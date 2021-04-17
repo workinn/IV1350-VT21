@@ -3,13 +3,11 @@ package model;
 import DTO.ItemInformationDTO;
 import DTO.SaleDTO;
 import integration.HandlerCreator;
-import integration.InventoryHandler;
 
 import java.util.ArrayList;
 public class Sale {
 
   private HandlerCreator handler;
-  private InventoryHandler inventoryHandler;
   private float runningTotal;
   private ArrayList<ItemInformationDTO> items;
   private ItemInformationDTO lastAddedItem;
@@ -18,7 +16,6 @@ public class Sale {
 
   public Sale(HandlerCreator handler) {
     this.handler = handler;
-    this.inventoryHandler = handler.getInventoryHandler();
     this.runningTotal = 0;
     this.items = new ArrayList<ItemInformationDTO>();
     this.lastAddedItem = null;
@@ -52,18 +49,17 @@ public class Sale {
   }
 
   public SaleDTO addItem(String itemIdentifier) {
-    ItemInformationDTO item = inventoryHandler.getItemInformation(itemIdentifier);
+    ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
     
-    if(item == null) {
-
-      SaleDTO saleDTO = new SaleDTO(items, runningTotal, false);
-      return saleDTO;
-    } else {
-
+    if(item != null) {
       addItemInternally(item, 1);
       SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
       return saleDTO;
+    } else {
+      SaleDTO saleDTO = new SaleDTO(items, runningTotal, false);
+      return saleDTO;
     }
+
   }
 
   public SaleDTO addQuantity(int quantity) {
