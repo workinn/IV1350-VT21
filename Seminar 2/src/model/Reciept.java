@@ -7,12 +7,16 @@ public class Reciept {
   private String store;
   private String phoneNumber;
   private SaleDTO sale;
+  float amountPaid;
+  float change;
 
-  public Reciept(SaleDTO sale){
+  public Reciept(SaleDTO sale, float amountPaid, float change) {
       this.address = "Testvägen 5";
       this.store = "Conceptstore";
       this.phoneNumber = "0700000123";
       this.sale = sale;
+      this.amountPaid = amountPaid;
+      this.change = change;
   }
 
   public String getAddress() {

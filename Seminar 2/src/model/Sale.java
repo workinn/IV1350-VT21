@@ -100,12 +100,12 @@ public class Sale {
     return saleDTO;
   }
 
-  public void printReciept() {
+  public void printReciept(float amountPaid, float change) {
     // Save current state of Sale in DTO
     SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
 
     // Create reciept by sending SaleDTO
-    Reciept reciept = new Reciept(saleDTO);
+    Reciept reciept = new Reciept(saleDTO, amountPaid, change);
 
     // Print reciept
     handler.getPrinterHandler().printRecipt(reciept);
