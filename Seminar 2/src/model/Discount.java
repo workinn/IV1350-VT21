@@ -1,12 +1,12 @@
-package src.model;
+package model;
 
 import java.util.ArrayList;
 
-import src.DTO.ClubMemberDTO;
-import src.DTO.ItemInformationDTO;
-import src.DTO.SaleDTO;
-import src.integration.DiscountHandler;
-import src.integration.MemberHandler;
+import DTO.ClubMemberDTO;
+import DTO.ItemInformationDTO;
+import DTO.SaleDTO;
+import integration.DiscountHandler;
+import integration.MemberHandler;
 
 public class Discount {
 

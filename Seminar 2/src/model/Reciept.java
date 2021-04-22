@@ -1,5 +1,5 @@
-package src.model;
-import src.DTO.SaleDTO;
+package model;
+import DTO.SaleDTO;
 
 public class Reciept {
   

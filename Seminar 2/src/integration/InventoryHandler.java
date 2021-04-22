@@ -1,7 +1,7 @@
-package src.integration;
+package integration;
 
-import src.DTO.ItemInformationDTO;
-import src.DTO.SaleDTO;
+import DTO.ItemInformationDTO;
+import DTO.SaleDTO;
 
 
 public class InventoryHandler {

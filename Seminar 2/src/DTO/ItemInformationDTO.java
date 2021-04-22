@@ -1,4 +1,4 @@
-package src.DTO;
+package DTO;
 
 public class ItemInformationDTO {
     private float price;

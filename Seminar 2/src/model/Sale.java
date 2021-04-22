@@ -1,8 +1,8 @@
-package src.model;
+package model;
 
-import src.DTO.ItemInformationDTO;
-import src.DTO.SaleDTO;
-import src.integration.HandlerCreator;
+import DTO.ItemInformationDTO;
+import DTO.SaleDTO;
+import integration.HandlerCreator;
 
 import java.util.ArrayList;
 public class Sale {

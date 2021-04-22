@@ -1,9 +1,9 @@
-package src.controller;
+package controller;
 
-import src.DTO.SaleDTO;
-import src.integration.HandlerCreator;
-import src.model.CashRegister;
-import src.model.Sale;
+import DTO.SaleDTO;
+import integration.HandlerCreator;
+import model.CashRegister;
+import model.Sale;
 
 public class Controller {
 

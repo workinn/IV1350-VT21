@@ -1,9 +1,9 @@
-package src.startup;
+package startup;
 
-import src.integration.HandlerCreator;
-import src.model.CashRegister;
-import src.controller.Controller;
-import src.view.View;
+import integration.HandlerCreator;
+import model.CashRegister;
+import controller.Controller;
+import view.View;
 
 public class Main {
   public static void main(String[] args) throws Exception {

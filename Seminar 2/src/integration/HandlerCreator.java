@@ -1,4 +1,4 @@
-package src.integration;
+package integration;
 
 public class HandlerCreator {
 

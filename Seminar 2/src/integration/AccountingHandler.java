@@ -1,6 +1,6 @@
-package src.integration;
+package integration;
 
-import src.DTO.SaleDTO;
+import DTO.SaleDTO;
 
 public class AccountingHandler {
 

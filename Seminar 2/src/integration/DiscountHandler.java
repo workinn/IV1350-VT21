@@ -1,7 +1,7 @@
-package src.integration;
+package integration;
 
-import src.DTO.ClubMemberDTO;
-import src.DTO.ItemInformationDTO;
+import DTO.ClubMemberDTO;
+import DTO.ItemInformationDTO;
 
 public class DiscountHandler {
 
