@@ -1,8 +1,8 @@
-package model;
+package src.model;
 
-import DTO.SaleDTO;
-import integration.AccountingHandler;
-import integration.InventoryHandler;
+import src.DTO.SaleDTO;
+import src.integration.AccountingHandler;
+import src.integration.InventoryHandler;
 
 public class SaleLog {
 

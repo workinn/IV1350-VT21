@@ -1,5 +1,6 @@
-package integration;
-import model.Reciept;
+package src.integration;
+
+import src.model.Reciept;
 
 public class PrinterHandler {
 

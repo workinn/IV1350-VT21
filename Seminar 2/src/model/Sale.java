@@ -1,8 +1,8 @@
-package model;
+package src.model;
 
-import DTO.ItemInformationDTO;
-import DTO.SaleDTO;
-import integration.HandlerCreator;
+import src.DTO.ItemInformationDTO;
+import src.DTO.SaleDTO;
+import src.integration.HandlerCreator;
 
 import java.util.ArrayList;
 public class Sale {
@@ -33,7 +33,7 @@ public class Sale {
 
         int temp_quantity = item.getQuantity();
 
-        ItemInformationDTO newItem = new ItemInformationDTO(item, temp_quantity + quantity);
+        ItemInformationDTO newItem = new ItemInformationDTO(item, temp_quantity + quantity, 0);
         items.remove(i);
         items.add(newItem);
         itemAdded = true;
@@ -59,7 +59,6 @@ public class Sale {
       SaleDTO saleDTO = new SaleDTO(items, runningTotal, false);
       return saleDTO;
     }
-
   }
 
   public SaleDTO addQuantity(int quantity) {

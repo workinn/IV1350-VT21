@@ -1,4 +1,4 @@
-package DTO;
+package src.DTO;
 
 public class ItemInformationDTO {
     private float price;
@@ -17,13 +17,14 @@ public class ItemInformationDTO {
         this.quantity = 1;
     }
 
-    public ItemInformationDTO(ItemInformationDTO itemInformationDTO, int quantity){
+    public ItemInformationDTO(ItemInformationDTO itemInformationDTO, int quantity, float discount){
         this.price = itemInformationDTO.getPrice();
         this.vatRate = itemInformationDTO.getVATrate();
         this.itemDescription = itemInformationDTO.getItemDescription();
         this.itemIdentifier = itemInformationDTO.getItemIdentifier();
-        this.discount = itemInformationDTO.getDiscount();
+        this.discount = discount;
         this.quantity = quantity;
+
     }
     
     public float getPrice(){

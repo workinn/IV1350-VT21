@@ -1,6 +1,6 @@
-package model;
+package src.model;
 
-import DTO.SaleDTO;
+import src.DTO.SaleDTO;
 
 public class CashRegister {
 

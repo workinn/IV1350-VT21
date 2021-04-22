@@ -1,9 +1,9 @@
-package controller;
+package src.controller;
 
-import DTO.SaleDTO;
-import integration.HandlerCreator;
-import model.CashRegister;
-import model.Sale;
+import src.DTO.SaleDTO;
+import src.integration.HandlerCreator;
+import src.model.CashRegister;
+import src.model.Sale;
 
 public class Controller {
 
@@ -38,8 +38,9 @@ public class Controller {
 
   public float payment(int amountPaid) {
     SaleDTO saleDTO = currentSale.logSale();
-    currentSale.printReciept();
     cashRegister.addPayment(saleDTO);
-    return cashRegister.getChange(amountPaid, saleDTO);
+    float change = cashRegister.getChange(amountPaid, saleDTO);
+    currentSale.printReciept(amountPaid, change);
+    return change;
   }
 }

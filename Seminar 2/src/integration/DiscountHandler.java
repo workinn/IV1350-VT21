@@ -1,7 +1,7 @@
-package integration;
+package src.integration;
 
-import DTO.ClubMemberDTO;
-import DTO.SaleDTO;
+import src.DTO.ClubMemberDTO;
+import src.DTO.ItemInformationDTO;
 
 public class DiscountHandler {
 
@@ -9,14 +9,14 @@ public class DiscountHandler {
 
   }
 
-  public SaleDTO addDiscount(SaleDTO sale, ClubMemberDTO member) {
+  public ItemInformationDTO addDiscount(ItemInformationDTO item, ClubMemberDTO member) {
     /* 
     Contacts External Discount System to get a SaleDTO with discount added
     */
     
     // Should be SaleDTO from External Discount System
-    SaleDTO updatedSale = null;
+    ItemInformationDTO updatedItem = null;
 
-    return updatedSale;
+    return updatedItem;
   }
 }

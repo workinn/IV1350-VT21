@@ -1,6 +1,6 @@
-package integration;
+package src.integration;
 
-import DTO.ClubMemberDTO;
+import src.DTO.ClubMemberDTO;
 
 public class MemberHandler {
 
