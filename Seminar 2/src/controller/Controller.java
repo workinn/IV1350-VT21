@@ -37,9 +37,11 @@ public class Controller {
   }
 
   public float payment(int amountPaid) {
+    System.out.println("Amount paid = " + amountPaid);
     SaleDTO saleDTO = currentSale.logSale();
     cashRegister.addPayment(saleDTO);
     float change = cashRegister.getChange(amountPaid, saleDTO);
+    System.out.println("Change = " + change);
     currentSale.printReciept(amountPaid, change);
     return change;
   }

@@ -13,10 +13,15 @@ public class DiscountHandler {
     /* 
     Contacts External Discount System to get a SaleDTO with discount added
     */
-    
-    // Should be SaleDTO from External Discount System
-    ItemInformationDTO updatedItem = null;
 
-    return updatedItem;
+    ItemInformationDTO newItem;
+
+    if(member.getMemberID() == "1337") {
+      newItem = new ItemInformationDTO(item, item.getQuantity(), (item.getPrice() * item.getQuantity() * 0.5));
+    } else {
+      newItem = item;
+    }
+    
+    return newItem;
   }
 }

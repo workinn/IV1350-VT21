@@ -26,31 +26,39 @@ public class Sale {
   private void addItemInternally(ItemInformationDTO item, int quantity) {
 
     boolean itemAdded = false;
+    ItemInformationDTO newItem;
+    int temp_quantity;
 
     // Check if item already exists in items
     for(int i = 0; i < items.size(); i++) {
       if(items.get(i) == item) {
 
-        int temp_quantity = item.getQuantity();
+        temp_quantity = item.getQuantity();
 
-        ItemInformationDTO newItem = new ItemInformationDTO(item, temp_quantity + quantity, 0);
+        newItem = new ItemInformationDTO(item, temp_quantity + quantity, 0);
         items.remove(i);
         items.add(newItem);
         itemAdded = true;
+        System.out.println("Added item " + newItem.getItemDescription());
       }
     }
 
     if(itemAdded == false) {
       items.add(item);
+      System.out.println("Added item " + item.getItemDescription());
     }
 
     runningTotal += (item.getPrice() * quantity);
     lastAddedItem = item;
+    System.out.println("Running total = " + runningTotal);
   }
 
   public SaleDTO addItem(String itemIdentifier) {
+    //System.out.println("Hello from addItem!");
     ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
     
+    //System.out.println(item.getItemDescription());
+
     if(item != null) {
       addItemInternally(item, 1);
       SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
@@ -76,6 +84,9 @@ public class Sale {
   }
 
   public SaleDTO addDiscount(String customerID) {
+
+    System.out.println("Looking for discounts...");
+
     // Save current state of Sale in DTO
     SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
 
@@ -85,6 +96,8 @@ public class Sale {
     // Update state of Sale
     items = saleDTO.getItems();
     runningTotal = saleDTO.getRunningTotal();
+    
+    System.out.println("Running total after discounts = " + runningTotal);
 
     return saleDTO;
   }
@@ -108,5 +121,11 @@ public class Sale {
 
     // Print reciept
     handler.getPrinterHandler().printRecipt(reciept);
+  }
+
+  public void printItems() {
+    for(int i = 0; i < items.size(); i++) {
+      System.out.println(items.get(i).getItemDescription());
+    }
   }
 }

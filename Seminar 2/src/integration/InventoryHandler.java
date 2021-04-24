@@ -21,8 +21,14 @@ public class InventoryHandler {
     Gets item information from External Inventory System 
     */
 
-    // returnedItem contains information from External Inventory System, item not found returns null.
-    ItemInformationDTO returnedItem = null;
-    return returnedItem;
+    ItemInformationDTO item;
+
+    if(itemIdentifier == "1337") {
+      item = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier, 0.0);
+    } else {
+      item = null;
+    }
+
+    return item;
   }
 }

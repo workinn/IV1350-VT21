@@ -1,14 +1,14 @@
 package DTO;
 
 public class ItemInformationDTO {
-    private float price;
-    private float vatRate;    
+    private double price;
+    private double vatRate;    
     private String itemDescription;
     private String itemIdentifier;
-    private float discount;
+    private double discount;
     private int quantity;
 
-    public ItemInformationDTO(float price, float vatRate, String itemDescription, String itemIdentifier, float discount) {
+    public ItemInformationDTO(double price, double vatRate, String itemDescription, String itemIdentifier, double discount) {
         this.price = price;
         this.vatRate = vatRate;
         this.itemDescription = itemDescription;
@@ -17,7 +17,7 @@ public class ItemInformationDTO {
         this.quantity = 1;
     }
 
-    public ItemInformationDTO(ItemInformationDTO itemInformationDTO, int quantity, float discount){
+    public ItemInformationDTO(ItemInformationDTO itemInformationDTO, int quantity, double discount){
         this.price = itemInformationDTO.getPrice();
         this.vatRate = itemInformationDTO.getVATrate();
         this.itemDescription = itemInformationDTO.getItemDescription();
@@ -27,11 +27,11 @@ public class ItemInformationDTO {
 
     }
     
-    public float getPrice(){
+    public double getPrice(){
         return price;
     }
     
-    public float getVATrate(){
+    public double getVATrate(){
         return vatRate;
     }
     
@@ -43,7 +43,7 @@ public class ItemInformationDTO {
         return itemIdentifier;
     }
 
-    public float getDiscount(){
+    public double getDiscount(){
         return discount;
     }
 

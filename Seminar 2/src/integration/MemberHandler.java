@@ -8,14 +8,19 @@ public class MemberHandler {
 
   }
 
-  public ClubMemberDTO getMember(String costumerID){
+  public ClubMemberDTO getMember(String customerID){
     /*
     Gets Club Member from External Member System
     */
 
-    // Should be data returned from External Member System
-    ClubMemberDTO returnedMember = null;
+    ClubMemberDTO member;
 
-    return returnedMember;
+    if(customerID == "Daniel") {
+      member = new ClubMemberDTO("Daniel", "1337");
+    } else {
+      member = null;
+    }
+
+    return member;
   }
 }
