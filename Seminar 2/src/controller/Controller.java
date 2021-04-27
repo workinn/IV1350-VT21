@@ -5,12 +5,21 @@ import integration.HandlerCreator;
 import model.CashRegister;
 import model.Sale;
 
+/**
+ * Represents ...... Instances are immutable(?).
+ */
 public class Controller {
 
   private HandlerCreator handler;
   private CashRegister cashRegister;
   private Sale currentSale;
 
+  /**
+   * Creates a new instance, representing the controller.
+   * 
+   * @param handler
+   * @param cashRegister
+   */
   public Controller(HandlerCreator handler, CashRegister cashRegister) {
     this.handler = handler;
     this.cashRegister = cashRegister;
