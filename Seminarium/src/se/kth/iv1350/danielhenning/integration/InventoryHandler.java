@@ -1,7 +1,7 @@
-package integration;
+package se.kth.iv1350.danielhenning.integration;
 
-import DTO.ItemInformationDTO;
-import DTO.SaleDTO;
+import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 
 public class InventoryHandler {

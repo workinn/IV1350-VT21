@@ -1,9 +1,9 @@
-package controller;
+package se.kth.iv1350.danielhenning.controller;
 
-import DTO.SaleDTO;
-import integration.HandlerCreator;
-import model.CashRegister;
-import model.Sale;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.model.CashRegister;
+import se.kth.iv1350.danielhenning.model.Sale;
 
 /**
  * Represents ...... Instances are immutable(?).
@@ -25,6 +25,9 @@ public class Controller {
     this.cashRegister = cashRegister;
   }
 
+  /**
+   * 
+   */
   public void startSale() {
     currentSale = new Sale(handler);
   }
@@ -37,6 +40,10 @@ public class Controller {
     return currentSale.addQuantity(quantity);
   }
 
+  /**
+   * 
+   * @return 
+   */
   public SaleDTO endSale() {
     return currentSale.endSale();
   }
@@ -45,6 +52,10 @@ public class Controller {
     return currentSale.addDiscount(customerID);
   }
 
+  /**
+   * 
+   * @param amountPaid
+   */
   public float payment(int amountPaid) {
     System.out.println("Amount paid = " + amountPaid);
     SaleDTO saleDTO = currentSale.logSale();

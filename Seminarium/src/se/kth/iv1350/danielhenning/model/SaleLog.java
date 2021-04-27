@@ -1,8 +1,8 @@
-package model;
+package se.kth.iv1350.danielhenning.model;
 
-import DTO.SaleDTO;
-import integration.AccountingHandler;
-import integration.InventoryHandler;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.AccountingHandler;
+import se.kth.iv1350.danielhenning.integration.InventoryHandler;
 
 public class SaleLog {
 

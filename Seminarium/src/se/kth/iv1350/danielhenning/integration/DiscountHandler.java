@@ -1,7 +1,7 @@
-package integration;
+package se.kth.iv1350.danielhenning.integration;
 
-import DTO.ClubMemberDTO;
-import DTO.ItemInformationDTO;
+import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
+import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 
 public class DiscountHandler {
 

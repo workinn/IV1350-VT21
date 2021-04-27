@@ -1,5 +1,5 @@
-package model;
-import DTO.SaleDTO;
+package se.kth.iv1350.danielhenning.model;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class Reciept {
   

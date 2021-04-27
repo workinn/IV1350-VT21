@@ -1,14 +1,15 @@
-package model;
+package se.kth.iv1350.danielhenning.model;
 
-import DTO.ItemInformationDTO;
-import DTO.SaleDTO;
-import integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 
 import java.util.ArrayList;
+
+import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 public class Sale {
 
   private HandlerCreator handler;
-  private float runningTotal;
+  private float runningTotal;   // Denna och två under kanske ska vara klass av ItemList
   private ArrayList<ItemInformationDTO> items;
   private ItemInformationDTO lastAddedItem;
   private Discount discount;

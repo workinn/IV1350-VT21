@@ -1,10 +1,10 @@
-package DTO;
+package se.kth.iv1350.danielhenning.dto;
 
 public class ItemInformationDTO {
-    private double price;
-    private double vatRate;    
-    private String itemDescription;
-    private String itemIdentifier;
+    private double price;   //ItemPrice
+    private double vatRate; // ItemPrice
+    private String itemDescription; // ItemDescription
+    private String itemIdentifier;  // ItemDesription
     private double discount;
     private int quantity;
 

@@ -1,6 +1,6 @@
-package integration;
+package se.kth.iv1350.danielhenning.integration;
 
-import model.Reciept;
+import se.kth.iv1350.danielhenning.model.Reciept;
 
 public class PrinterHandler {
 

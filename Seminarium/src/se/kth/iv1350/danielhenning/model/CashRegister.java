@@ -1,6 +1,6 @@
-package model;
+package se.kth.iv1350.danielhenning.model;
 
-import DTO.SaleDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class CashRegister {
 

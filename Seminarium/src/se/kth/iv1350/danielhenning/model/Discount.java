@@ -1,12 +1,12 @@
-package model;
+package se.kth.iv1350.danielhenning.model;
 
 import java.util.ArrayList;
 
-import DTO.ClubMemberDTO;
-import DTO.ItemInformationDTO;
-import DTO.SaleDTO;
-import integration.DiscountHandler;
-import integration.MemberHandler;
+import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
+import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.DiscountHandler;
+import se.kth.iv1350.danielhenning.integration.MemberHandler;
 
 public class Discount {
 

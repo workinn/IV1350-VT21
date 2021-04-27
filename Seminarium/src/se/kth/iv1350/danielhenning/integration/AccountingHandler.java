@@ -1,6 +1,6 @@
-package integration;
+package se.kth.iv1350.danielhenning.integration;
 
-import DTO.SaleDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class AccountingHandler {
 

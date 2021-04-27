@@ -1,9 +1,9 @@
-package startup;
+package se.kth.iv1350.danielhenning.startup;
 
-import integration.HandlerCreator;
-import model.CashRegister;
-import controller.Controller;
-import view.View;
+import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.model.CashRegister;
+import se.kth.iv1350.danielhenning.controller.Controller;
+import se.kth.iv1350.danielhenning.view.View;
 
 public class Main {
   public static void main(String[] args) throws Exception {
@@ -17,13 +17,5 @@ public class Main {
     Controller controller = new Controller(integrationHandler, cashRegister);
     
     View view = new View(controller);
-
-    controller.startSale();
-    controller.addItem("1337");
-    controller.addQuantity(5);
-    controller.endSale();
-    controller.requestDiscount("Daniel");
-    controller.payment(50);
-    System.out.println("Program seems to work!");
   }
 }
