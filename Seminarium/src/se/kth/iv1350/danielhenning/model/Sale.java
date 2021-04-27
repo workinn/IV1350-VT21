@@ -9,21 +9,25 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
 public class Sale {
 
   private HandlerCreator handler;
-  private float runningTotal;   // Denna och två under kanske ska vara klass av ItemList
-  private ArrayList<ItemInformationDTO> items;
-  private ItemInformationDTO lastAddedItem;
+  // private float runningTotal;   // Denna och två under kanske ska vara klass av ItemList
+  // private ArrayList<ItemInformationDTO> items;
+  // private ItemInformationDTO lastAddedItem;
   private Discount discount;
   private SaleLog saleLog;
+  private ItemList items;
+  private boolean lastItemFound;
 
   public Sale(HandlerCreator handler) {
     this.handler = handler;
-    this.runningTotal = 0;
-    this.items = new ArrayList<ItemInformationDTO>();
-    this.lastAddedItem = null;
+    // this.runningTotal = 0;
+    // this.items = new ArrayList<ItemInformationDTO>();
+    // this.lastAddedItem = null;
     this.discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     this.saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
+    this.items = new ItemList();
   }
 
+  /*
   private void addItemInternally(ItemInformationDTO item, int quantity) {
 
     boolean itemAdded = false;
@@ -52,6 +56,10 @@ public class Sale {
     runningTotal += (item.getPrice() * quantity);
     lastAddedItem = item;
     System.out.println("Running total = " + runningTotal);
+  }*/
+
+  private SaleDTO getSaleDTO() {
+    return new SaleDTO(items);
   }
 
   public SaleDTO addItem(String itemIdentifier) {
@@ -60,28 +68,22 @@ public class Sale {
     
     //System.out.println(item.getItemDescription());
 
-    if(item != null) {
-      addItemInternally(item, 1);
-      SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
-      return saleDTO;
+    if(item == null) {
+      lastItemFound = false;
     } else {
-      SaleDTO saleDTO = new SaleDTO(items, runningTotal, false);
-      return saleDTO;
+      items.addItem(item);
     }
+    return getSaleDTO();
   }
 
   public SaleDTO addQuantity(int quantity) {
-    addItemInternally(lastAddedItem, quantity - 1);
+    items.increaseQuantityOfLastScannedItem(quantity);
 
-    // Save current state of Sale in DTO
-    SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
-    return saleDTO;
+    return getSaleDTO();
   }
 
   public SaleDTO endSale() {
-    // Save current state of Sale in DTO
-    SaleDTO saleDTO = new SaleDTO(items, runningTotal, true);
-    return saleDTO;
+    return getSaleDTO();
   }
 
   public SaleDTO addDiscount(String customerID) {

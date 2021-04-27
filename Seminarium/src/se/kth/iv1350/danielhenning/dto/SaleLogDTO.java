@@ -1,26 +1,22 @@
 package se.kth.iv1350.danielhenning.dto;
 
+import java.time.LocalDateTime;
+
 public class SaleLogDTO {
 
   private SaleDTO sale;
-  private String date;
-  private String time;
+  private LocalDateTime dateTime;
 
    public SaleLogDTO(SaleDTO sale) {
      this.sale = sale;
-     this.date = "2021-04-17";
-     this.time = "13:37";
+     this.dateTime = LocalDateTime.now();
    }
 
    public SaleDTO getSale() {
      return sale;
    }
 
-   public String getDate() {
-     return date;
-   }
-
-   public String getTime() {
-     return time;
+   public LocalDateTime getDateTime() {
+     return dateTime;
    }
 }

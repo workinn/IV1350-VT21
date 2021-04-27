@@ -1,7 +1,7 @@
 package se.kth.iv1350.danielhenning.integration;
 
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
-import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.dto.SaleLogDTO;
 
 
 public class InventoryHandler {
@@ -10,7 +10,7 @@ public class InventoryHandler {
 
   }
   
-  public void updateInventory(SaleDTO sale){
+  public void updateInventory(SaleLogDTO saleLog){
     /*
     Updates External Inventory System
     */

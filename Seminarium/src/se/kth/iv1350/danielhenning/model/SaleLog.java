@@ -1,9 +1,13 @@
 package se.kth.iv1350.danielhenning.model;
 
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.dto.SaleLogDTO;
 import se.kth.iv1350.danielhenning.integration.AccountingHandler;
 import se.kth.iv1350.danielhenning.integration.InventoryHandler;
 
+/**
+ * The SaleLog class represents 
+ */
 public class SaleLog {
 
   private AccountingHandler accountingHandler;
@@ -15,7 +19,8 @@ public class SaleLog {
   }
 
   public void logSale(SaleDTO sale) {
-    accountingHandler.updateAccounting(sale);
-    inventoryHandler.updateInventory(sale);
+    SaleLogDTO saleLog = new SaleLogDTO(sale);
+    accountingHandler.updateAccounting(saleLog);
+    inventoryHandler.updateInventory(saleLog);
   }
 }
