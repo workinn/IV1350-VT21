@@ -17,8 +17,8 @@ public class Controller {
   /**
    * Creates a new instance, representing the controller.
    * 
-   * @param handler
-   * @param cashRegister
+   * @param handler HandlerCreator of the program that cotains the handlers in the integration layer.
+   * @param cashRegister is the CashRegister that contains information about the amount of cash in the register.
    */
   public Controller(HandlerCreator handler, CashRegister cashRegister) {
     this.handler = handler;
@@ -26,12 +26,15 @@ public class Controller {
   }
 
   /**
-   * 
+   * Starts a new sale, creates a new instance of the sale class.
    */
   public void startSale() {
     currentSale = new Sale(handler);
   }
 
+  /**
+   * 
+   */
   public SaleDTO addItem(String itemIdentifier) {
     return currentSale.addItem(itemIdentifier);
   }

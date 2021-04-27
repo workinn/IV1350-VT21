@@ -8,12 +8,13 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
 import se.kth.iv1350.danielhenning.integration.DiscountHandler;
 import se.kth.iv1350.danielhenning.integration.MemberHandler;
 
+
 public class Discount {
 
     private DiscountHandler discountHandler;
     private MemberHandler memberHandler;
     private float totalDiscount;
-    
+
     public Discount(DiscountHandler discountHandler, MemberHandler memberHandler){
         this.discountHandler = discountHandler;
         this.memberHandler = memberHandler;
