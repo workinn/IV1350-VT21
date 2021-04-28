@@ -16,6 +16,13 @@ public class ItemRowDTO {
     this.priceIncludingDiscount = itemRow.getPriceIncludingDiscount();
   }
 
+  public ItemRowDTO(ItemRowDTO itemRow, double discount) {
+    this.item = itemRow.getitem();
+    this.quantity = itemRow.getQuantity();
+    this.discount = discount;
+    this.priceIncludingDiscount = itemRow.getPriceIncludingDiscount() - discount;
+  }
+
   public ItemInformationDTO getitem() {
     return item;
   }

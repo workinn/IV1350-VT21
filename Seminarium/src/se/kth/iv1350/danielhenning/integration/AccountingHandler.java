@@ -1,6 +1,6 @@
 package se.kth.iv1350.danielhenning.integration;
 
-import se.kth.iv1350.danielhenning.dto.SaleLogDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class AccountingHandler {
 
@@ -8,7 +8,7 @@ public class AccountingHandler {
     
   }
 
-  public void updateAccounting(SaleLogDTO saleLog) {
+  public void updateAccounting(SaleDTO saleDTO) {
     /*
     Updates External Accounting System
     */

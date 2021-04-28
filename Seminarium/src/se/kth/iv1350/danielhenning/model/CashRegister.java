@@ -4,9 +4,9 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class CashRegister {
 
-  private float balance;
+  private double balance;
 
-    public CashRegister(float initialBalance) {
+    public CashRegister(double initialBalance) {
     this.balance = initialBalance;
     }
 
@@ -14,11 +14,11 @@ public class CashRegister {
       balance += sale.getRunningTotal();
     }
 
-    public float getChange(int amountPaid, SaleDTO sale) {
+    public double getChange(int amountPaid, SaleDTO sale) {
       return amountPaid - sale.getRunningTotal();
     }
 
-    public float getBalance() {
+    public double getBalance() {
       return balance;
     }
 }

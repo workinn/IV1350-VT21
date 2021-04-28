@@ -16,7 +16,6 @@ public class Main {
    * @param args is command line arguments for Java
    */
   public static void main(String[] args) throws Exception {
-    System.out.println("Hello, World!");
 
     HandlerCreator integrationHandler = new HandlerCreator();
 

@@ -3,7 +3,9 @@ package se.kth.iv1350.danielhenning.controller;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.model.CashRegister;
+import se.kth.iv1350.danielhenning.model.Discount;
 import se.kth.iv1350.danielhenning.model.Sale;
+import se.kth.iv1350.danielhenning.model.SaleLog;
 
 /**
  * Represents ...... Instances are immutable(?).
@@ -12,6 +14,8 @@ public class Controller {
 
   private HandlerCreator handler;
   private CashRegister cashRegister;
+  private SaleLog todaysSaleLog;
+  private Discount todaysDiscount;
   private Sale currentSale;
 
   /**
@@ -23,13 +27,15 @@ public class Controller {
   public Controller(HandlerCreator handler, CashRegister cashRegister) {
     this.handler = handler;
     this.cashRegister = cashRegister;
+    this.todaysSaleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
+    this.todaysDiscount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
   }
 
   /**
    * Starts a new sale, creates a new instance of the sale class.
    */
   public void startSale() {
-    currentSale = new Sale(handler);
+    currentSale = new Sale(handler.getInventoryHandler(), handler.getPrinterHandler(), todaysSaleLog, todaysDiscount);
   }
 
   /**
@@ -59,11 +65,11 @@ public class Controller {
    * 
    * @param amountPaid
    */
-  public float payment(int amountPaid) {
+  public double payment(int amountPaid) {
     System.out.println("Amount paid = " + amountPaid);
     SaleDTO saleDTO = currentSale.logSale();
     cashRegister.addPayment(saleDTO);
-    float change = cashRegister.getChange(amountPaid, saleDTO);
+    double change = cashRegister.getChange(amountPaid, saleDTO);
     System.out.println("Change = " + change);
     currentSale.printReciept(amountPaid, change);
     return change;

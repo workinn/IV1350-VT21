@@ -1,16 +1,15 @@
-package se.kth.iv1350.danielhenning.model;
-import se.kth.iv1350.danielhenning.dto.SaleDTO;
+package se.kth.iv1350.danielhenning.dto;
 
-public class Reciept {
+public class RecieptDTO {
   
   private String address;
   private String store;
   private String phoneNumber;
   private SaleDTO sale;
-  float amountPaid;
-  float change;
+  double amountPaid;
+  double change;
 
-  public Reciept(SaleDTO sale, float amountPaid, float change) {
+  public RecieptDTO(SaleDTO sale, double amountPaid, double change) {
       this.address = "Testvägen 5";
       this.store = "Conceptstore";
       this.phoneNumber = "0700000123";

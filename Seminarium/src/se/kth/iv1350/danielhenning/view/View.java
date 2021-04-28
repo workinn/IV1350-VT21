@@ -21,6 +21,8 @@ public class View {
     controller.startSale();
     controller.addItem("1337");
     controller.addQuantity(10);
+    controller.addItem("1");
+    controller.addQuantity(10);
     controller.endSale();
     controller.requestDiscount("Daniel");
     controller.payment(500);

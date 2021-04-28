@@ -1,8 +1,7 @@
 package se.kth.iv1350.danielhenning.integration;
 
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
-import se.kth.iv1350.danielhenning.dto.SaleLogDTO;
-
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class InventoryHandler {
 
@@ -10,7 +9,7 @@ public class InventoryHandler {
 
   }
   
-  public void updateInventory(SaleLogDTO saleLog){
+  public void updateInventory(SaleDTO saleDTO){
     /*
     Updates External Inventory System
     */
@@ -24,8 +23,11 @@ public class InventoryHandler {
     ItemInformationDTO item;
 
     if(itemIdentifier == "1337") {
-      item = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier, 0.0);
-    } else {
+      item = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier);
+    } else if (itemIdentifier == "1") {
+      item = new ItemInformationDTO(25, 0.10, "Coca-Cola", itemIdentifier);
+    } 
+    else {
       item = null;
     }
 

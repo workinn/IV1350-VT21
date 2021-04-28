@@ -1,34 +1,40 @@
 package se.kth.iv1350.danielhenning.model;
 
-import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.InventoryHandler;
+import se.kth.iv1350.danielhenning.integration.PrinterHandler;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
+import se.kth.iv1350.danielhenning.dto.DiscountDTO;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
+import se.kth.iv1350.danielhenning.dto.RecieptDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 public class Sale {
 
-  private HandlerCreator handler;
+  // private HandlerCreator handler;
+  private InventoryHandler inventoryHandler;
+  private PrinterHandler printer;
   private Discount discount;
   private SaleLog saleLog;
   private ItemList items;
   private boolean lastItemFound;
+  private LocalDateTime dateTime;
 
-  public Sale(HandlerCreator handler) {
-    this.handler = handler;
-    this.discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    this.saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
+  public Sale(InventoryHandler inventoryHandler, PrinterHandler printer, SaleLog saleLog, Discount discount) {
+    this.inventoryHandler = inventoryHandler;
+    this.printer = printer;
+    this.discount = discount;
+    this.saleLog = saleLog;
     this.items = new ItemList();
-
-    System.out.println("Start Sale!");
+    this.dateTime = LocalDateTime.now();
   }
 
   private SaleDTO getSaleDTO() {
-    return new SaleDTO(items, lastItemFound);
+    return new SaleDTO(items, lastItemFound, dateTime);
   }
 
   public SaleDTO addItem(String itemIdentifier) {
-    ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
+    ItemInformationDTO item = inventoryHandler.getItemInformation(itemIdentifier);
     
     if(item == null) {
       lastItemFound = false;
@@ -57,32 +63,23 @@ public class Sale {
 
     System.out.println("Looking for discounts...");
 
-    SaleDTO saleDTO = discount.addDiscount(getSaleDTO(), customerID);
+    DiscountDTO discountDTO = discount.addDiscount(getSaleDTO(), customerID);
 
-    // Update state of Sale
-    items.addDiscount(saleDTO);
+    items.addDiscount(discountDTO);
     
-    // System.out.println("Running total after discounts = " + items.getRunningTotal();
-
-    return saleDTO;
+    return getSaleDTO();
   }
 
   public SaleDTO logSale() {
-
     SaleDTO saleDTO = getSaleDTO();
-    // Log sale
     saleLog.logSale(saleDTO);
 
     return saleDTO;
   }
 
-  public void printReciept(float amountPaid, float change) {
+  public void printReciept(double amountPaid, double change) {
 
-    // Create reciept by sending SaleDTO
-    Reciept reciept = new Reciept(getSaleDTO(), amountPaid, change);
-
-    // Print reciept
-    handler.getPrinterHandler().printRecipt(reciept);
+    RecieptDTO reciept = new RecieptDTO(getSaleDTO(), amountPaid, change);
+    printer.printRecipt(reciept);
   }
-
 }
