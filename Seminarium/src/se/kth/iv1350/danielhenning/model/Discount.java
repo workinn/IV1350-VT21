@@ -21,7 +21,7 @@ public class Discount {
         this.memberHandler = memberHandler;
         this.totalDiscountToday = 0;
     }
-
+// Skall kanske vara under SaleLog?
     private void updateTotalDiscountToday(DiscountDTO discountDTO) {
        ArrayList<ItemRowDTO> items = discountDTO.getItemRowDTO();
 

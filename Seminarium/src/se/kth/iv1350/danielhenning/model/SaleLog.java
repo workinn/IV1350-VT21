@@ -15,7 +15,7 @@ public class SaleLog {
   private InventoryHandler inventoryHandler;
   private ArrayList<SaleDTO> todaysSales;
   private double amountSoldForToday;
-
+//Discount given?
   public SaleLog(AccountingHandler accountingHandler, InventoryHandler inventoryHandler) {
     this.accountingHandler = accountingHandler;
     this.inventoryHandler = inventoryHandler;

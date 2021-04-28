@@ -37,7 +37,7 @@ public class ItemList {
   private void increaseQuantity(int rowIndex, int quantity) {
     itemRows.get(rowIndex).increaseQuantity(quantity);
   }
-
+//Onödig om running total görs i sale, kanske endast update total items.
   private void updateRunningTotalAndNumberOfItems(int quantity) {
     runningTotal += (itemRows.get(indexOfLastChangedRow).getItem().getPrice() * quantity);
     numberOfItems += quantity;
@@ -68,7 +68,7 @@ public class ItemList {
 
     updateRunningTotalAndNumberOfItems(1);
   }
-
+// frågan om denna ska göras från här, kanske göras från Sale iställeT?
   public void addDiscount(DiscountDTO discount) {
 
     System.out.println("Running total before discounts: " + runningTotal);

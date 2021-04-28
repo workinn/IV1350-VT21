@@ -30,7 +30,7 @@ public class Sale {
   }
 
   private SaleDTO getSaleDTO() {
-    return new SaleDTO(items, lastItemFound, dateTime);
+    return new SaleDTO(items, lastItemFound, dateTime); //Skicka hela Sale?
   }
 
   public SaleDTO addItem(String itemIdentifier) {
@@ -74,7 +74,7 @@ public class Sale {
     SaleDTO saleDTO = getSaleDTO();
     saleLog.logSale(saleDTO);
 
-    return saleDTO;
+    return saleDTO; //? ska denna retuneras?
   }
 
   public void printReciept(double amountPaid, double change) {

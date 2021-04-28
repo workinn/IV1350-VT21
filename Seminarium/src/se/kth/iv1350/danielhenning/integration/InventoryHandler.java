@@ -22,6 +22,8 @@ public class InventoryHandler {
 
     ItemInformationDTO item;
 
+
+    // skapa en Array med hårdkodade items som loopas igenom för att hitta rätt. och sen return item alt null om inget hittas.
     if(itemIdentifier == "1337") {
       item = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier);
     } else if (itemIdentifier == "1") {
