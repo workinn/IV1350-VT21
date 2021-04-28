@@ -6,22 +6,31 @@ import se.kth.iv1350.danielhenning.model.ItemList;
 
 public class SaleDTO {
 
-  ArrayList<ItemInformationDTO> items;
-  float runningTotal;
+  ArrayList<ItemRowDTO> itemRows;
   boolean lastItemFound;
+  float runningTotal;
+  int numberOfItems;
 
-  public SaleDTO(ItemList items) {
-    this.items = items.getItems();
-    this.runningTotal = items.getRunningTotal();
-    this.lastItemFound = items.getLastItemFound();
+  public SaleDTO(ItemList itemList, boolean lastItemFound) {
+    itemRows = new ArrayList<ItemRowDTO>();
+    for(int i = 0; i < itemList.getItemList().size(); i++) {
+      this.itemRows.add(new ItemRowDTO(itemList.getItemList().get(i)));
+    }
+    this.lastItemFound = lastItemFound;
+    this.runningTotal = itemList.getRunningTotal();
+    this.numberOfItems = itemList.getNumberOfItems();
   }
 
-  public ArrayList<ItemInformationDTO> getItems() {
-    return items;
+  public ArrayList<ItemRowDTO> getItemRows() {
+    return itemRows;
   }
 
   public float getRunningTotal() {
     return runningTotal;
+  }
+
+  public int getNumberOfItems() {
+    return numberOfItems;
   }
 
   public boolean getLastItemFound() {

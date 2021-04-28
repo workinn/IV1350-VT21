@@ -5,18 +5,18 @@ import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 /**
  * RowInItemList
  */
-public class RowOfItem {
+public class ItemRow {
 
   ItemInformationDTO item;
   int quantity;
   double discount;
-  double price;
+  double priceIncludingDiscount;
 
-  public RowOfItem(ItemInformationDTO item) {
+  public ItemRow(ItemInformationDTO item) {
     this.item = item;
     this.quantity = 1;
     this.discount = 0;
-    this.price = item.getPrice();
+    this.priceIncludingDiscount = item.getPrice();
   }
 
   public void increaseQuantity(int quantity) {
@@ -34,8 +34,13 @@ public class RowOfItem {
     calculatePrice();
   }
 
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+    calculatePrice();
+  }
+
   private void calculatePrice() {
-    price = (price - discount) * quantity;
+    priceIncludingDiscount = (priceIncludingDiscount - discount) * quantity;
   }
 
   public ItemInformationDTO getItem() {
@@ -50,7 +55,7 @@ public class RowOfItem {
     return discount;
   }
 
-  public double getPrice() {
-    return price;
+  public double getPriceIncludingDiscount() {
+    return priceIncludingDiscount;
   }
 }

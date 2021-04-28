@@ -20,10 +20,10 @@ public class View {
 
     controller.startSale();
     controller.addItem("1337");
-    controller.addQuantity(5);
+    controller.addQuantity(10);
     controller.endSale();
     controller.requestDiscount("Daniel");
-    controller.payment(50);
+    controller.payment(500);
     System.out.println("Program seems to work!");
   }
 }

@@ -3,17 +3,19 @@ package se.kth.iv1350.danielhenning.model;
 import java.util.ArrayList;
 
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
+import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 public class ItemList {
 
-  private ArrayList<RowOfItem> itemList;
+  private ArrayList<ItemRow> itemRows;
   private float runningTotal;
   private int numberOfItems;
   private int numberOfRows;
   private int indexOfLastChangedRow;
 
   public ItemList() {
-    this.itemList = new ArrayList<RowOfItem>();
+    this.itemRows = new ArrayList<ItemRow>();
     this.runningTotal = 0;
     this.numberOfItems = 0;
     this.numberOfRows = 0;
@@ -22,8 +24,8 @@ public class ItemList {
 
   private int indexOfRow(ItemInformationDTO item) {
     ItemInformationDTO itemInRow;
-    for(int i = 0; i < itemList.size(); i++) {
-      itemInRow = itemList.get(i).getItem();
+    for(int i = 0; i < itemRows.size(); i++) {
+      itemInRow = itemRows.get(i).getItem();
       if(itemInRow == item) {
         return i;
       }
@@ -32,16 +34,20 @@ public class ItemList {
   }
 
   private void increaseQuantity(int rowIndex, int quantity) {
-    itemList.get(rowIndex).increaseQuantity(quantity);
+    itemRows.get(rowIndex).increaseQuantity(quantity);
+  }
+
+  private void updateRunningTotalAndNumberOfItems(int quantity) {
+    runningTotal += (itemRows.get(indexOfLastChangedRow).getItem().getPrice() * quantity);
+    numberOfItems += quantity;
   }
 
   public void increaseQuantityOfLastScannedItem(int quantity) {
+    System.out.println("Increasing quantity of item [" + itemRows.get(indexOfLastChangedRow).getItem().getItemDescription() + "] with " + quantity);
     increaseQuantity(indexOfLastChangedRow, quantity);
-
-    RowOfItem lastChangedRow = itemList.get(indexOfLastChangedRow);
-
-    runningTotal += (lastChangedRow.getPrice() * quantity);
-    numberOfItems += quantity;
+    System.out.println("New quantity: " + itemRows.get(indexOfLastChangedRow).getQuantity());
+    updateRunningTotalAndNumberOfItems(quantity);
+    System.out.println("Running total: " + runningTotal);
   }
 
   public void addItem(ItemInformationDTO item) {
@@ -49,22 +55,37 @@ public class ItemList {
     int rowIndex = indexOfRow(item);
 
     if(rowIndex == notFound) {
-      RowOfItem newRow = new RowOfItem(item);
-      itemList.add(newRow);
+      ItemRow newRow = new ItemRow(item);
+      itemRows.add(newRow);
+      System.out.println("Added item: " + newRow.getItem().getItemDescription());
       numberOfRows++;
-      indexOfLastChangedRow = itemList.size() - 1;
+      indexOfLastChangedRow = itemRows.size() - 1;
     } else {
       increaseQuantity(rowIndex, 1);
       indexOfLastChangedRow = rowIndex;
     }
 
-    runningTotal += item.getPrice();
-    numberOfItems += item.getQuantity();
+    updateRunningTotalAndNumberOfItems(1);
     System.out.println("Running total = " + runningTotal);
   }
 
-  public ArrayList<RowOfItem> getItems() {
-    return itemList;
+  public void addDiscount(SaleDTO saleDTO) {
+
+    ArrayList<ItemRowDTO> newItemRows = saleDTO.getItemRows();
+
+    for(int i = 0; i < itemRows.size(); i++) {
+      double oldDiscount = itemRows.get(i).getDiscount();
+      double newDiscount = newItemRows.get(i).getDiscount();
+      if(oldDiscount != newDiscount) {
+        itemRows.get(i).setDiscount(newDiscount);
+        runningTotal -= newDiscount;
+        System.out.println("Adding discount to ItemList! New Running Total: " + runningTotal);
+      }
+    }
+  }
+
+  public ArrayList<ItemRow> getItemList() {
+    return itemRows;
   }
 
   public float getRunningTotal() {
