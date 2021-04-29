@@ -5,7 +5,13 @@ public class ItemInformationDTO {
     private double vatRate; // ItemPrice
     private String itemDescription; // ItemDescription
     private String itemIdentifier;  // ItemDesription
-
+/**
+ * Creates an ItemInformationDTO with the data taken from database for the scanned itemcode.
+ * @param price is double representing the price of the item.
+ * @param vatRate is a double representing the amount of vat on the item.
+ * @param itemDescription a String representing the name of the item.
+ * @param itemIdentifier a String representing the items identifier that was scanned.
+ */
     public ItemInformationDTO(double price, double vatRate, String itemDescription, String itemIdentifier) {
         this.price = price;
         this.vatRate = vatRate;
