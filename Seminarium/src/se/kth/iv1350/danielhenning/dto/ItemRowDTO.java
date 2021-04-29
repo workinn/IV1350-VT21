@@ -2,7 +2,7 @@ package se.kth.iv1350.danielhenning.dto;
 
 import se.kth.iv1350.danielhenning.model.ItemRow;
 
-public class ItemRowDTO {
+public final class ItemRowDTO {
 
   ItemInformationDTO item;
   int quantity;
@@ -37,5 +37,9 @@ public class ItemRowDTO {
 
   public double getPriceIncludingDiscount() {
     return priceIncludingDiscount;
+  }
+
+  public String toString() {
+    return item.toString() + " |     " + quantity + "     |    " + discount + "    |   " + priceIncludingDiscount + "    |";
   }
 }

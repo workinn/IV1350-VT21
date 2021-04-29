@@ -1,23 +1,19 @@
 package se.kth.iv1350.danielhenning.model;
 
-import java.util.ArrayList;
-
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
+
+import java.util.ArrayList;
 
 public class ItemList {
 
   private ArrayList<ItemRow> itemRows;
-  private double runningTotal;
-  private double totalDiscount;
   private int numberOfItems;
   private int numberOfRows;
   private int indexOfLastChangedRow;
 
   public ItemList() {
     this.itemRows = new ArrayList<ItemRow>();
-    this.runningTotal = 0;
-    this.totalDiscount = 0;
     this.numberOfItems = 0;
     this.numberOfRows = 0;
     this.indexOfLastChangedRow = 0;
@@ -36,19 +32,11 @@ public class ItemList {
 
   private void increaseQuantity(int rowIndex, int quantity) {
     itemRows.get(rowIndex).increaseQuantity(quantity);
-  }
-
-  private void updateRunningTotalAndNumberOfItems(int quantity) {
-    runningTotal += (itemRows.get(indexOfLastChangedRow).getItem().getPrice() * quantity);
     numberOfItems += quantity;
   }
 
   public void increaseQuantityOfLastScannedItem(int quantity) {
-    System.out.println("Increasing quantity of item [" + itemRows.get(indexOfLastChangedRow).getItem().getItemDescription() + "] with " + quantity);
     increaseQuantity(indexOfLastChangedRow, quantity);
-    System.out.println("New quantity: " + itemRows.get(indexOfLastChangedRow).getQuantity());
-    updateRunningTotalAndNumberOfItems(quantity);
-    System.out.println("Running total: " + runningTotal);
   }
 
   public void addItem(ItemInformationDTO item) {
@@ -58,42 +46,29 @@ public class ItemList {
     if(rowIndex == notFound) {
       ItemRow newRow = new ItemRow(item);
       itemRows.add(newRow);
-      //System.out.println("Added item: " + newRow.getItem().getItemDescription());
       numberOfRows++;
+      numberOfItems++;
       indexOfLastChangedRow = itemRows.size() - 1;
     } else {
       increaseQuantity(rowIndex, 1);
       indexOfLastChangedRow = rowIndex;
+      numberOfItems++;
     }
-
-    updateRunningTotalAndNumberOfItems(1);
   }
 
   public void addDiscount(DiscountDTO discount) {
-
-    System.out.println("Running total before discounts: " + runningTotal);
 
     for(int i = 0; i < itemRows.size(); i++) {
       double oldDiscount = itemRows.get(i).getDiscount();
       double newDiscount = discount.getItemRowDTO().get(i).getDiscount();
       if(oldDiscount != newDiscount) {
         itemRows.get(i).setDiscount(newDiscount);
-        runningTotal -= newDiscount;
-        System.out.println("Adding discount to ItemList! New Running Total: " + runningTotal);
       }
     }
-    totalDiscount = discount.getTotalSaleDiscount();
-    System.out.println("Adding total discount to Sale: " + totalDiscount);
-    runningTotal -= totalDiscount;
-    System.out.println("Final running total = " + runningTotal);
   }
 
-  public ArrayList<ItemRow> getItemList() {
+  public ArrayList<ItemRow> getItemRows() {
     return itemRows;
-  }
-
-  public double getRunningTotal() {
-    return runningTotal;
   }
 
   public int getNumberOfItems() {

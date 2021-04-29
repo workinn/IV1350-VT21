@@ -2,7 +2,7 @@ package se.kth.iv1350.danielhenning.dto;
 
 import java.util.ArrayList;
 
-public class DiscountDTO {
+public final class DiscountDTO {
   
     private ArrayList<ItemRowDTO> itemRows;
     private ClubMemberDTO member;

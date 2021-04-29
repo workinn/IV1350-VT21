@@ -7,10 +7,10 @@ import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
  */
 public class ItemRow {
 
-  ItemInformationDTO item;
-  int quantity;
-  double discount;
-  double priceIncludingDiscount;
+  private ItemInformationDTO item;
+  private int quantity;
+  private double discount;
+  private double priceIncludingDiscount;
 
   public ItemRow(ItemInformationDTO item) {
     this.item = item;
@@ -40,7 +40,7 @@ public class ItemRow {
   }
 
   private void calculatePrice() {
-    priceIncludingDiscount = (priceIncludingDiscount - discount) * quantity;
+    priceIncludingDiscount = (item.getPrice() * quantity) - discount;
   }
 
   public ItemInformationDTO getItem() {

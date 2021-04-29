@@ -1,7 +1,5 @@
 package se.kth.iv1350.danielhenning.model;
 
-import java.util.ArrayList;
-
 import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
 import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
@@ -9,6 +7,7 @@ import se.kth.iv1350.danielhenning.integration.DiscountHandler;
 import se.kth.iv1350.danielhenning.integration.MemberHandler;
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
 
+import java.util.ArrayList;
 
 public class Discount {
 
@@ -32,11 +31,10 @@ public class Discount {
     }
 
     public DiscountDTO addDiscount(SaleDTO saleDTO, String customerID){
-
         ClubMemberDTO member = memberHandler.getMember(customerID);
         DiscountDTO discountDTO = discountHandler.addDiscount(saleDTO, member);
         updateTotalDiscountToday(discountDTO);
-
+        
         return discountDTO;
     }
 

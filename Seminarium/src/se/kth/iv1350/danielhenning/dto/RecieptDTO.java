@@ -1,6 +1,6 @@
 package se.kth.iv1350.danielhenning.dto;
 
-public class RecieptDTO {
+public final class RecieptDTO {
   
   private String address;
   private String store;

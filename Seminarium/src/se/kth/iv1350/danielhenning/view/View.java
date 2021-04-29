@@ -1,6 +1,7 @@
 package se.kth.iv1350.danielhenning.view;
 
 import se.kth.iv1350.danielhenning.controller.Controller;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 /**
  * The View class represents the the view of the program
@@ -18,14 +19,23 @@ public class View {
   public View(Controller controller) {
     this.controller = controller;
 
+    SaleDTO currentStateOfSale;
+
     controller.startSale();
-    controller.addItem("1337");
-    controller.addQuantity(10);
-    controller.addItem("1");
-    controller.addQuantity(10);
-    controller.endSale();
-    controller.requestDiscount("Daniel");
-    controller.payment(500);
+    currentStateOfSale = controller.addItem("1337");
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.addQuantity(10);
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.addItem("1");
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.addQuantity(15);
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.endSale();
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.requestDiscount("Daniel");
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.payment(500);
+    currentStateOfSale.printSale();
     System.out.println("Program seems to work!");
   }
 }

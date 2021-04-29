@@ -1,6 +1,6 @@
 package se.kth.iv1350.danielhenning.dto;
 
-public class ClubMemberDTO {
+public final class ClubMemberDTO {
 
   private String name;
   private String memberID;

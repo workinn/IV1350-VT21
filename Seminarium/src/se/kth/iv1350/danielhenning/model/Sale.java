@@ -2,16 +2,14 @@ package se.kth.iv1350.danielhenning.model;
 
 import se.kth.iv1350.danielhenning.integration.InventoryHandler;
 import se.kth.iv1350.danielhenning.integration.PrinterHandler;
-
-import java.time.LocalDateTime;
-
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.RecieptDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
-public class Sale {
 
-  // private HandlerCreator handler;
+import java.time.LocalDateTime;
+
+public class Sale {
   private InventoryHandler inventoryHandler;
   private PrinterHandler printer;
   private Discount discount;
@@ -19,6 +17,10 @@ public class Sale {
   private ItemList items;
   private boolean lastItemFound;
   private LocalDateTime dateTime;
+  private double runningTotal;
+  private double discountOnWholeSale;
+  private double amountPaid;
+  private double change;
 
   public Sale(InventoryHandler inventoryHandler, PrinterHandler printer, SaleLog saleLog, Discount discount) {
     this.inventoryHandler = inventoryHandler;
@@ -27,10 +29,23 @@ public class Sale {
     this.saleLog = saleLog;
     this.items = new ItemList();
     this.dateTime = LocalDateTime.now();
+    this.runningTotal = 0;
+    this.discountOnWholeSale = 0;
+    this.amountPaid = 0;
+    this.change = 0;
   }
 
   private SaleDTO getSaleDTO() {
-    return new SaleDTO(items, lastItemFound, dateTime);
+    calculateRunningTotal();
+    return new SaleDTO(this);
+  }
+
+  private void calculateRunningTotal() {
+    runningTotal = 0;
+    for(int i = 0; i < items.getItemRows().size(); i++) {
+      runningTotal += items.getItemRows().get(i).getPriceIncludingDiscount();
+    }
+    runningTotal -= discountOnWholeSale;
   }
 
   public SaleDTO addItem(String itemIdentifier) {
@@ -41,9 +56,6 @@ public class Sale {
     } else {
       lastItemFound = true;
       items.addItem(item);
-
-      System.out.println("Item added: " + item.getItemDescription());
-      System.out.println("Running Total: " + items.getRunningTotal());
     }
 
     return getSaleDTO();
@@ -61,9 +73,8 @@ public class Sale {
 
   public SaleDTO addDiscount(String customerID) {
 
-    System.out.println("Looking for discounts...");
-
     DiscountDTO discountDTO = discount.addDiscount(getSaleDTO(), customerID);
+    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
 
     items.addDiscount(discountDTO);
     
@@ -77,9 +88,39 @@ public class Sale {
     return saleDTO;
   }
 
-  public void printReciept(double amountPaid, double change) {
-
+  public SaleDTO printReciept(double amountPaid, double change) {
+    this.amountPaid = amountPaid;
+    this.change = change;
     RecieptDTO reciept = new RecieptDTO(getSaleDTO(), amountPaid, change);
     printer.printRecipt(reciept);
+    return getSaleDTO();
+  }
+
+  public ItemList getItemList() {
+    return items;
+  }
+
+  public boolean getLastItemFound() {
+    return lastItemFound;
+  }
+
+  public double getRunningTotal() {
+    return runningTotal;
+  }
+
+  public double getDiscountOnWholeSale() {
+    return discountOnWholeSale;
+  }
+
+  public LocalDateTime getDateTime() {
+    return dateTime;
+  }
+
+  public double getAmountPaid() {
+    return amountPaid;
+  }
+
+  public double getChange() {
+    return change;
   }
 }

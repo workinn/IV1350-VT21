@@ -65,13 +65,11 @@ public class Controller {
    * 
    * @param amountPaid
    */
-  public double payment(int amountPaid) {
-    System.out.println("Amount paid = " + amountPaid);
+  public SaleDTO payment(int amountPaid) {
     SaleDTO saleDTO = currentSale.logSale();
     cashRegister.addPayment(saleDTO);
     double change = cashRegister.getChange(amountPaid, saleDTO);
-    System.out.println("Change = " + change);
-    currentSale.printReciept(amountPaid, change);
-    return change;
+    saleDTO = currentSale.printReciept(amountPaid, change);
+    return saleDTO;
   }
 }

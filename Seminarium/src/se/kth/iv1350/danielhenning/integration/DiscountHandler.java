@@ -23,12 +23,15 @@ public class DiscountHandler {
     ItemRowDTO newRow;
     double runningTotal = 0;
     double totalSaleDiscount = 0;
+    int multiplier;
+    double discount;
 
     for(int i = 0; i < saleDTO.getItemRows().size(); i++) {
       oldRow = saleDTO.getItemRows().get(i);
       if(oldRow.getitem().getItemIdentifier() == "1" && oldRow.getQuantity() >= 5) {
-        newRow = new ItemRowDTO(oldRow, oldRow.getPriceIncludingDiscount() * 0.40);
-        System.out.println("Discount found - 5 Coca-Cola for the price of 3!");
+        multiplier = oldRow.getQuantity() / 5;
+        discount = oldRow.getitem().getPrice() * 2 * multiplier;
+        newRow = new ItemRowDTO(oldRow, discount);
         rowsWithDiscount.add(newRow);
         runningTotal += newRow.getPriceIncludingDiscount();
       } else {
@@ -37,7 +40,6 @@ public class DiscountHandler {
       }
     }
     if(member != null & runningTotal>= 100) { 
-      System.out.println("Discount found - 10 SEK off on total sale!");
       totalSaleDiscount = 10.0;
     }
      return new DiscountDTO(rowsWithDiscount, member, totalSaleDiscount);

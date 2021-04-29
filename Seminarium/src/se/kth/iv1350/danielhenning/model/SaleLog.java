@@ -1,10 +1,10 @@
 package se.kth.iv1350.danielhenning.model;
 
-import java.util.ArrayList;
-
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 import se.kth.iv1350.danielhenning.integration.AccountingHandler;
 import se.kth.iv1350.danielhenning.integration.InventoryHandler;
+
+import java.util.ArrayList;
 
 /**
  * The SaleLog class represents 
@@ -24,7 +24,6 @@ public class SaleLog {
   }
 
   public void logSale(SaleDTO saleDTO) {
-    //SaleLogDTO saleLog = new SaleLogDTO(sale);
     todaysSales.add(saleDTO);
     amountSoldForToday += saleDTO.getRunningTotal();
     accountingHandler.updateAccounting(saleDTO);

@@ -1,10 +1,10 @@
 package se.kth.iv1350.danielhenning.dto;
 
-public class ItemInformationDTO {
-    private double price;   //ItemPrice
-    private double vatRate; // ItemPrice
-    private String itemDescription; // ItemDescription
-    private String itemIdentifier;  // ItemDesription
+public final class ItemInformationDTO {
+    private double price;
+    private double vatRate;
+    private String itemDescription;
+    private String itemIdentifier;
 
     public ItemInformationDTO(double price, double vatRate, String itemDescription, String itemIdentifier) {
         this.price = price;
@@ -12,14 +12,6 @@ public class ItemInformationDTO {
         this.itemDescription = itemDescription;
         this.itemIdentifier = itemIdentifier;
     }
-
-    /*
-    public ItemInformationDTO(ItemInformationDTO itemInformationDTO, int quantity, double discount){
-        this.price = itemInformationDTO.getPrice();
-        this.vatRate = itemInformationDTO.getVATrate();
-        this.itemDescription = itemInformationDTO.getItemDescription();
-        this.itemIdentifier = itemInformationDTO.getItemIdentifier();
-    }*/
     
     public double getPrice(){
         return price;
@@ -35,5 +27,9 @@ public class ItemInformationDTO {
 
     public String getItemIdentifier(){
         return itemIdentifier;
+    }
+
+    public String toString() {
+        return itemDescription + "   |  " + itemIdentifier;
     }
 }
