@@ -1,5 +1,8 @@
 package se.kth.iv1350.danielhenning.integration;
-
+/**
+ * The HandlerCreator class represents a creator
+ * and holder of all handlers in the integration layer
+ */
 public class HandlerCreator {
 
   AccountingHandler accountingHandler;
@@ -8,6 +11,9 @@ public class HandlerCreator {
   MemberHandler memberHandler;
   PrinterHandler printerHandler;
   
+  /**
+   * Creates a new instance of the class HandlerCreator
+   */
   public HandlerCreator() {
     this.accountingHandler = new AccountingHandler();
     this.inventoryHandler = new InventoryHandler();

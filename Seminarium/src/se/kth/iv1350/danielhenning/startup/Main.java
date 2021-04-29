@@ -6,13 +6,12 @@ import se.kth.iv1350.danielhenning.controller.Controller;
 import se.kth.iv1350.danielhenning.view.View;
 
 /**
- * The Main class represents the startup of the program.
+ * The Main class represents the startup of the program
  */
 public class Main {
 
   /**
    * This is the startup of the program
-   * 
    * @param args is command line arguments for Java
    */
   public static void main(String[] args) throws Exception {

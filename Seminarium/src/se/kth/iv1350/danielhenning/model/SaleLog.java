@@ -7,7 +7,14 @@ import se.kth.iv1350.danielhenning.integration.InventoryHandler;
 import java.util.ArrayList;
 
 /**
- * The SaleLog class represents 
+ * The SaleLog class represents the logging of all the
+ * sales done today. It stores all completed sales
+ * in a list of SaleDTOs and also keep track of
+ * the total amount sold for today as well as the 
+ * total amount of discount given today. Furthermore
+ * the class also manages the communication for storing
+ * the completed sales in the External Accounting System
+ * as well as updating the External Inventory System
  */
 public class SaleLog {
 
@@ -15,7 +22,13 @@ public class SaleLog {
   private InventoryHandler inventoryHandler;
   private ArrayList<SaleDTO> todaysSales;
   private double amountSoldForToday;
-//Discount given?
+  private double amountDiscountGivenToday;
+
+  /**
+   * Creates a new instance of the class SaleLog
+   * @param accountingHandler is the handler of the accounting
+   * @param inventoryHandler is the handler of the inventory
+   */
   public SaleLog(AccountingHandler accountingHandler, InventoryHandler inventoryHandler) {
     this.accountingHandler = accountingHandler;
     this.inventoryHandler = inventoryHandler;
@@ -23,9 +36,24 @@ public class SaleLog {
     this.amountSoldForToday = 0;
   }
 
+  private void updateTotalDiscountToday(SaleDTO saleDTO) {
+
+     for(int i = 0; i < saleDTO.getItemRows().size(); i++) {
+        amountDiscountGivenToday += saleDTO.getItemRows().get(i).getDiscount();
+     }
+     amountDiscountGivenToday += saleDTO.getDiscountOnWholeSale();
+  }
+
+  /**
+   * The method logSale logs the given sale internally
+   * as well as sends it to the External Accounting
+   * System and the External Inventory System for updating
+   * @param saleDTO is the sale to be logged
+   */
   public void logSale(SaleDTO saleDTO) {
     todaysSales.add(saleDTO);
     amountSoldForToday += saleDTO.getRunningTotal();
+    updateTotalDiscountToday(saleDTO);
     accountingHandler.updateAccounting(saleDTO);
     inventoryHandler.updateInventory(saleDTO);
   }
@@ -36,5 +64,9 @@ public class SaleLog {
 
   public double getAoumtSoldForToday() {
     return amountSoldForToday;
+  }
+
+  public double getAmountDiscountGivenToday() {
+    return amountDiscountGivenToday;
   }
 }

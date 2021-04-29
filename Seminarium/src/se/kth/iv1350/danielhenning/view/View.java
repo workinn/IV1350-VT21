@@ -28,7 +28,7 @@ public class View {
     currentStateOfSale.printSale();
     currentStateOfSale = controller.addItem("1");
     currentStateOfSale.printSale();
-    currentStateOfSale = controller.addQuantity(15);
+    currentStateOfSale = controller.addQuantity(5);
     currentStateOfSale.printSale();
     currentStateOfSale = controller.endSale();
     currentStateOfSale.printSale();

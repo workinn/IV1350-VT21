@@ -5,6 +5,13 @@ import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 
 import java.util.ArrayList;
 
+/**
+ * The ItemList class represents the whole list of items
+ * that makes up the sale. The class contains a list of
+ * ItemRows, the total number of items in the list and
+ * the number of rows in the list. The variable 
+ * indexOfLastChangedRow is used for inner logic
+ */
 public class ItemList {
 
   private ArrayList<ItemRow> itemRows;
@@ -12,6 +19,9 @@ public class ItemList {
   private int numberOfRows;
   private int indexOfLastChangedRow;
 
+  /**
+   * Creates a new instance of the class ItemList
+   */
   public ItemList() {
     this.itemRows = new ArrayList<ItemRow>();
     this.numberOfItems = 0;
@@ -35,10 +45,23 @@ public class ItemList {
     numberOfItems += quantity;
   }
 
+  /**
+   * The method increaseQuantityOfLastScannedItem increases the quantity
+   * of the last scanned item by the given quantity
+   * @param quantity is the quantity to increase the quantity of an item
+   */
   public void increaseQuantityOfLastScannedItem(int quantity) {
     increaseQuantity(indexOfLastChangedRow, quantity);
   }
 
+  /**
+   * The method addItem adds the given item to the list of ItemRows.
+   * If a row with the same item already exists, it increases the 
+   * quantity by 1. If a row with the same item does not exist,
+   * a new row with the given item is created and added to the list
+   * of ItemRows
+   * @param item is the item to add to the list of ItemRows
+   */
   public void addItem(ItemInformationDTO item) {
     int notFound = -1;
     int rowIndex = indexOfRow(item);
@@ -55,9 +78,14 @@ public class ItemList {
       numberOfItems++;
     }
   }
-// frågan om denna ska göras från här, kanske göras från Sale iställeT?
-  public void addDiscount(DiscountDTO discount) {
 
+  /**
+   * The method addDiscount adds discount to the rows in the list
+   * of ItemRows. This is done by comparing and adding discounts
+   * from a given DiscountDTO
+   * @param discount has the discounts to be included to the list of ItemRows
+   */
+  public void addDiscount(DiscountDTO discount) {
     for(int i = 0; i < itemRows.size(); i++) {
       double oldDiscount = itemRows.get(i).getDiscount();
       double newDiscount = discount.getItemRowDTO().get(i).getDiscount();

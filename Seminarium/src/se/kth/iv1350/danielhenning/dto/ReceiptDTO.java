@@ -1,21 +1,25 @@
 package se.kth.iv1350.danielhenning.dto;
 
-public final class RecieptDTO {
+/**
+ * The class ReceiptDTO represents a 
+ * Data Transfer Object of a receipt
+ */
+public final class ReceiptDTO {
   
   private String address;
   private String store;
   private String phoneNumber;
   private SaleDTO sale;
-  double amountPaid;
-  double change;
 
-  public RecieptDTO(SaleDTO sale, double amountPaid, double change) {
+  /**
+   * Creates a new instance of the class ReceiptDTO
+   * @param sale is the sale being added to the receipt for later printing
+   */
+  public ReceiptDTO(SaleDTO sale) {
       this.address = "Testvägen 5";
       this.store = "Conceptstore";
       this.phoneNumber = "0700000123";
       this.sale = sale;
-      this.amountPaid = amountPaid;
-      this.change = change;
   }
 
   public String getAddress() {
