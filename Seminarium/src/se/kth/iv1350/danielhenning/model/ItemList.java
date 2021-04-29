@@ -55,7 +55,7 @@ public class ItemList {
       numberOfItems++;
     }
   }
-
+// frågan om denna ska göras från här, kanske göras från Sale iställeT?
   public void addDiscount(DiscountDTO discount) {
 
     for(int i = 0; i < itemRows.size(); i++) {

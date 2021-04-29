@@ -85,7 +85,7 @@ public class Sale {
     SaleDTO saleDTO = getSaleDTO();
     saleLog.logSale(saleDTO);
 
-    return saleDTO;
+    return saleDTO; //? ska denna retuneras?
   }
 
   public SaleDTO printReciept(double amountPaid, double change) {
