@@ -96,7 +96,6 @@ return amountToReturn;
           amountToReturn= discountTotalRules.get(i).getDiscountAmount();
         }
       }
-      System.out.println(amountToReturn);
 
       return amountToReturn;
     }
