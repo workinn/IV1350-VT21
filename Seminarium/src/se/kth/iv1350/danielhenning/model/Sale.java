@@ -6,6 +6,7 @@ import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.ReceiptDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
+
 import java.time.LocalDateTime;
 
 /**
@@ -26,6 +27,7 @@ public class Sale {
   private double discountOnWholeSale;
   private double amountPaid;
   private double change;
+  private Discount discount;
 
   /**
    * Creates a new instance of the class Sale
@@ -36,6 +38,7 @@ public class Sale {
     this.handler = handler;
     this.saleLog = saleLog;
     this.items = new ItemList();
+    this.discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     this.dateTime = LocalDateTime.now();
     this.runningTotal = 0;
     this.discountOnWholeSale = 0;
@@ -104,11 +107,15 @@ public class Sale {
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
   public SaleDTO addDiscount(String customerID) {
-    DiscountDTO discountDTO = handler.getDiscountHandler().addDiscount(getSaleDTO(), handler.getMemberHandler().getMember(customerID));
-    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
+    //DiscountDTO discountDTO = handler.getDiscountHandler().addDiscount(getSaleDTO(), handler.getMemberHandler().getMember(customerID));
+    //discountOnWholeSale = discountDTO.getTotalSaleDiscount();
 
-    items.addDiscount(discountDTO);
-    
+   // items.addDiscount(discountDTO);
+
+   DiscountDTO discountDTO = discount.discountCheck(customerID, getSaleDTO());
+   discountOnWholeSale = discountDTO.getTotalSaleDiscount();
+   items.addDiscount(discountDTO);
+   
     return getSaleDTO();
   }
 

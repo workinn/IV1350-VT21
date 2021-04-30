@@ -15,6 +15,7 @@ public class MemberHandler {
    * Create a new instance of the class MemberHandler
    */
   public MemberHandler() {
+  
   }
 
   /**
@@ -28,7 +29,7 @@ public class MemberHandler {
 
     ClubMemberDTO member;
 
-    if(customerID == "Daniel") {
+    if(customerID == "1337") {
       member = new ClubMemberDTO("Daniel", "1337");
     } else {
       member = null;

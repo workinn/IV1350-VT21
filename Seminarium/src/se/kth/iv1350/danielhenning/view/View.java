@@ -32,7 +32,7 @@ public class View {
     currentStateOfSale.printSale();
     currentStateOfSale = controller.endSale();
     currentStateOfSale.printSale();
-    currentStateOfSale = controller.requestDiscount("Daniel");
+    currentStateOfSale = controller.requestDiscount("1337");
     currentStateOfSale.printSale();
     currentStateOfSale = controller.payment(500);
     currentStateOfSale.printSale();
