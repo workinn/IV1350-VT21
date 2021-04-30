@@ -41,6 +41,6 @@ public final class ItemInformationDTO {
     }
 
     public String toString() {
-        return itemDescription + "   |  " + itemIdentifier;
+        return itemDescription + "   | " + itemIdentifier;
     }
 }
