@@ -77,7 +77,8 @@ public final class SaleDTO {
   public double getDiscountOnWholeSale() {
     return discountOnWholeSale;
   }
-
+// Is a mockup to show information the view gets.
+  
   public void printSale() {
     if(lastItemFound == false) {
       System.out.println("--------------------------");
