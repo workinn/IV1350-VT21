@@ -32,7 +32,7 @@ public class MemberHandler {
     if(customerID == "1337") {
       member = new ClubMemberDTO("Daniel", "1337");
     } else {
-      member = null;
+      member = new ClubMemberDTO(null,null);
     }
     return member;
   }

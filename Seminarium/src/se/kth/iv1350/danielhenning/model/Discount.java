@@ -50,9 +50,6 @@ public class Discount {
         }
         
         totalSaleDiscount = getDiscountTotalAmount(runningTotalAfterItemDiscount, member);
-        System.out.println(totalSaleDiscount);
-        System.out.println(totalSaleDiscount);
-        System.out.println(totalSaleDiscount);
 
         return new DiscountDTO(rowsWithDiscount, member, totalSaleDiscount);
 
@@ -67,7 +64,7 @@ public class Discount {
             if(multiplier>=1 && discountRules.get(i).getClubMemberID()==null && amountToReturn<(multiplier*discountRules.get(i).getDiscountAmount())){
                amountToReturn = multiplier*discountRules.get(i).getDiscountAmount();
             }
-            if(multiplier>=1 && discountRules.get(i).getClubMemberID()=="0" && member !=null && amountToReturn<(multiplier*discountRules.get(i).getDiscountAmount())){
+            if(multiplier>=1 && discountRules.get(i).getClubMemberID()=="0" && member.getMemberID() !=null && amountToReturn<(multiplier*discountRules.get(i).getDiscountAmount())){
                 amountToReturn = multiplier*discountRules.get(i).getDiscountAmount();
             }
 
@@ -90,7 +87,7 @@ return amountToReturn;
         {
           amountToReturn= discountTotalRules.get(i).getDiscountAmount();
         }
-        if(discountTotalRules.get(i).getClubMemberID()=="0" && member!=null && amountToReturn<discountTotalRules.get(i).getDiscountAmount())
+        if(discountTotalRules.get(i).getClubMemberID()=="0" && member.getMemberID()!=null && amountToReturn<discountTotalRules.get(i).getDiscountAmount())
         {
           amountToReturn= discountTotalRules.get(i).getDiscountAmount();
         }
@@ -99,7 +96,7 @@ return amountToReturn;
           amountToReturn= discountTotalRules.get(i).getDiscountAmount();
         }
       }
-
+      System.out.println(amountToReturn);
 
       return amountToReturn;
     }
