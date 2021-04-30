@@ -2,17 +2,22 @@ package se.kth.iv1350.danielhenning.dto;
 
 import java.util.ArrayList;
 
-public class DiscountDTO {
+/**
+ * The class DiscountDTO is a Data Transfer Object to relay 
+ * what discounts where added to what row of item
+ */
+public final class DiscountDTO {
   
     private ArrayList<ItemRowDTO> itemRows;
     private ClubMemberDTO member;
     private double totalSaleDiscount;
-/**
- * Create a DiscountDTO to calculate discount in sale.
- * @param itemRows is an array of ItemRowDTO that has been added discount on.
- * @param member the ClubMebmerDTO is sent in the Discount to be able to connect the Costumer to the sale.
- * @param totalSaleDiscount is a number of the total amount of discount given, is used for statistic purpouses.
- */
+
+    /**
+     * Creates a new instance of the class DiscountDTO
+     * @param itemRows is a list of all rows of items in a sale. Each row have eligible discounts added to it
+     * @param member is the Club Member used to look for discounts
+     * @param totalSaleDiscount is the total amount of discounts given to this sale
+     */
     public DiscountDTO(ArrayList<ItemRowDTO> itemRows, ClubMemberDTO member, double totalSaleDiscount) {
       this.itemRows = itemRows;
       this.member = member;
