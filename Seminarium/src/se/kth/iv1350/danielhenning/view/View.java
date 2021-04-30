@@ -36,6 +36,7 @@ public class View {
     currentStateOfSale.printSale();
     currentStateOfSale = controller.payment(500);
     currentStateOfSale.printSale();
+    
     System.out.println("Program seems to work!");
   }
 }

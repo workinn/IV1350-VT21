@@ -79,6 +79,11 @@ public final class SaleDTO {
   }
 
   public void printSale() {
+    if(lastItemFound == false) {
+      System.out.println("--------------------------");
+      System.out.println("|INVALID ITEM IDENTIFIER!|");
+      System.out.println("--------------------------");
+    }
     System.out.println("---------------------------------------------------------------");
     System.out.println("| Row | Description | ID  | Quantity  | Discount  | Row Price |");
     System.out.println("---------------------------------------------------------------");
@@ -100,6 +105,6 @@ public final class SaleDTO {
       min = "" + minute;
     }
 
-    System.out.println("                  Time: " + dateTime.getHour() + ":" + min);
+    System.out.println("                  Time: " + dateTime.getHour() + ":" + min + "\n");
   }
 }
