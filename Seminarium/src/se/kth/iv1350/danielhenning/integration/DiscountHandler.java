@@ -37,24 +37,54 @@ public class DiscountHandler {
     this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(100,20,"1337"));
     this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(500,25,"1337"));    
   }
-  
-  public ArrayList<DiscountRulesDTO> getDiscountRules(String itemID){
+  /**
+   * This funktion imitates what data a SQL queery should have retrived.
+   * @param item is a ItemRowDTO that is going to be checked against database.
+   * @param member is ClubMemberDTo with the info on the costumer to be checked against database.
+   */
+  public ArrayList<DiscountRulesDTO> getDiscountRules(ItemRowDTO item, ClubMemberDTO member){
     ArrayList<DiscountRulesDTO> discountRulesToSend = new ArrayList<DiscountRulesDTO>();
     for(int i = 0; i < discountRulesArray.size(); i++) {
-      if(itemID == discountRulesArray.get(i).getItemIdentifier()) {
+      if(discountRulesArray.get(i).getItemIdentifier()==item.getitem().getItemIdentifier() && discountRulesArray.get(i).getClubMemberID()==null){
         discountRulesToSend.add(discountRulesArray.get(i));
       }
+      if(discountRulesArray.get(i).getItemIdentifier()==item.getitem().getItemIdentifier() && discountRulesArray.get(i).getClubMemberID()=="0" && member.getMemberID()!=null){
+        discountRulesToSend.add(discountRulesArray.get(i));
+      }
+      if(discountRulesArray.get(i).getItemIdentifier()==item.getitem().getItemIdentifier() && discountRulesArray.get(i).getClubMemberID()== member.getMemberID()){
+        discountRulesToSend.add(discountRulesArray.get(i));
+      }
+
     }
    return discountRulesToSend;
   }
 
-  public ArrayList<DiscountRulesTotalDTO> getDiscountTotalRules(double runningTotal){
+
+
+/**
+ * This funktion imitates what data a SQL queery should have retrived.
+ * @param runningTotal a double represtenting running total after item discount.
+ * @param member a ClubMemberDTO of the customer.
+ * @return returns and ArrayList of DiscountRulesTotalDTO with all the applicible rules for that costumer.
+ */
+  public ArrayList<DiscountRulesTotalDTO> getDiscountTotalRules(double runningTotal, ClubMemberDTO member){
     ArrayList<DiscountRulesTotalDTO> discountRulesTotalToSend = new ArrayList<DiscountRulesTotalDTO>();
 
     for(int i =0 ; i<discountRulesTotalArray.size();i++){
-      if(runningTotal>discountRulesTotalArray.get(i).getAmountTotalToGetDiscount()){
+     
+      if(discountRulesTotalArray.get(i).getAmountTotalToGetDiscount()<runningTotal && discountRulesTotalArray.get(i).getClubMemberID()==null){
         discountRulesTotalToSend.add(discountRulesTotalArray.get(i));
       }
+     
+      if(discountRulesTotalArray.get(i).getAmountTotalToGetDiscount()<runningTotal && discountRulesTotalArray.get(i).getClubMemberID()=="0" && member.getMemberID()!=null){
+        discountRulesTotalToSend.add(discountRulesTotalArray.get(i));
+      }
+
+      if(discountRulesTotalArray.get(i).getAmountTotalToGetDiscount()<runningTotal && discountRulesTotalArray.get(i).getClubMemberID()==member.getMemberID()){
+        discountRulesTotalToSend.add(discountRulesTotalArray.get(i));
+      }
+      
+
     }
     return discountRulesTotalToSend;
 

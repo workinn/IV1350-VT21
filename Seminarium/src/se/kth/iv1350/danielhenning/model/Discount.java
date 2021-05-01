@@ -22,7 +22,12 @@ public class Discount {
         this.memberHandler = memberHandler;
         this.totalDiscountToday = 0;
     }
-
+/**
+ * This funktion checks if the costumer is eligable for discount and how much.
+ * @param customerID a String with the costumer ID number.
+ * @param sale a SaleDTO of the current sale.
+ * @return a DiscountDTO with a ItemRowDTO with added discount aswell as ClubMemberDTO and totalSaleDiscount.
+ */
     public DiscountDTO discountCheck(String customerID, SaleDTO sale){
 
         ArrayList<ItemRowDTO> rowsWithDiscount = new ArrayList<ItemRowDTO>();
@@ -36,7 +41,7 @@ public class Discount {
 
         for(int i = 0; i<sale.getItemRows().size();i++){
             amountDiscount=0;
-            discountRules = discountHandler.getDiscountRules(sale.getItemRows().get(i).getitem().getItemIdentifier());
+            discountRules = discountHandler.getDiscountRules(sale.getItemRows().get(i), member);
 
             if(discountRules.size()>0){
                 amountDiscount= getDiscountAmount(discountRules, sale.getItemRows().get(i), member);   
@@ -61,17 +66,9 @@ public class Discount {
         for(int i=0; i<discountRules.size(); i++){
             multiplier = item.getQuantity()/discountRules.get(i).getQuantityToGetDiscount();
 
-            if(multiplier>=1 && discountRules.get(i).getClubMemberID()==null && amountToReturn<(multiplier*discountRules.get(i).getDiscountAmount())){
-               amountToReturn = multiplier*discountRules.get(i).getDiscountAmount();
-            }
-            if(multiplier>=1 && discountRules.get(i).getClubMemberID()=="0" && member.getMemberID() !=null && amountToReturn<(multiplier*discountRules.get(i).getDiscountAmount())){
-                amountToReturn = multiplier*discountRules.get(i).getDiscountAmount();
-            }
-
-            if(multiplier>=1 && discountRules.get(i).getClubMemberID()== member.getMemberID() && amountToReturn<(multiplier*discountRules.get(i).getDiscountAmount())){
+            if(multiplier*discountRules.get(i).getDiscountAmount()>amountToReturn){
               amountToReturn = multiplier*discountRules.get(i).getDiscountAmount();
-          }
-          
+            }
         }
 return amountToReturn;
     }
@@ -80,18 +77,10 @@ return amountToReturn;
 
       ArrayList<DiscountRulesTotalDTO> discountTotalRules = new ArrayList<DiscountRulesTotalDTO>();
       double amountToReturn=0;
-      discountTotalRules = discountHandler.getDiscountTotalRules(runningTotalAfterItemDiscount);
+      discountTotalRules = discountHandler.getDiscountTotalRules(runningTotalAfterItemDiscount, member);
 
       for(int i = 0; i<discountTotalRules.size();i++){
-        if(discountTotalRules.get(i).getClubMemberID()==null && amountToReturn<discountTotalRules.get(i).getDiscountAmount())
-        {
-          amountToReturn= discountTotalRules.get(i).getDiscountAmount();
-        }
-        if(discountTotalRules.get(i).getClubMemberID()=="0" && member.getMemberID()!=null && amountToReturn<discountTotalRules.get(i).getDiscountAmount())
-        {
-          amountToReturn= discountTotalRules.get(i).getDiscountAmount();
-        }
-        if(discountTotalRules.get(i).getClubMemberID()==member.getMemberID() && amountToReturn<discountTotalRules.get(i).getDiscountAmount())
+        if(amountToReturn<discountTotalRules.get(i).getDiscountAmount())
         {
           amountToReturn= discountTotalRules.get(i).getDiscountAmount();
         }
