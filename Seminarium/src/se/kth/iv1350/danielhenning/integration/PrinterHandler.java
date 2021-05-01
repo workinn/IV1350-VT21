@@ -20,5 +20,6 @@ public class PrinterHandler {
    * @param receipt contains all information about the sale to be printed
    */
   public void printReceipt(ReceiptDTO receipt){
+    System.out.print(receipt.getReceiptToPrint());
   }
 }

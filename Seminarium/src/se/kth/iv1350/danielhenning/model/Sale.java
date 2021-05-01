@@ -115,7 +115,7 @@ public class Sale {
    DiscountDTO discountDTO = discount.discountCheck(customerID, getSaleDTO());
    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
    items.addDiscount(discountDTO);
-   
+
     return getSaleDTO();
   }
 

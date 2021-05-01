@@ -22,6 +22,7 @@ public final class SaleDTO {
   private double amountPaid;
   private double change;
   private double discountOnWholeSale;
+  private ClubMemberDTO member;
 
   /**
    * Creates a new instance of the class SaleDTO
@@ -40,6 +41,7 @@ public final class SaleDTO {
     this.amountPaid = sale.getAmountPaid();
     this.change = sale.getChange();
     this.discountOnWholeSale = sale.getDiscountOnWholeSale();
+    this.member = new ClubMemberDTO(null,null);
   }
 
   public ArrayList<ItemRowDTO> getItemRows() {
@@ -79,7 +81,7 @@ public final class SaleDTO {
   }
 
   public void printSale() {
-    if(lastItemFound == false) {
+    /*if(lastItemFound == false) {
       System.out.println("--------------------------");
       System.out.println("|INVALID ITEM IDENTIFIER!|");
       System.out.println("--------------------------");
@@ -105,6 +107,6 @@ public final class SaleDTO {
       min = "" + minute;
     }
 
-    System.out.println("                  Time: " + dateTime.getHour() + ":" + min + "\n");
+    System.out.println("                  Time: " + dateTime.getHour() + ":" + min + "\n");*/
   }
 }
