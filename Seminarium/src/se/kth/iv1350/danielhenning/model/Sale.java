@@ -107,11 +107,6 @@ public class Sale {
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
   public SaleDTO addDiscount(String customerID) {
-    //DiscountDTO discountDTO = handler.getDiscountHandler().addDiscount(getSaleDTO(), handler.getMemberHandler().getMember(customerID));
-    //discountOnWholeSale = discountDTO.getTotalSaleDiscount();
-
-   // items.addDiscount(discountDTO);
-
    DiscountDTO discountDTO = discount.discountCheck(customerID, getSaleDTO());
    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
    items.addDiscount(discountDTO);

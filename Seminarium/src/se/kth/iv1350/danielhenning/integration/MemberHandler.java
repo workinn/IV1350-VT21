@@ -30,7 +30,7 @@ public class MemberHandler {
     ClubMemberDTO member;
 
     if(customerID == "1337") {
-      member = new ClubMemberDTO("Daniel", "1337");
+      member = new ClubMemberDTO("D aniel", "1337");
     } else {
       member = new ClubMemberDTO(null,null);
     }

@@ -23,19 +23,19 @@ public class View {
 
     controller.startSale();
     currentStateOfSale = controller.addItem("1337");
-    currentStateOfSale.printSale();
+    // currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(10);
-    currentStateOfSale.printSale();
+    // currentStateOfSale.printSale();
     currentStateOfSale = controller.addItem("1");
-    currentStateOfSale.printSale();
+    // currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(5);
-    currentStateOfSale.printSale();
+    // currentStateOfSale.printSale();
     currentStateOfSale = controller.endSale();
-    currentStateOfSale.printSale();
-    currentStateOfSale = controller.requestDiscount("1337");
-    currentStateOfSale.printSale();
+    // currentStateOfSale.printSale();
+    currentStateOfSale = controller.requestDiscount("111");
+    // currentStateOfSale.printSale();
     currentStateOfSale = controller.payment(500);
-    currentStateOfSale.printSale();
+    // currentStateOfSale.printSale();
     
     System.out.println("Program seems to work!");
   }
