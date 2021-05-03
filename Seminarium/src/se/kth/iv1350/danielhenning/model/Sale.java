@@ -8,6 +8,7 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 
 import java.time.LocalDateTime;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  * The Sale class represents the whole sale. It has general information
@@ -84,10 +85,15 @@ public class Sale {
    * @param quantity the quantity of items of the same type as the last scanned one
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
-  public SaleDTO addQuantity(int quantity) {
-    if(lastItemFound) {
-      items.increaseQuantityOfLastScannedItem(quantity - 1);
+  public SaleDTO addQuantity(int quantity) throws RejectedExecutionException {
+    if(!lastItemFound) {
+      throw new RejectedExecutionException("Add Quantity Rejected: Last scanned item not found: lastItemFound = " + lastItemFound);
     }
+    if(quantity < 1) {
+      throw new RejectedExecutionException("Quantity Rejected: Can't add a 0 or a negative value to item: " + quantity);
+    }
+
+    items.increaseQuantityOfLastScannedItem(quantity - 1);
 
     return getSaleDTO();
   }

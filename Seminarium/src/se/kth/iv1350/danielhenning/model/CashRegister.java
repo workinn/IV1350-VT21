@@ -1,5 +1,7 @@
 package se.kth.iv1350.danielhenning.model;
 
+import java.util.concurrent.RejectedExecutionException;
+
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 /**
@@ -23,8 +25,8 @@ public class CashRegister {
      * sale to the cash registers balance
      * @param sale contains the amount of the current sale to be added to the cash registers balance
      */
-    public void addPayment(SaleDTO sale) {
-      balance += sale.getRunningTotal();
+    public void addPayment(SaleDTO saleDTO) {
+      balance += saleDTO.getRunningTotal();
     }
 
     /**
@@ -34,8 +36,11 @@ public class CashRegister {
      * @param sale is the current sale
      * @return the change
      */
-    public double getChange(int amountPaid, SaleDTO sale) {
-      return amountPaid - sale.getRunningTotal();
+    public double getChange(double amountPaid, SaleDTO saleDTO) throws RejectedExecutionException {
+      if (amountPaid < saleDTO.getRunningTotal()) {
+        throw new RejectedExecutionException("Amount Paid Rejected: Amount Paid is less than the Running Total: Amount Paid = " + amountPaid + ", Running Total = " + saleDTO.getRunningTotal());
+      }
+      return amountPaid - saleDTO.getRunningTotal();
     }
 
     public double getBalance() {
