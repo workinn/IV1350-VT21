@@ -29,7 +29,7 @@ public class CashRegisterTest {
   public void testInitialBalance() {
     double expected = initialBalance;
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The InitialBalance is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The InitialBalance is not what was expected: ");
   }
 
   @Test
@@ -43,7 +43,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance;
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Balance is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Balance is not what was expected: ");
   }
 
   @Test
@@ -61,7 +61,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * 1);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -80,7 +80,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * 1000);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -98,7 +98,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * 1);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -118,7 +118,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * quantity);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -139,7 +139,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance + apple.getPrice() + cola.getPrice();
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -163,7 +163,7 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * quantity) + (cola.getPrice() * quantity);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -178,7 +178,7 @@ public class CashRegisterTest {
 
     double expected = amountPaid;
     double actual = cashRegister.getChange(amountPaid, saleDTO);
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -197,7 +197,7 @@ public class CashRegisterTest {
 
     double expected = amountPaid - apple.getPrice();
     double actual = cashRegister.getChange(amountPaid, saleDTO);
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 
   @Test
@@ -216,6 +216,6 @@ public class CashRegisterTest {
 
     double expected = amountPaid - cola.getPrice();
     double actual = cashRegister.getChange(amountPaid, saleDTO);
-    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: ");
   }
 }

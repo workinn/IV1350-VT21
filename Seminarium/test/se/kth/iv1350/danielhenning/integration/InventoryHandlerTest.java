@@ -28,11 +28,11 @@ public class InventoryHandlerTest {
     ItemInformationDTO expected = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier);
     ItemInformationDTO actual = inventoryHandler.getItemInformation(itemIdentifier);
 
-    assertEquals(expected.getClass(), actual.getClass(), "The given object from getItemInformation is not of the expect class: expected: " + expected.getClass() + " actual: " + actual.getClass());
-    assertEquals(expected.getItemDescription(), actual.getItemDescription(), "The given ItemDescription is not what was expected: expected: " + expected.getItemDescription() + " actual: " + actual.getItemDescription());
-    assertEquals(expected.getItemIdentifier(), actual.getItemIdentifier(), "The given ItemIdentifier is not what was expected: expected: " + expected.getItemIdentifier() + " actual: " + actual.getItemIdentifier());
-    assertEquals(expected.getPrice(), actual.getPrice(), "The given Price is not what was expected: expected: " + expected.getPrice() + " actual: " + actual.getPrice());
-    assertEquals(expected.getVATrate(), actual.getVATrate(), "The given VATrate is not what was expected: expected: " + expected.getVATrate() + " actual: " + actual.getVATrate());
+    assertEquals(expected.getClass(), actual.getClass(), "The given object from getItemInformation is not of the expect class: ");
+    assertEquals(expected.getItemDescription(), actual.getItemDescription(), "The given ItemDescription is not what was expected: ");
+    assertEquals(expected.getItemIdentifier(), actual.getItemIdentifier(), "The given ItemIdentifier is not what was expected: ");
+    assertEquals(expected.getPrice(), actual.getPrice(), "The given Price is not what was expected: ");
+    assertEquals(expected.getVATrate(), actual.getVATrate(), "The given VATrate is not what was expected: ");
   }
 
   @Test
@@ -41,11 +41,11 @@ public class InventoryHandlerTest {
     ItemInformationDTO expected = new ItemInformationDTO(25, 0.10, "Coca-Cola", itemIdentifier);
     ItemInformationDTO actual = inventoryHandler.getItemInformation(itemIdentifier);
 
-    assertEquals(expected.getClass(), actual.getClass(), "The given object from getItemInformation is not of the expect class: expected: " + expected.getClass() + " actual: " + actual.getClass());
-    assertEquals(expected.getItemDescription(), actual.getItemDescription(), "The given ItemDescription is not what was expected: expected: " + expected.getItemDescription() + " actual: " + actual.getItemDescription());
-    assertEquals(expected.getItemIdentifier(), actual.getItemIdentifier(), "The given ItemIdentifier is not what was expected: expected: " + expected.getItemIdentifier() + " actual: " + actual.getItemIdentifier());
-    assertEquals(expected.getPrice(), actual.getPrice(), "The given Price is not what was expected: expected: " + expected.getPrice() + " actual: " + actual.getPrice());
-    assertEquals(expected.getVATrate(), actual.getVATrate(), "The given VATrate is not what was expected: expected: " + expected.getVATrate() + " actual: " + actual.getVATrate());
+    assertEquals(expected.getClass(), actual.getClass(), "The given object from getItemInformation is not of the expect class: ");
+    assertEquals(expected.getItemDescription(), actual.getItemDescription(), "The given ItemDescription is not what was expected: ");
+    assertEquals(expected.getItemIdentifier(), actual.getItemIdentifier(), "The given ItemIdentifier is not what was expected: ");
+    assertEquals(expected.getPrice(), actual.getPrice(), "The given Price is not what was expected: ");
+    assertEquals(expected.getVATrate(), actual.getVATrate(), "The given VATrate is not what was expected: ");
   }
 
   @Test
@@ -54,7 +54,7 @@ public class InventoryHandlerTest {
     ItemInformationDTO expected = null;
     ItemInformationDTO actual = inventoryHandler.getItemInformation(itemIdentifier);
 
-    assertEquals(expected, actual, "The given ItemInformationDTO is not what was expected: expected: " + expected + " actual: "+ actual);
+    assertEquals(expected, actual, "The given ItemInformationDTO is not what was expected: ");
   }
   
 }

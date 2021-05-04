@@ -26,7 +26,4 @@ public class PrinterHandlerTest {
     boolean actual = printer!=null;
     assertEquals(expected, actual, "The PrinterHandler is not initiated!");
   }
-
-
-  
 }

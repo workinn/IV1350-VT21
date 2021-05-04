@@ -27,7 +27,11 @@ public class Discount {
    * @param sale a SaleDTO of the current sale.
    * @return a DiscountDTO with a ItemRowDTO with added discount aswell as ClubMemberDTO and totalSaleDiscount.
    */
-  public DiscountDTO getDiscountDTO(String customerID, SaleDTO sale){
+  public DiscountDTO getDiscountDTO(String customerID, SaleDTO saleDTO){
+
+    if(saleDTO == null) {
+      return null;
+    }
 
     ArrayList<ItemRowDTO> rowsWithDiscount = new ArrayList<ItemRowDTO>();
     ArrayList<DiscountRulesDTO> discountRules = new ArrayList<DiscountRulesDTO>();
@@ -38,14 +42,14 @@ public class Discount {
     double totalSaleDiscount=0;
     double runningTotalAfterItemDiscount=0;
 
-    for(int i = 0; i < sale.getItemRows().size(); i++){
+    for(int i = 0; i < saleDTO.getItemRows().size(); i++){
       amountDiscount=0;
-      discountRules = discountHandler.getDiscountRules(sale.getItemRows().get(i), member);
+      discountRules = discountHandler.getDiscountRules(saleDTO.getItemRows().get(i), member);
 
       if(!discountRules.isEmpty()) {
-          amountDiscount = getDiscountAmount(discountRules, sale.getItemRows().get(i), member);   
+          amountDiscount = getDiscountAmount(discountRules, saleDTO.getItemRows().get(i), member);   
       }
-      oldRow = sale.getItemRows().get(i);
+      oldRow = saleDTO.getItemRows().get(i);
       newRow = new ItemRowDTO(oldRow,amountDiscount);
       rowsWithDiscount.add(newRow);
     }

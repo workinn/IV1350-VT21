@@ -27,7 +27,7 @@ public class MemberHandlerTest {
     ClubMemberDTO expected = null;
     ClubMemberDTO actual = memberHandler.getMember("");
 
-    assertEquals(expected, actual, "The given ClubMemberDTO is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The given ClubMemberDTO is not what was expected: ");
   }
 
   @Test
@@ -35,7 +35,7 @@ public class MemberHandlerTest {
     ClubMemberDTO expected = null;
     ClubMemberDTO actual = memberHandler.getMember("100");
 
-    assertEquals(expected, actual, "The given ClubMemberDTO is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The given ClubMemberDTO is not what was expected: ");
   }
 
   @Test
@@ -46,12 +46,12 @@ public class MemberHandlerTest {
     String expected = expectedMember.getMemberID();
     String actual = actualMember.getMemberID();
 
-    assertEquals(expected, actual, "The given MemberID is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The given MemberID is not what was expected: ");
 
     expected = expectedMember.getName();
     actual = actualMember.getName();
 
-    assertEquals(expected, actual, "The given Name is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The given Name is not what was expected: ");
   }
 
   @Test
@@ -62,12 +62,11 @@ public class MemberHandlerTest {
     String expected = expectedMember.getMemberID();
     String actual = actualMember.getMemberID();
 
-    assertEquals(expected, actual, "The given MemberID is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The given MemberID is not what was expected: ");
     
     expected = expectedMember.getName();
     actual = actualMember.getName();
 
-    assertEquals(expected, actual, "The given Name is not what was expected: expected: " + expected + " actual: " + actual);
+    assertEquals(expected, actual, "The given Name is not what was expected: ");
   }
-  
 }
