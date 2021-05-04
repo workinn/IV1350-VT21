@@ -44,14 +44,14 @@ public class DiscountHandler {
     return member.getMemberID();
   }
 
-  private String getItemID(ItemRowDTO itemRow) {
-    if(itemRow == null) {
+  private String getItemID(ItemRowDTO itemRowDTO) {
+    if(itemRowDTO == null) {
       return null;
     }
-    if(itemRow.getitem() == null) {
+    if(itemRowDTO.getitem() == null) {
       return null;
     }
-    return itemRow.getitem().getItemIdentifier();
+    return itemRowDTO.getitem().getItemIdentifier();
   }
 
   /**
@@ -59,11 +59,11 @@ public class DiscountHandler {
    * @param item is a ItemRowDTO that is going to be checked against database.
    * @param member is ClubMemberDTo with the info on the costumer to be checked against database.
    */
-  public ArrayList<DiscountRulesDTO> getDiscountRules(ItemRowDTO itemRow, ClubMemberDTO member){
+  public ArrayList<DiscountRulesDTO> getDiscountRules(ItemRowDTO itemRowDTO, ClubMemberDTO member){
 
     ArrayList<DiscountRulesDTO> discountRules = new ArrayList<DiscountRulesDTO>();
 
-    String giveItemID = getItemID(itemRow);
+    String giveItemID = getItemID(itemRowDTO);
     String givenMemberID = getMemberID(member);
     String itemRuleID;
     String memberRuleID;
