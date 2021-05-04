@@ -14,70 +14,60 @@ public class MemberHandlerTest {
 
   @BeforeEach
   public void startUp() {
-    System.out.println("Start up!");
     memberHandler = new MemberHandler();
   }
 
   @AfterEach
   public void tearDown() {
-    System.out.println("Tear down!");
     memberHandler = null;
   }
 
   @Test
   public void getMemberWithEmptyString() {
-    System.out.println("getMemberWithEmptyString!");
-
     ClubMemberDTO expected = null;
     ClubMemberDTO actual = memberHandler.getMember("");
 
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The given ClubMemberDTO is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void getMemberWithNotExistingString() {
-    System.out.println("getMemberWithNotExistingString!");
-
     ClubMemberDTO expected = null;
     ClubMemberDTO actual = memberHandler.getMember("100");
 
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The given ClubMemberDTO is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void getMember1337() {
-    System.out.println("getMember1337!");
-
     ClubMemberDTO expectedMember = new ClubMemberDTO("Daniel", "1337");
     ClubMemberDTO actualMember = memberHandler.getMember("1337");
 
     String expected = expectedMember.getMemberID();
     String actual = actualMember.getMemberID();
 
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The given MemberID is not what was expected: expected: " + expected + " actual: " + actual);
 
     expected = expectedMember.getName();
     actual = actualMember.getName();
 
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The given Name is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void getMember1() {
-    System.out.println("getMember1!");
-
     ClubMemberDTO expectedMember = new ClubMemberDTO("Henning", "1");
     ClubMemberDTO actualMember = memberHandler.getMember("1");
 
     String expected = expectedMember.getMemberID();
     String actual = actualMember.getMemberID();
 
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The given MemberID is not what was expected: expected: " + expected + " actual: " + actual);
     
     expected = expectedMember.getName();
     actual = actualMember.getName();
 
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The given Name is not what was expected: expected: " + expected + " actual: " + actual);
   }
   
 }

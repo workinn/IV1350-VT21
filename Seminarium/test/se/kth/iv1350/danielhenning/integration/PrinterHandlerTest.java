@@ -6,25 +6,27 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+public class PrinterHandlerTest {
 
-public class AccountingHandlerTest {
-
-  private AccountingHandler accountingHandler;
+  PrinterHandler printer;
 
   @BeforeEach
   public void startUp() {
-    accountingHandler = new AccountingHandler();
+    printer = new PrinterHandler();
   }
 
   @AfterEach
   public void tearDown() {
-    accountingHandler = null;
+    printer = null;
   }
 
   @Test
-  public void testAccountingHandler() {
+  public void testPrinterHandler() {
     boolean expected = true;
-    boolean actual = accountingHandler!=null;
-    assertEquals(expected, actual, "The AccountingHandler is not initiated!");
+    boolean actual = printer!=null;
+    assertEquals(expected, actual, "The PrinterHandler is not initiated!");
   }
+
+
+  
 }

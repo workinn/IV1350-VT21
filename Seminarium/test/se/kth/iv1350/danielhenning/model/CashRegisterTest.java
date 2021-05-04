@@ -17,27 +17,23 @@ public class CashRegisterTest {
 
   @BeforeEach
   public void startUp() {
-    System.out.println("Start up!");
     cashRegister = new CashRegister(initialBalance);
   }
 
   @AfterEach
   public void tearDown() {
-    System.out.println("Tear down!");
     cashRegister = null;
   }
 
   @Test
   public void testInitialBalance() {
-    System.out.println("Testing Initial Balance!");
     double expected = initialBalance;
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The InitialBalance is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWithNoItems() {
-    System.out.println("Testing to Add Payment with No Items!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -47,12 +43,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance;
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Balance is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWith1Apple() {
-    System.out.println("Testing to Add Payment with 1 Apple!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -66,12 +61,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * 1);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWith1000Apple() {
-    System.out.println("Testing to Add Payment with 1000 Apple!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -86,12 +80,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * 1000);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWith1Cola() {
-    System.out.println("Testing to Add Payment with 1 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -105,12 +98,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * 1);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWith1000Cola() {
-    System.out.println("Testing to Add Payment with 1000 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -126,12 +118,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * quantity);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWith1Apple1Cola() {
-    System.out.println("Testing to Add Payment with 1 Apple and 1 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -148,12 +139,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance + apple.getPrice() + cola.getPrice();
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testAddPaymentWith1000Apple1000Cola() {
-    System.out.println("Testing to Add Payment with 1000 Apple and 1000 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -173,12 +163,11 @@ public class CashRegisterTest {
 
     double expected = initialBalance + (apple.getPrice() * quantity) + (cola.getPrice() * quantity);
     double actual = cashRegister.getBalance();
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testGetChangeWithNoItems() {
-    System.out.println("Testing to Get Change with No Items!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -189,12 +178,11 @@ public class CashRegisterTest {
 
     double expected = amountPaid;
     double actual = cashRegister.getChange(amountPaid, saleDTO);
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testGetChangeWith1Apple() {
-    System.out.println("Testing to Get Change with 1 Apple!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -209,12 +197,11 @@ public class CashRegisterTest {
 
     double expected = amountPaid - apple.getPrice();
     double actual = cashRegister.getChange(amountPaid, saleDTO);
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 
   @Test
   public void testGetChangeWith1Cola() {
-    System.out.println("Testing to Get Change with 1 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -229,6 +216,6 @@ public class CashRegisterTest {
 
     double expected = amountPaid - cola.getPrice();
     double actual = cashRegister.getChange(amountPaid, saleDTO);
-    assertEquals(expected, actual);
+    assertEquals(expected, actual, "The Blanace is not what was expected: expected: " + expected + " actual: " + actual);
   }
 }

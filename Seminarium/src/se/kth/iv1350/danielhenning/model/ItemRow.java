@@ -19,10 +19,12 @@ public class ItemRow {
    * @param item is the item in the row
    */
   public ItemRow(ItemInformationDTO item) {
-    this.item = item;
-    this.quantity = 1;
-    this.discount = 0;
-    this.priceIncludingDiscount = item.getPrice();
+    if(item != null) {
+      this.item = item;
+      this.quantity = 1;
+      this.discount = 0;
+      this.priceIncludingDiscount = item.getPrice();
+    }
   }
 
   /**

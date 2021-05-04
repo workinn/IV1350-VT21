@@ -21,19 +21,48 @@ public class DiscountHandlerTest {
 
   @BeforeEach
   public void startUp() {
-    System.out.println("Start Up!");
     discountHandler = new DiscountHandler();
   }
 
   @AfterEach
   public void tearDown() {
-    System.out.println("Tear Down!");
     discountHandler = null;
   }
 
   @Test
-  public void testGetDiscountForAppleAndNotMember () {
-    System.out.println("testGetDiscountForAppleAndNotMember");
+  public void testGetDiscountForNoneExistingItemAndNoneExistingMember() {
+    HandlerCreator handler = new HandlerCreator();
+    String itemIdentifier = "100";
+    ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
+    ItemRow itemRow = new ItemRow(item);
+    ItemRowDTO itemRowDTO = new ItemRowDTO(itemRow);
+    ClubMemberDTO member = handler.getMemberHandler().getMember("");
+
+    ArrayList<DiscountRulesDTO> expected = new ArrayList<DiscountRulesDTO>();
+
+    ArrayList<DiscountRulesDTO> actual = discountHandler.getDiscountRules(itemRowDTO, member);
+
+    assertEquals(expected, actual, "Given array of Discount Rules is not empty");
+  }
+
+  @Test
+  public void testGetDiscountForNoneExistingItemAndExistingMember1337() {
+    HandlerCreator handler = new HandlerCreator();
+    String itemIdentifier = "100";
+    ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
+    ItemRow itemRow = new ItemRow(item);
+    ItemRowDTO itemRowDTO = new ItemRowDTO(itemRow);
+    ClubMemberDTO member = handler.getMemberHandler().getMember("1337");
+
+    ArrayList<DiscountRulesDTO> expected = new ArrayList<DiscountRulesDTO>();
+
+    ArrayList<DiscountRulesDTO> actual = discountHandler.getDiscountRules(itemRowDTO, member);
+
+    assertEquals(expected, actual, "Given array of Discount Rules is not empty");
+  }
+
+  @Test
+  public void testGetDiscountForAppleAndNotMember() {
     HandlerCreator handler = new HandlerCreator();
     String itemIdentifier = "1337";
     ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
@@ -47,16 +76,15 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesDTO> actual;
     actual = discountHandler.getDiscountRules(itemRowDTO, member);
 
-    assertEquals(expected.size(), actual.size());
-    assertEquals(expected.get(0).getClubMemberID(), actual.get(0).getClubMemberID());
-    assertEquals(expected.get(0).getDiscountAmount(), actual.get(0).getDiscountAmount());
-    assertEquals(expected.get(0).getItemIdentifier(), actual.get(0).getItemIdentifier());
-    assertEquals(expected.get(0).getQuantityToGetDiscount(), actual.get(0).getQuantityToGetDiscount());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
+    assertEquals(expected.get(0).getClubMemberID(), actual.get(0).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(0).getClubMemberID() + " actual: " + actual.get(0).getClubMemberID());
+    assertEquals(expected.get(0).getDiscountAmount(), actual.get(0).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(0).getDiscountAmount() + " actual: " + actual.get(0).getDiscountAmount());
+    assertEquals(expected.get(0).getItemIdentifier(), actual.get(0).getItemIdentifier(), "Given ItemID is wrong: expected: " + expected.get(0).getItemIdentifier() + " actual: " + actual.get(0).getItemIdentifier());
+    assertEquals(expected.get(0).getQuantityToGetDiscount(), actual.get(0).getQuantityToGetDiscount(), "Given QuantityToGetDiscount is wrong: expected: " + expected.get(0).getQuantityToGetDiscount() + " actual: " + actual.get(0).getQuantityToGetDiscount());
   }
 
   @Test
-  public void testGetDiscountForAppleAndNotSpecificMember () {
-    System.out.println("testGetDiscountForAppleAndNotSpecificMember");
+  public void testGetDiscountForAppleAndNotSpecificMember() {
     HandlerCreator handler = new HandlerCreator();
     String itemIdentifier = "1337";
     ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
@@ -71,18 +99,17 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesDTO> actual;
     actual = discountHandler.getDiscountRules(itemRowDTO, member);
     
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier());
-      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier(), "Given ItemID is wrong: expected: " + expected.get(i).getItemIdentifier() + " actual: " + actual.get(i).getItemIdentifier());
+      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount(), "Given QuantityToGetDiscount is wrong: expected: " + expected.get(i).getQuantityToGetDiscount() + " actual: " + actual.get(i).getQuantityToGetDiscount());
     }
   }
 
   @Test
-  public void testGetDiscountForAppleAndWithSpecificMember () {
-    System.out.println("testGetDiscountForAppleAndWithSpecificMember");
+  public void testGetDiscountForAppleAndWithSpecificMember() {
     HandlerCreator handler = new HandlerCreator();
     String itemIdentifier = "1337";
     ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
@@ -98,18 +125,17 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesDTO> actual;
     actual = discountHandler.getDiscountRules(itemRowDTO, member);
     
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier());
-      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier(), "Given ItemID is wrong: expected: " + expected.get(i).getItemIdentifier() + " actual: " + actual.get(i).getItemIdentifier());
+      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount(), "Given QuantityToGetDiscount is wrong: expected: " + expected.get(i).getQuantityToGetDiscount() + " actual: " + actual.get(i).getQuantityToGetDiscount());
     }
   }
 
   @Test
   public void testGetDiscountForColaAndNotMember () {
-    System.out.println("testGetDiscountForColaAndNotMember");
     HandlerCreator handler = new HandlerCreator();
     String itemIdentifier = "1";
     ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
@@ -123,18 +149,17 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesDTO> actual;
     actual = discountHandler.getDiscountRules(itemRowDTO, member);
     
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier());
-      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier(), "Given ItemID is wrong: expected: " + expected.get(i).getItemIdentifier() + " actual: " + actual.get(i).getItemIdentifier());
+      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount(), "Given QuantityToGetDiscount is wrong: expected: " + expected.get(i).getQuantityToGetDiscount() + " actual: " + actual.get(i).getQuantityToGetDiscount());
     }
   }
 
   @Test
   public void testGetDiscountForColaAndMember () {
-    System.out.println("testGetDiscountForColaAndNotMember");
     HandlerCreator handler = new HandlerCreator();
     String itemIdentifier = "1";
     ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
@@ -148,18 +173,17 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesDTO> actual;
     actual = discountHandler.getDiscountRules(itemRowDTO, member);
     
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier());
-      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getItemIdentifier(), actual.get(i).getItemIdentifier(), "Given ItemID is wrong: expected: " + expected.get(i).getItemIdentifier() + " actual: " + actual.get(i).getItemIdentifier());
+      assertEquals(expected.get(i).getQuantityToGetDiscount(), actual.get(i).getQuantityToGetDiscount(), "Given QuantityToGetDiscount is wrong: expected: " + expected.get(i).getQuantityToGetDiscount() + " actual: " + actual.get(i).getQuantityToGetDiscount());
     }
   }
 
   @Test
   public void testGetTotalSaleDiscountRulesAndNotMemberAndRunningTotal100() {
-    System.out.println("testGetTotalSaleDiscountRulesAndNotMemberAndRunningTotal100");
     HandlerCreator handler = new HandlerCreator();
     ClubMemberDTO member = handler.getMemberHandler().getMember("");
     double runningTotal = 100;
@@ -170,21 +194,16 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesTotalDTO> actual;
     actual = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
 
-    for(int i = 0; i < actual.size(); i++) {
-      System.out.println(actual.get(i).getDiscountAmount());
-    }
-    
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount(), "Given AmountTotalToGetDiscount is wrong: expected: " + expected.get(i).getAmountTotalToGetDiscount() + " actual: " + actual.get(i).getAmountTotalToGetDiscount());
     }
   }
 
   @Test
   public void testGetTotalSaleDiscountRulesAndMemberAndRunningTotal100() {
-    System.out.println("testGetTotalSaleDiscountRulesAndMemberAndRunningTotal100");
     HandlerCreator handler = new HandlerCreator();
     ClubMemberDTO member = handler.getMemberHandler().getMember("1");
     double runningTotal = 100;
@@ -195,22 +214,17 @@ public class DiscountHandlerTest {
 
     ArrayList<DiscountRulesTotalDTO> actual;
     actual = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
-
-    for(int i = 0; i < actual.size(); i++) {
-      System.out.println(actual.get(i).getDiscountAmount());
-    }
     
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount(), "Given AmountTotalToGetDiscount is wrong: expected: " + expected.get(i).getAmountTotalToGetDiscount() + " actual: " + actual.get(i).getAmountTotalToGetDiscount());
     }
   }
 
   @Test
   public void testGetTotalSaleDiscountRulesAndMember1337AndRunningTotal100() {
-    System.out.println("testGetTotalSaleDiscountRulesAndMember1337AndRunningTotal100");
     HandlerCreator handler = new HandlerCreator();
     ClubMemberDTO member = handler.getMemberHandler().getMember("1337");
     double runningTotal = 100;
@@ -222,22 +236,17 @@ public class DiscountHandlerTest {
 
     ArrayList<DiscountRulesTotalDTO> actual;
     actual = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
-
-    for(int i = 0; i < actual.size(); i++) {
-      System.out.println(actual.get(i).getDiscountAmount());
-    }
     
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount(), "Given AmountTotalToGetDiscount is wrong: expected: " + expected.get(i).getAmountTotalToGetDiscount() + " actual: " + actual.get(i).getAmountTotalToGetDiscount());
     }
   }
 
   @Test
   public void testGetTotalSaleDiscountRulesAndNotMemberAndRunningTotal500() {
-    System.out.println("testGetTotalSaleDiscountRulesAndNotMemberAndRunningTotal500");
     HandlerCreator handler = new HandlerCreator();
     ClubMemberDTO member = handler.getMemberHandler().getMember("");
     double runningTotal = 500;
@@ -248,21 +257,16 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesTotalDTO> actual;
     actual = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
 
-    for(int i = 0; i < actual.size(); i++) {
-      System.out.println(actual.get(i).getDiscountAmount());
-    }
-    
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount(), "Given AmountTotalToGetDiscount is wrong: expected: " + expected.get(i).getAmountTotalToGetDiscount() + " actual: " + actual.get(i).getAmountTotalToGetDiscount());
     }
   }
 
   @Test
   public void testGetTotalSaleDiscountRulesAndMemberAndRunningTotal500() {
-    System.out.println("testGetTotalSaleDiscountRulesAndMemberAndRunningTotal500");
     HandlerCreator handler = new HandlerCreator();
     ClubMemberDTO member = handler.getMemberHandler().getMember("1");
     double runningTotal = 500;
@@ -274,21 +278,16 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesTotalDTO> actual;
     actual = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
 
-    for(int i = 0; i < actual.size(); i++) {
-      System.out.println(actual.get(i).getDiscountAmount());
-    }
-    
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount(), "Given AmountTotalToGetDiscount is wrong: expected: " + expected.get(i).getAmountTotalToGetDiscount() + " actual: " + actual.get(i).getAmountTotalToGetDiscount());
     }
   }
 
   @Test
   public void testGetTotalSaleDiscountRulesAndMember1337AndRunningTotal500() {
-    System.out.println("testGetTotalSaleDiscountRulesAndMember1337AndRunningTotal500");
     HandlerCreator handler = new HandlerCreator();
     ClubMemberDTO member = handler.getMemberHandler().getMember("1337");
     double runningTotal = 500;
@@ -302,15 +301,11 @@ public class DiscountHandlerTest {
     ArrayList<DiscountRulesTotalDTO> actual;
     actual = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
 
-    for(int i = 0; i < actual.size(); i++) {
-      System.out.println(actual.get(i).getDiscountAmount());
-    }
-    
-    assertEquals(expected.size(), actual.size());
+    assertEquals(expected.size(), actual.size(), "Size of given array is wrong: expected: " + expected.size() + " actual: " + actual.size());
     for(int i = 0; i < expected.size(); i++) {
-      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID());
-      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount());
-      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount());
+      assertEquals(expected.get(i).getClubMemberID(), actual.get(i).getClubMemberID(), "Given ClubMemberID is wrong: expected: " + expected.get(i).getClubMemberID() + " actual: " + actual.get(i).getClubMemberID());
+      assertEquals(expected.get(i).getDiscountAmount(), actual.get(i).getDiscountAmount(), "Given DiscountAmount is wrong: expected: " + expected.get(i).getDiscountAmount() + " actual: " + actual.get(i).getDiscountAmount());
+      assertEquals(expected.get(i).getAmountTotalToGetDiscount(), actual.get(i).getAmountTotalToGetDiscount(), "Given AmountTotalToGetDiscount is wrong: expected: " + expected.get(i).getAmountTotalToGetDiscount() + " actual: " + actual.get(i).getAmountTotalToGetDiscount());
     }
   }
 }

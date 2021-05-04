@@ -84,7 +84,6 @@ public class DiscountHandler {
         discountRules.add(discountRulesArray.get(i));
       }
     }
-    System.out.println("From DH: " + discountRules.size());
     return discountRules;
   }
 
