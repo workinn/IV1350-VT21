@@ -77,7 +77,7 @@ public class Discount {
     ArrayList<DiscountRulesTotalDTO> discountTotalRules = new ArrayList<DiscountRulesTotalDTO>();
     double totalSaleDiscount = 0;
     double currentTotalSaleDiscount;
-    discountTotalRules = discountHandler.getDiscountTotalRules(runningTotal, member);
+    discountTotalRules = discountHandler.getTotalSaleDiscountRules(runningTotal, member);
 
     for(int i = 0; i < discountTotalRules.size(); i++){
       currentTotalSaleDiscount = discountTotalRules.get(i).getDiscountAmount();

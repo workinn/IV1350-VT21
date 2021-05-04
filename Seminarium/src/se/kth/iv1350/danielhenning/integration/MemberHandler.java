@@ -26,14 +26,12 @@ public class MemberHandler {
    * @return a ClubMemberDTO of the retrieved Club Member. May return null if a Club Member is not found
    */
   public ClubMemberDTO getMember(String customerID){
-
-    ClubMemberDTO member;
-
-    if(customerID == "1337") {
-      member = new ClubMemberDTO("Daniel", "1337");
-    } else {
-      member = null;
+    if(customerID == "1") {
+      return new ClubMemberDTO("Henning", "1");
     }
-    return member;
+    if(customerID == "1337") {
+      return new ClubMemberDTO("Daniel", "1337");
+    }
+    return null;
   }
 }
