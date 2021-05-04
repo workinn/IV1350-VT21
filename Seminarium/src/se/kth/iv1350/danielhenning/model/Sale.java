@@ -35,11 +35,11 @@ public class Sale {
    * @param handler contains all the handlers in the integration layer
    * @param saleLog is used to log the completed sale
    */
-  public Sale(HandlerCreator handler, SaleLog saleLog) {
+  public Sale(HandlerCreator handler, SaleLog saleLog, Discount discount) {
     this.handler = handler;
     this.saleLog = saleLog;
     this.items = new ItemList();
-    this.discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    this.discount = discount;
     this.dateTime = LocalDateTime.now();
     this.runningTotal = 0;
     this.discountOnWholeSale = 0;
@@ -85,15 +85,10 @@ public class Sale {
    * @param quantity the quantity of items of the same type as the last scanned one
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
-  public SaleDTO addQuantity(int quantity) throws RejectedExecutionException {
-    if(!lastItemFound) {
-      throw new RejectedExecutionException("Add Quantity Rejected: Last scanned item not found: lastItemFound = " + lastItemFound);
+  public SaleDTO addQuantity(int quantity) {
+    if(lastItemFound && quantity > 0) {
+      items.increaseQuantityOfLastScannedItem(quantity - 1);
     }
-    if(quantity < 1) {
-      throw new RejectedExecutionException("Quantity Rejected: Can't add a 0 or a negative value to item: " + quantity);
-    }
-
-    items.increaseQuantityOfLastScannedItem(quantity - 1);
 
     return getSaleDTO();
   }
@@ -113,7 +108,7 @@ public class Sale {
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
   public SaleDTO addDiscount(String customerID) {
-   DiscountDTO discountDTO = discount.discountCheck(customerID, getSaleDTO());
+   DiscountDTO discountDTO = discount.getDiscountDTO(customerID, getSaleDTO());
    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
    items.addDiscount(discountDTO);
 

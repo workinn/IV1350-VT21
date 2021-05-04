@@ -27,7 +27,7 @@ public class Discount {
    * @param sale a SaleDTO of the current sale.
    * @return a DiscountDTO with a ItemRowDTO with added discount aswell as ClubMemberDTO and totalSaleDiscount.
    */
-  public DiscountDTO discountCheck(String customerID, SaleDTO sale){
+  public DiscountDTO getDiscountDTO(String customerID, SaleDTO sale){
 
     ArrayList<ItemRowDTO> rowsWithDiscount = new ArrayList<ItemRowDTO>();
     ArrayList<DiscountRulesDTO> discountRules = new ArrayList<DiscountRulesDTO>();
@@ -59,31 +59,34 @@ public class Discount {
   }
 
   private double getDiscountAmount(ArrayList<DiscountRulesDTO> discountRules, ItemRowDTO item, ClubMemberDTO member){
-      double amountToReturn=0;
-      int multiplier = 0;
+      double discount = 0;
+      int discountMultiplier = 0;
+      double currentDiscount;
       for(int i = 0; i < discountRules.size(); i++){
-          multiplier = item.getQuantity()/discountRules.get(i).getQuantityToGetDiscount();
-
-          if(multiplier*discountRules.get(i).getDiscountAmount()>amountToReturn){
-            amountToReturn = multiplier*discountRules.get(i).getDiscountAmount();
+        discountMultiplier = item.getQuantity() / discountRules.get(i).getQuantityToGetDiscount();
+        currentDiscount = discountMultiplier * discountRules.get(i).getDiscountAmount();
+          if(currentDiscount > discount){
+            discount = currentDiscount;
           }
       }
-    return amountToReturn;
+    return discount;
   }
 
-  private double getDiscountTotalAmount(double runningTotalAfterItemDiscount, ClubMemberDTO member){
+  private double getDiscountTotalAmount(double runningTotal, ClubMemberDTO member){
 
     ArrayList<DiscountRulesTotalDTO> discountTotalRules = new ArrayList<DiscountRulesTotalDTO>();
-    double amountToReturn=0;
-    discountTotalRules = discountHandler.getDiscountTotalRules(runningTotalAfterItemDiscount, member);
+    double totalSaleDiscount = 0;
+    double currentTotalSaleDiscount;
+    discountTotalRules = discountHandler.getDiscountTotalRules(runningTotal, member);
 
-    for(int i = 0; i<discountTotalRules.size();i++){
-      if(amountToReturn<discountTotalRules.get(i).getDiscountAmount())
+    for(int i = 0; i < discountTotalRules.size(); i++){
+      currentTotalSaleDiscount = discountTotalRules.get(i).getDiscountAmount();
+      if(totalSaleDiscount < currentTotalSaleDiscount)
       {
-        amountToReturn= discountTotalRules.get(i).getDiscountAmount();
+        totalSaleDiscount = currentTotalSaleDiscount;
       }
     }
 
-    return amountToReturn;
+    return totalSaleDiscount;
   }
 }

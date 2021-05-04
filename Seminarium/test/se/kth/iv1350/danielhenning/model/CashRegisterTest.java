@@ -30,7 +30,7 @@ public class CashRegisterTest {
   @Test
   public void testInitialBalance() {
     System.out.println("Testing Initial Balance!");
-    double expected = 1000;
+    double expected = initialBalance;
     double actual = cashRegister.getBalance();
     assertEquals(expected, actual);
   }
@@ -40,7 +40,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with No Items!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     SaleDTO saleDTO = new SaleDTO(sale);
     cashRegister.addPayment(saleDTO);
 
@@ -54,7 +55,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with 1 Apple!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String appleID = "1337";
     sale.addItem(appleID);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -72,7 +74,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with 1000 Apple!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String appleID = "1337";
     sale.addItem(appleID);
     sale.addQuantity(1000);
@@ -91,7 +94,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with 1 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String colaID = "1";
     sale.addItem(colaID);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -109,7 +113,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with 1000 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String colaID = "1";
     int quantity = 1000;
     sale.addItem(colaID);
@@ -129,7 +134,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with 1 Apple and 1 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String appleID = "1337";
     String colaID = "1";
     sale.addItem(appleID);
@@ -150,7 +156,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Add Payment with 1000 Apple and 1000 Cola!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String appleID = "1337";
     String colaID = "1";
     int quantity = 1000;
@@ -174,7 +181,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Get Change with No Items!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     SaleDTO saleDTO = new SaleDTO(sale);
 
     double amountPaid = 0;
@@ -189,7 +197,8 @@ public class CashRegisterTest {
     System.out.println("Testing to Get Change with 1 Apple!");
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Sale sale = new Sale(handler, saleLog);
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
     String appleID = "1337";
     sale.addItem(appleID);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -202,5 +211,24 @@ public class CashRegisterTest {
     double actual = cashRegister.getChange(amountPaid, saleDTO);
     assertEquals(expected, actual);
   }
-  
+
+  @Test
+  public void testGetChangeWith1Cola() {
+    System.out.println("Testing to Get Change with 1 Cola!");
+    HandlerCreator handler = new HandlerCreator();
+    SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
+    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog, discount);
+    String colaID = "1";
+    sale.addItem(colaID);
+    SaleDTO saleDTO = new SaleDTO(sale);
+
+    ItemInformationDTO cola = handler.getInventoryHandler().getItemInformation(colaID);
+
+    double amountPaid = 100;
+
+    double expected = amountPaid - cola.getPrice();
+    double actual = cashRegister.getChange(amountPaid, saleDTO);
+    assertEquals(expected, actual);
+  }
 }

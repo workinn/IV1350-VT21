@@ -3,6 +3,7 @@ package se.kth.iv1350.danielhenning.controller;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.model.CashRegister;
+import se.kth.iv1350.danielhenning.model.Discount;
 import se.kth.iv1350.danielhenning.model.Sale;
 import se.kth.iv1350.danielhenning.model.SaleLog;
 
@@ -15,6 +16,7 @@ public class Controller {
   private HandlerCreator handler;
   private CashRegister cashRegister;
   private SaleLog todaysSaleLog;
+  private Discount discount;
   private Sale currentSale;
 
   /**
@@ -27,6 +29,7 @@ public class Controller {
     this.handler = handler;
     this.cashRegister = cashRegister;
     this.todaysSaleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
+    this.discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
   }
 
   /**
@@ -34,7 +37,7 @@ public class Controller {
    * is started by creating a new instance of the class Sale
    */
   public void startSale() {
-    currentSale = new Sale(handler, todaysSaleLog);
+    currentSale = new Sale(handler, todaysSaleLog, discount);
   }
 
   /**

@@ -36,10 +36,7 @@ public class CashRegister {
      * @param sale is the current sale
      * @return the change
      */
-    public double getChange(double amountPaid, SaleDTO saleDTO) throws RejectedExecutionException {
-      if (amountPaid < saleDTO.getRunningTotal()) {
-        throw new RejectedExecutionException("Amount Paid Rejected: Amount Paid is less than the Running Total: Amount Paid = " + amountPaid + ", Running Total = " + saleDTO.getRunningTotal());
-      }
+    public double getChange(double amountPaid, SaleDTO saleDTO) {
       return amountPaid - saleDTO.getRunningTotal();
     }
 
