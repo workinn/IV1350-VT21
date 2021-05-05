@@ -16,27 +16,33 @@ public final class ReceiptDTO {
    * @param sale is the sale being added to the receipt for later printing
    */
   public ReceiptDTO(SaleDTO sale) {
-      this.receiptToPrint = new StringBuilder();
-      this.address = "Testvägen 5";
-      this.store = "Conceptstore";
-      this.phoneNumber = "070 - 000 01 23";
-      this.sale = sale;
+    this.receiptToPrint = new StringBuilder();
+    this.address = "Testvägen 5";
+    this.store = "Conceptstore";
+    this.phoneNumber = "070 - 000 01 23";
+    this.sale = sale;
 
-    receiptToPrint.append(store + "\n");
-    receiptToPrint.append(address+"\n");
-    receiptToPrint.append(phoneNumber+"\n");
-    receiptToPrint.append(sale.getDateTime().getYear()+"/");
+    receiptToPrint.append("------------------------------------------------------------\n");
+    receiptToPrint.append("|                       " + store + "                       |\n");
+    receiptToPrint.append("|                        " + address + "                       |\n");
+    receiptToPrint.append("|                      " + phoneNumber + "                     |\n");
+    receiptToPrint.append("|   Date: " + sale.getDateTime().getYear()+"/");
     receiptToPrint.append(sale.getDateTime().getMonthValue()+"/");
     receiptToPrint.append(sale.getDateTime().getDayOfMonth()+"\t");
-    receiptToPrint.append(sale.getDateTime().getHour()+":");
-    receiptToPrint.append(sale.getDateTime().getMinute());
-    receiptToPrint.append("\n");
-    receiptToPrint.append("Description  ItemID  Qunatity   ItemDiscount   TotalPrice\n");
-    receiptToPrint.append("\n");
+    receiptToPrint.append("                     Time: " + sale.getDateTime().getHour()+":");
+    if(sale.getDateTime().getMinute() <= 9) {
+      receiptToPrint.append("0" + sale.getDateTime().getMinute());
+    } else {
+      receiptToPrint.append(sale.getDateTime().getMinute());
+    }
+    receiptToPrint.append("   |\n");
+    receiptToPrint.append("| Description | ItemID | Qunatity | Discount |  TotalPrice |\n");
+    receiptToPrint.append("------------------------------------------------------------\n");
 
     for(int i = 0; i<sale.getItemRows().size();i++){
-      receiptToPrint.append(sale.getItemRows().get(i).toString());
+      receiptToPrint.append("| " + sale.getItemRows().get(i).toString());
       receiptToPrint.append("\n");
+      receiptToPrint.append("------------------------------------------------------------\n");
     }
     receiptToPrint.append("\nTotal Sale Discount " + sale.getDiscountOnWholeSale()+"\n");
     receiptToPrint.append("TotalPrice: "+ sale.getRunningTotal()+"\n");

@@ -20,21 +20,23 @@ public class View {
     this.controller = controller;
 
     SaleDTO currentStateOfSale;
+    String appleID = "1337";
+    String colaID = "1";
+    String existingCustomerID = "1337";
+    String noneExistingCustomerID = "10";
 
     controller.startSale();
-    currentStateOfSale = controller.addItem("1337");
-    currentStateOfSale.printSale();
-    currentStateOfSale = controller.addItem("1337");
-    currentStateOfSale.printSale();
+    currentStateOfSale = controller.addItem(appleID);
+    //currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(10);
     // currentStateOfSale.printSale();
-    currentStateOfSale = controller.addItem("1");
+    currentStateOfSale = controller.addItem(colaID);
     // currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(5);
     // currentStateOfSale.printSale();
     currentStateOfSale = controller.endSale();
     // currentStateOfSale.printSale();
-    currentStateOfSale = controller.requestDiscount("111");
+    currentStateOfSale = controller.requestDiscount(existingCustomerID);
     // currentStateOfSale.printSale();
     currentStateOfSale = controller.payment(500);
     // currentStateOfSale.printSale();

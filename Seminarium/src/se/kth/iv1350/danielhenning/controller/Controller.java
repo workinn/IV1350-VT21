@@ -41,7 +41,7 @@ public class Controller {
   }
 
   /**
-   * The method addItem adds a new item to the Sale
+   * The method addItem adds a new item to the Sale 
    * @param itemIdentifier is the identifier (bar code) of the scanned item
    * @return a SaleDTO which represents the current state of the Sale
    */
