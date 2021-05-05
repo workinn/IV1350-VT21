@@ -19,11 +19,14 @@ public class ItemRow {
    * @param item is the item in the row
    */
   public ItemRow(ItemInformationDTO item) {
+    this.item = item;
+    this.discount = 0;
     if(item != null) {
-      this.item = item;
       this.quantity = 1;
-      this.discount = 0;
       this.priceIncludingDiscount = item.getPrice();
+    } else {
+      this.quantity = 0;
+      this.priceIncludingDiscount = 0;
     }
   }
 
@@ -33,18 +36,12 @@ public class ItemRow {
    * @param quantity is the quantity to increase the quantity of the row of
    */
   public void increaseQuantity(int quantity) {
-    this.quantity += quantity;
-    calculatePrice();
-  }
-
-  /**
-   * The method setQuantity sets the quantity
-   * of the item in the row to the given quantity
-   * @param quantity is the quantity to set the rows quantity to
-   */
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-    calculatePrice();
+    if(item != null) {
+      if(quantity > 0) {
+        this.quantity += quantity;
+        calculatePrice();
+      }
+    }
   }
 
   /**
@@ -52,8 +49,16 @@ public class ItemRow {
    * @param discount is the amount of discount to add to the row
    */
   public void setDiscount(double discount) {
-    this.discount = discount;
-    calculatePrice();
+    if(item != null) {
+      if(discount >= 0) {
+        if(discount > priceIncludingDiscount) {
+          this.discount = priceIncludingDiscount;
+        } else {
+          this.discount = discount;
+        }
+        calculatePrice();
+      }
+    }
   }
 
   private void calculatePrice() {

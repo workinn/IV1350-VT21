@@ -93,7 +93,7 @@ public class ItemListTest {
 
     ArrayList<ItemRow> expectedItemRows = new ArrayList<ItemRow>();
     expectedItemRows.add(new ItemRow(item));
-    expectedItemRows.get(0).setQuantity(2);
+    expectedItemRows.get(0).increaseQuantity(1);
     ArrayList<ItemRow> actualItemRows = itemList.getItemRows();
 
     int expectedNumberOfItems = 2;
@@ -126,7 +126,7 @@ public class ItemListTest {
 
     ArrayList<ItemRow> expectedItemRows = new ArrayList<ItemRow>();
     expectedItemRows.add(new ItemRow(item));
-    expectedItemRows.get(0).setQuantity(3);
+    expectedItemRows.get(0).increaseQuantity(2);
     ArrayList<ItemRow> actualItemRows = itemList.getItemRows();
 
     int expectedNumberOfItems = 3;
@@ -242,8 +242,8 @@ public class ItemListTest {
     ArrayList<ItemRow> expectedItemRows = new ArrayList<ItemRow>();
     expectedItemRows.add(new ItemRow(apple));
     expectedItemRows.add(new ItemRow(cola));
-    expectedItemRows.get(0).setQuantity(10);
-    expectedItemRows.get(1).setQuantity(10);
+    expectedItemRows.get(0).increaseQuantity(9);
+    expectedItemRows.get(1).increaseQuantity(9);
     ArrayList<ItemRow> actualItemRows = itemList.getItemRows();
 
     int expectedNumberOfItems = 20;
@@ -336,7 +336,7 @@ public class ItemListTest {
 
     ArrayList<ItemRow> expectedItemRows = new ArrayList<ItemRow>();
     expectedItemRows.add(new ItemRow(item));
-    expectedItemRows.get(0).setQuantity(10);
+    expectedItemRows.get(0).increaseQuantity(9);
     ArrayList<ItemRow> actualItemRows = itemList.getItemRows();
 
     int expectedNumberOfItems = 10;
@@ -404,7 +404,7 @@ public class ItemListTest {
     ArrayList<ItemRow> expectedItemRows = new ArrayList<ItemRow>();
     expectedItemRows.add(new ItemRow(apple));
     expectedItemRows.add(new ItemRow(cola));
-    expectedItemRows.get(1).setQuantity(10);
+    expectedItemRows.get(1).increaseQuantity(9);
     ArrayList<ItemRow> actualItemRows = itemList.getItemRows();
 
     int expectedNumberOfItems = 11;

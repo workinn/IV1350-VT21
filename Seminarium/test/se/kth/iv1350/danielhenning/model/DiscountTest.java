@@ -126,6 +126,7 @@ public class DiscountTest {
 
     ArrayList<ItemRowDTO> expectedItemRows = new ArrayList<ItemRowDTO>();
     ItemRow itemRow = new ItemRow(item);
+    itemRow.increaseQuantity(9);
     itemRow.setDiscount(20);
     expectedItemRows.add(new ItemRowDTO(itemRow));
     ClubMemberDTO member = handler.getMemberHandler().getMember(customerID);
@@ -156,6 +157,7 @@ public class DiscountTest {
 
     ArrayList<ItemRowDTO> expectedItemRows = new ArrayList<ItemRowDTO>();
     ItemRow itemRow = new ItemRow(item);
+    itemRow.increaseQuantity(9);
     itemRow.setDiscount(40);
     expectedItemRows.add(new ItemRowDTO(itemRow));
     ClubMemberDTO member = handler.getMemberHandler().getMember(customerID);
@@ -212,6 +214,7 @@ public class DiscountTest {
 
     ArrayList<ItemRowDTO> expectedItemRows = new ArrayList<ItemRowDTO>();
     ItemRow itemRow = new ItemRow(item);
+    itemRow.increaseQuantity(9);
     itemRow.setDiscount(100);
     expectedItemRows.add(new ItemRowDTO(itemRow));
     ClubMemberDTO member = handler.getMemberHandler().getMember(customerID);
@@ -242,6 +245,7 @@ public class DiscountTest {
 
     ArrayList<ItemRowDTO> expectedItemRows = new ArrayList<ItemRowDTO>();
     ItemRow itemRow = new ItemRow(item);
+    itemRow.increaseQuantity(9);
     itemRow.setDiscount(100);
     expectedItemRows.add(new ItemRowDTO(itemRow));
     ClubMemberDTO member = handler.getMemberHandler().getMember(customerID);
