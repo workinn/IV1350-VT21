@@ -36,18 +36,20 @@ public final class ReceiptDTO {
       receiptToPrint.append(sale.getDateTime().getMinute());
     }
     receiptToPrint.append("   |\n");
+    receiptToPrint.append("------------------------------------------------------------\n");
     receiptToPrint.append("| Description | ItemID | Qunatity | Discount |  TotalPrice |\n");
     receiptToPrint.append("------------------------------------------------------------\n");
 
     for(int i = 0; i<sale.getItemRows().size();i++){
-      receiptToPrint.append("| " + sale.getItemRows().get(i).toString());
+      receiptToPrint.append("|     " + sale.getItemRows().get(i).toString() + "   ");
       receiptToPrint.append("\n");
       receiptToPrint.append("------------------------------------------------------------\n");
     }
-    receiptToPrint.append("\nTotal Sale Discount " + sale.getDiscountOnWholeSale()+"\n");
-    receiptToPrint.append("TotalPrice: "+ sale.getRunningTotal()+"\n");
-    receiptToPrint.append("Amount Paid "+sale.getAmountPaid()+"\n");
-    receiptToPrint.append("Change: "+sale.getChange()+"\n");
+    receiptToPrint.append("| Total Sale Discount " + sale.getDiscountOnWholeSale() + "                                 |\n");
+    receiptToPrint.append("| Running Total: "+ sale.getRunningTotal() + "                                     |\n");
+    receiptToPrint.append("| Amount Paid "+sale.getAmountPaid() + "                                        |\n");
+    receiptToPrint.append("| Change: "+sale.getChange() + "                                            |\n");
+    receiptToPrint.append("------------------------------------------------------------\n");
   }
 
   public String getAddress() {

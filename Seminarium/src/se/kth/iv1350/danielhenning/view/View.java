@@ -27,20 +27,17 @@ public class View {
 
     controller.startSale();
     currentStateOfSale = controller.addItem(appleID);
-    //currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(10);
-    // currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.addItem(colaID);
-    // currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(5);
-    // currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.endSale();
-    // currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.requestDiscount(existingCustomerID);
-    // currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.payment(500);
-    // currentStateOfSale.printSale();
-    
-    System.out.println("Program seems to work!");
   }
 }
