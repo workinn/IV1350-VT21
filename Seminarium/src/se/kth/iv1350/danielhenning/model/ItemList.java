@@ -26,7 +26,7 @@ public class ItemList {
     this.itemRows = new ArrayList<ItemRow>();
     this.numberOfItems = 0;
     this.numberOfRows = 0;
-    this.indexOfLastChangedRow = 0;
+    this.indexOfLastChangedRow = -1;
   }
 
   private int indexOfRow(ItemInformationDTO item) {
@@ -46,15 +46,6 @@ public class ItemList {
   }
 
   /**
-   * The method increaseQuantityOfLastScannedItem increases the quantity
-   * of the last scanned item by the given quantity
-   * @param quantity is the quantity to increase the quantity of an item
-   */
-  public void increaseQuantityOfLastScannedItem(int quantity) {
-    increaseQuantity(indexOfLastChangedRow, quantity);
-  }
-
-  /**
    * The method addItem adds the given item to the list of ItemRows.
    * If a row with the same item already exists, it increases the 
    * quantity by 1. If a row with the same item does not exist,
@@ -66,16 +57,30 @@ public class ItemList {
     int notFound = -1;
     int rowIndex = indexOfRow(item);
 
-    if(rowIndex == notFound) {
-      ItemRow newRow = new ItemRow(item);
-      itemRows.add(newRow);
-      numberOfRows++;
-      numberOfItems++;
-      indexOfLastChangedRow = itemRows.size() - 1;
-    } else {
-      increaseQuantity(rowIndex, 1);
-      indexOfLastChangedRow = rowIndex;
-      numberOfItems++;
+    if(item != null) {
+      if(rowIndex == notFound) {
+        ItemRow newRow = new ItemRow(item);
+        itemRows.add(newRow);
+        numberOfRows++;
+        numberOfItems++;
+        indexOfLastChangedRow = itemRows.size() - 1;
+      } else {
+        increaseQuantity(rowIndex, 1);
+        indexOfLastChangedRow = rowIndex;
+      }
+    }
+  }
+
+  /**
+   * The method increaseQuantityOfLastScannedItem increases the quantity
+   * of the last scanned item by the given quantity
+   * @param quantity is the quantity to increase the quantity of an item
+   */
+  public void increaseQuantityOfLastScannedItem(int quantity) {
+    if(indexOfLastChangedRow >= 0) {
+      if(quantity > 0) {
+        increaseQuantity(indexOfLastChangedRow, quantity);
+      }
     }
   }
 
@@ -86,11 +91,13 @@ public class ItemList {
    * @param discount has the discounts to be included to the list of ItemRows
    */
   public void addDiscount(DiscountDTO discount) {
-    for(int i = 0; i < itemRows.size(); i++) {
-      double oldDiscount = itemRows.get(i).getDiscount();
-      double newDiscount = discount.getItemRowDTO().get(i).getDiscount();
-      if(oldDiscount != newDiscount) {
-        itemRows.get(i).setDiscount(newDiscount);
+    if(discount != null) {
+      for(int i = 0; i < itemRows.size(); i++) {
+        double oldDiscount = itemRows.get(i).getDiscount();
+        double newDiscount = discount.getItemRowDTO().get(i).getDiscount();
+        if(oldDiscount != newDiscount) {
+          itemRows.get(i).setDiscount(newDiscount);
+        }
       }
     }
   }
