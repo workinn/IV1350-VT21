@@ -968,16 +968,132 @@ public class SaleTest {
     }
   }
 
+  @Test
+  public void testLogSaleWith10AppleAnd5Cola() {
+    String appleID = "1337";
+    String colaID = "1";
+    SaleDTO actual = sale.addItem(appleID);
+    actual = sale.addQuantity(10);
+    actual = sale.addItem(colaID);
+    actual = sale.addQuantity(5);
+    actual = sale.addDiscount("1337");
+    actual = sale.logSale();
 
-  
+    /*
+    * Compare Sale to given SaleDTO
+    */
+    assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
+    assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
+    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
+    assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
+    for(int i = 0; i < actual.getItemRows().size(); i++) {
+      assertEquals(sale.getItemList().getItemRows().get(i).getDiscount(), actual.getItemRows().get(i).getDiscount(), "The Discount on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getPriceIncludingDiscount(), actual.getItemRows().get(i).getPriceIncludingDiscount(), "The Price on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getQuantity(), actual.getItemRows().get(i).getQuantity(), "The Quantity on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getItemDescription(), actual.getItemRows().get(i).getItem().getItemDescription(), "The ItemDescription on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getItemIdentifier(), actual.getItemRows().get(i).getItem().getItemIdentifier(), "The ItemID on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getPrice(), actual.getItemRows().get(i).getItem().getPrice(), "The ItemPrice on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getVATrate(), actual.getItemRows().get(i).getItem().getVATrate(), "The ItemVATrate on row " + i + " is not what was expected: ");
+    }
 
+    /**
+     * Compare SaleDTO to expected values
+     */
+    ItemInformationDTO apple = handler.getInventoryHandler().getItemInformation(appleID);
+    ItemInformationDTO cola = handler.getInventoryHandler().getItemInformation(colaID);
+    ItemRow itemRow = new ItemRow(apple);
+    itemRow.increaseQuantity(9);
+    itemRow.setDiscount(40);
+    ArrayList<ItemRowDTO> expectedItemRows = new ArrayList<ItemRowDTO>();
+    expectedItemRows.add(new ItemRowDTO(itemRow));
+    itemRow = new ItemRow(cola);
+    itemRow.increaseQuantity(4);
+    itemRow.setDiscount(50);
+    expectedItemRows.add(new ItemRowDTO(itemRow));
+    
+    assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
+    assertEquals(20, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
+    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    assertEquals(15, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
+    assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(115, actual.getRunningTotal(), "The RunningTotal is not what was expected: ");
+    assertEquals(expectedItemRows.size(), actual.getItemRows().size(), "The size of SaleDTO ArrayList of ItemRowDTOs is not what was expected: ");
+    for(int i = 0; i < actual.getItemRows().size(); i++) {
+      assertEquals(expectedItemRows.get(i).getDiscount(), actual.getItemRows().get(i).getDiscount(), "The Discount on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getPriceIncludingDiscount(), actual.getItemRows().get(i).getPriceIncludingDiscount(), "The Price on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getQuantity(), actual.getItemRows().get(i).getQuantity(), "The Quantity on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getItemDescription(), actual.getItemRows().get(i).getItem().getItemDescription(), "The ItemDescription on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getItemIdentifier(), actual.getItemRows().get(i).getItem().getItemIdentifier(), "The ItemID on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getPrice(), actual.getItemRows().get(i).getItem().getPrice(), "The ItemPrice on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getVATrate(), actual.getItemRows().get(i).getItem().getVATrate(), "The ItemVATrate on row " + i + " is not what was expected: ");
+    }
+  }
 
-  
-  
-  
-  //calculateRunningTotal
-  //logSale
-  //printReceipt
+  @Test
+  public void testPrintReceiptWith10ApplesAnd5Colas() {
+    String appleID = "1337";
+    String colaID = "1";
+    SaleDTO actual = sale.addItem(appleID);
+    actual = sale.addQuantity(10);
+    actual = sale.addItem(colaID);
+    actual = sale.addQuantity(5);
+    actual = sale.addDiscount("1337");
 
+    /*
+    * Compare Sale to given SaleDTO
+    */
+    assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
+    assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
+    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
+    assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
+    for(int i = 0; i < actual.getItemRows().size(); i++) {
+      assertEquals(sale.getItemList().getItemRows().get(i).getDiscount(), actual.getItemRows().get(i).getDiscount(), "The Discount on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getPriceIncludingDiscount(), actual.getItemRows().get(i).getPriceIncludingDiscount(), "The Price on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getQuantity(), actual.getItemRows().get(i).getQuantity(), "The Quantity on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getItemDescription(), actual.getItemRows().get(i).getItem().getItemDescription(), "The ItemDescription on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getItemIdentifier(), actual.getItemRows().get(i).getItem().getItemIdentifier(), "The ItemID on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getPrice(), actual.getItemRows().get(i).getItem().getPrice(), "The ItemPrice on row " + i + " is not what was expected: ");
+      assertEquals(sale.getItemList().getItemRows().get(i).getItem().getVATrate(), actual.getItemRows().get(i).getItem().getVATrate(), "The ItemVATrate on row " + i + " is not what was expected: ");
+    }
 
+    /**
+     * Compare SaleDTO to expected values
+     */
+    ItemInformationDTO apple = handler.getInventoryHandler().getItemInformation(appleID);
+    ItemInformationDTO cola = handler.getInventoryHandler().getItemInformation(colaID);
+    ItemRow itemRow = new ItemRow(apple);
+    itemRow.increaseQuantity(9);
+    itemRow.setDiscount(40);
+    ArrayList<ItemRowDTO> expectedItemRows = new ArrayList<ItemRowDTO>();
+    expectedItemRows.add(new ItemRowDTO(itemRow));
+    itemRow = new ItemRow(cola);
+    itemRow.increaseQuantity(4);
+    itemRow.setDiscount(50);
+    expectedItemRows.add(new ItemRowDTO(itemRow));
+    
+    assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
+    assertEquals(20, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
+    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    assertEquals(15, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
+    assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
+    assertEquals(115, actual.getRunningTotal(), "The RunningTotal is not what was expected: ");
+    assertEquals(expectedItemRows.size(), actual.getItemRows().size(), "The size of SaleDTO ArrayList of ItemRowDTOs is not what was expected: ");
+    for(int i = 0; i < actual.getItemRows().size(); i++) {
+      assertEquals(expectedItemRows.get(i).getDiscount(), actual.getItemRows().get(i).getDiscount(), "The Discount on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getPriceIncludingDiscount(), actual.getItemRows().get(i).getPriceIncludingDiscount(), "The Price on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getQuantity(), actual.getItemRows().get(i).getQuantity(), "The Quantity on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getItemDescription(), actual.getItemRows().get(i).getItem().getItemDescription(), "The ItemDescription on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getItemIdentifier(), actual.getItemRows().get(i).getItem().getItemIdentifier(), "The ItemID on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getPrice(), actual.getItemRows().get(i).getItem().getPrice(), "The ItemPrice on row " + i + " is not what was expected: ");
+      assertEquals(expectedItemRows.get(i).getItem().getVATrate(), actual.getItemRows().get(i).getItem().getVATrate(), "The ItemVATrate on row " + i + " is not what was expected: ");
+    }
+  }
 }
