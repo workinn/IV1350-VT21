@@ -79,7 +79,7 @@ public final class SaleDTO {
   }
 
   // We made this mockup user interface to be able to follow the path of the program more easy during development.
-  /*public void printSale() {
+  public void printSale() {
     if(lastItemFound == false) {
       System.out.println("--------------------------");
       System.out.println("|INVALID ITEM IDENTIFIER!|");
@@ -107,5 +107,5 @@ public final class SaleDTO {
     }
 
     System.out.println("                  Time: " + dateTime.getHour() + ":" + min + "\n");
-  }*/
+  }
 }

@@ -30,10 +30,13 @@ public class ItemList {
   }
 
   private int indexOfRow(ItemInformationDTO item) {
-    ItemInformationDTO itemInRow;
+    String itemIDInRow;
+    if(item == null) {
+      return -1;
+    }
     for(int i = 0; i < itemRows.size(); i++) {
-      itemInRow = itemRows.get(i).getItem();
-      if(itemInRow == item) {
+      itemIDInRow = itemRows.get(i).getItem().getItemIdentifier();
+      if(itemIDInRow == item.getItemIdentifier()) {
         return i;
       }
     }

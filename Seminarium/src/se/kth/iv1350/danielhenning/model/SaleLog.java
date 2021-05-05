@@ -37,7 +37,6 @@ public class SaleLog {
   }
 
   private void updateTotalDiscountToday(SaleDTO saleDTO) {
-
      for(int i = 0; i < saleDTO.getItemRows().size(); i++) {
         amountDiscountGivenToday += saleDTO.getItemRows().get(i).getDiscount();
      }
@@ -51,11 +50,13 @@ public class SaleLog {
    * @param saleDTO is the sale to be logged
    */
   public void logSale(SaleDTO saleDTO) {
-    todaysSales.add(saleDTO);
-    amountSoldForToday += saleDTO.getRunningTotal();
-    updateTotalDiscountToday(saleDTO);
-    accountingHandler.updateAccounting(saleDTO);
-    inventoryHandler.updateInventory(saleDTO);
+    if(saleDTO.getItemRows().size() != 0) {
+      todaysSales.add(saleDTO);
+      amountSoldForToday += saleDTO.getRunningTotal();
+      updateTotalDiscountToday(saleDTO);
+      accountingHandler.updateAccounting(saleDTO);
+      inventoryHandler.updateInventory(saleDTO);
+    }
   }
 
   public ArrayList<SaleDTO> getTodaysSales() {

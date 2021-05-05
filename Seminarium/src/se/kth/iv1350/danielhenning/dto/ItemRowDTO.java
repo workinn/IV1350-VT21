@@ -32,13 +32,13 @@ public final class ItemRowDTO {
    * @param discount is the discount given to the row
    */
   public ItemRowDTO(ItemRowDTO itemRow, double discount) {
-    this.item = itemRow.getitem();
+    this.item = itemRow.getItem();
     this.quantity = itemRow.getQuantity();
     this.discount = discount;
     this.priceIncludingDiscount = itemRow.getPriceIncludingDiscount() - discount;
   }
 
-  public ItemInformationDTO getitem() {
+  public ItemInformationDTO getItem() {
     return item;
   }
 

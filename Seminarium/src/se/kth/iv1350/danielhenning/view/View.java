@@ -23,7 +23,9 @@ public class View {
 
     controller.startSale();
     currentStateOfSale = controller.addItem("1337");
-    // currentStateOfSale.printSale();
+    currentStateOfSale.printSale();
+    currentStateOfSale = controller.addItem("1337");
+    currentStateOfSale.printSale();
     currentStateOfSale = controller.addQuantity(10);
     // currentStateOfSale.printSale();
     currentStateOfSale = controller.addItem("1");

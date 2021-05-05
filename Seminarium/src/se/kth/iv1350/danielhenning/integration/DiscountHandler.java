@@ -47,10 +47,10 @@ public class DiscountHandler {
     if(itemRowDTO == null) {
       return null;
     }
-    if(itemRowDTO.getitem() == null) {
+    if(itemRowDTO.getItem() == null) {
       return null;
     }
-    return itemRowDTO.getitem().getItemIdentifier();
+    return itemRowDTO.getItem().getItemIdentifier();
   }
 
   /**

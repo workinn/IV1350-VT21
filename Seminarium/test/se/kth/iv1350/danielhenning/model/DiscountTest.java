@@ -104,7 +104,7 @@ public class DiscountTest {
     DiscountDTO expected = new DiscountDTO(expectedItemRows, member, 0);
     DiscountDTO actual = discount.getDiscountDTO(customerID, saleDTO);
     assertEquals(expected.getClass(), actual.getClass(), "The DiscountDTO is not of expected class: ");
-    assertEquals(expected.getItemRowDTO().get(0).getitem().getItemIdentifier(), actual.getItemRowDTO().get(0).getitem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
+    assertEquals(expected.getItemRowDTO().get(0).getItem().getItemIdentifier(), actual.getItemRowDTO().get(0).getItem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
     assertEquals(expected.getMember(), actual.getMember(), "The DiscountDTO's member is not what was expected: ");
     assertEquals(expected.getTotalSaleDiscount(), actual.getTotalSaleDiscount(), "The DiscountDTO's TotalSaleDiscount is not what was expected: ");
   }
@@ -134,7 +134,7 @@ public class DiscountTest {
     DiscountDTO expected = new DiscountDTO(expectedItemRows, member, 0);
     DiscountDTO actual = discount.getDiscountDTO(customerID, saleDTO);
     assertEquals(expected.getClass(), actual.getClass(), "The DiscountDTO is not of expected class: ");
-    assertEquals(expected.getItemRowDTO().get(0).getitem().getItemIdentifier(), actual.getItemRowDTO().get(0).getitem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
+    assertEquals(expected.getItemRowDTO().get(0).getItem().getItemIdentifier(), actual.getItemRowDTO().get(0).getItem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
     assertEquals(expected.getMember(), actual.getMember(), "The DiscountDTO's member is not what was expected: ");
     assertEquals(expected.getTotalSaleDiscount(), actual.getTotalSaleDiscount(), "The DiscountDTO's TotalSaleDiscount is not what was expected: ");
     assertEquals(expected.getItemRowDTO().get(0).getDiscount(), actual.getItemRowDTO().get(0).getDiscount(), "The Discount on row 0 is not what was expected: ");
@@ -165,7 +165,7 @@ public class DiscountTest {
     DiscountDTO expected = new DiscountDTO(expectedItemRows, member, 0);
     DiscountDTO actual = discount.getDiscountDTO(customerID, saleDTO);
     assertEquals(expected.getClass(), actual.getClass(), "The DiscountDTO is not of expected class: ");
-    assertEquals(expected.getItemRowDTO().get(0).getitem().getItemIdentifier(), actual.getItemRowDTO().get(0).getitem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
+    assertEquals(expected.getItemRowDTO().get(0).getItem().getItemIdentifier(), actual.getItemRowDTO().get(0).getItem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
     assertEquals(expected.getMember().getMemberID(), actual.getMember().getMemberID(), "The DiscountDTO's member is not what was expected: ");
     assertEquals(expected.getTotalSaleDiscount(), actual.getTotalSaleDiscount(), "The DiscountDTO's TotalSaleDiscount is not what was expected: ");
     assertEquals(expected.getItemRowDTO().get(0).getDiscount(), actual.getItemRowDTO().get(0).getDiscount(), "The Discount on row 0 is not what was expected: ");
@@ -192,7 +192,7 @@ public class DiscountTest {
     DiscountDTO expected = new DiscountDTO(expectedItemRows, member, 0);
     DiscountDTO actual = discount.getDiscountDTO(customerID, saleDTO);
     assertEquals(expected.getClass(), actual.getClass(), "The DiscountDTO is not of expected class: ");
-    assertEquals(expected.getItemRowDTO().get(0).getitem().getItemIdentifier(), actual.getItemRowDTO().get(0).getitem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
+    assertEquals(expected.getItemRowDTO().get(0).getItem().getItemIdentifier(), actual.getItemRowDTO().get(0).getItem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
     assertEquals(expected.getMember(), actual.getMember(), "The DiscountDTO's member is not what was expected: ");
     assertEquals(expected.getTotalSaleDiscount(), actual.getTotalSaleDiscount(), "The DiscountDTO's TotalSaleDiscount is not what was expected: ");
   }
@@ -222,7 +222,7 @@ public class DiscountTest {
     DiscountDTO expected = new DiscountDTO(expectedItemRows, member, 5);
     DiscountDTO actual = discount.getDiscountDTO(customerID, saleDTO);
     assertEquals(expected.getClass(), actual.getClass(), "The DiscountDTO is not of expected class: ");
-    assertEquals(expected.getItemRowDTO().get(0).getitem().getItemIdentifier(), actual.getItemRowDTO().get(0).getitem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
+    assertEquals(expected.getItemRowDTO().get(0).getItem().getItemIdentifier(), actual.getItemRowDTO().get(0).getItem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
     assertEquals(expected.getMember(), actual.getMember(), "The DiscountDTO's member is not what was expected: ");
     assertEquals(expected.getTotalSaleDiscount(), actual.getTotalSaleDiscount(), "The DiscountDTO's TotalSaleDiscount is not what was expected: ");
     assertEquals(expected.getItemRowDTO().get(0).getDiscount(), actual.getItemRowDTO().get(0).getDiscount(), "The Discount on row 0 is not what was expected: ");
@@ -253,7 +253,7 @@ public class DiscountTest {
     DiscountDTO expected = new DiscountDTO(expectedItemRows, member, 20);
     DiscountDTO actual = discount.getDiscountDTO(customerID, saleDTO);
     assertEquals(expected.getClass(), actual.getClass(), "The DiscountDTO is not of expected class: ");
-    assertEquals(expected.getItemRowDTO().get(0).getitem().getItemIdentifier(), actual.getItemRowDTO().get(0).getitem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
+    assertEquals(expected.getItemRowDTO().get(0).getItem().getItemIdentifier(), actual.getItemRowDTO().get(0).getItem().getItemIdentifier(), "The DiscountDTO's ItemRows are not as expected: ");
     assertEquals(expected.getMember().getMemberID(), actual.getMember().getMemberID(), "The DiscountDTO's member is not what was expected: ");
     assertEquals(expected.getTotalSaleDiscount(), actual.getTotalSaleDiscount(), "The DiscountDTO's TotalSaleDiscount is not what was expected: ");
     assertEquals(expected.getItemRowDTO().get(0).getDiscount(), actual.getItemRowDTO().get(0).getDiscount(), "The Discount on row 0 is not what was expected: ");
