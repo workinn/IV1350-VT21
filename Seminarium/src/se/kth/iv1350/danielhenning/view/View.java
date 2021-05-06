@@ -42,6 +42,8 @@ public class View {
     System.out.println("->Adding none existing item");
     currentStateOfSale = controller.addItem(noneExcistingItem);
     printSale(currentStateOfSale);
+    System.out.println("->Adding Apple");
+    currentStateOfSale = controller.addItem(appleID);
     System.out.println("->End Sale");
     currentStateOfSale = controller.endSale();
     printSale(currentStateOfSale);
