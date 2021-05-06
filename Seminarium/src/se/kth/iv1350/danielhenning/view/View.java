@@ -44,6 +44,7 @@ public class View {
     printSale(currentStateOfSale);
     System.out.println("->Adding Apple");
     currentStateOfSale = controller.addItem(appleID);
+    printSale(currentStateOfSale);
     System.out.println("->End Sale");
     currentStateOfSale = controller.endSale();
     printSale(currentStateOfSale);
