@@ -99,6 +99,7 @@ public class Sale {
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
   public SaleDTO endSale() {
+    lastItemFound = true;
     return getSaleDTO();
   }
 

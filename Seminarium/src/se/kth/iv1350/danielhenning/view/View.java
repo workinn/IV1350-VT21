@@ -50,6 +50,7 @@ public class View {
     printSale(currentStateOfSale);
     System.out.println("->Make Payment 500kr");
     currentStateOfSale = controller.payment(500);
+    printSale(currentStateOfSale);
   }
 
 
