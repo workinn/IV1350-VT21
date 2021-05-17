@@ -1,6 +1,8 @@
 package se.kth.iv1350.danielhenning.model;
 
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.ReceiptDTO;
@@ -66,16 +68,18 @@ public class Sale {
    * @param itemIdentifier is the identifier (bar code) of scanned item
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
-  public SaleDTO addItem(String itemIdentifier) {
-    ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
-    
-    if(item == null) {
-      lastItemFound = false;
-    } else {
-      lastItemFound = true;
+  public SaleDTO addItem(String itemIdentifier) throws ItemDoesNotExistException, CouldNotConnectToServerException{
+    try{
+      ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
       items.addItem(item);
+      lastItemFound = true;
+    }catch(ItemDoesNotExistException exc){
+      lastItemFound = false;
+      throw exc;
+    }catch(CouldNotConnectToServerException exc){
+      lastItemFound = false;
+      throw exc;
     }
-
     return getSaleDTO();
   }
 
@@ -99,7 +103,6 @@ public class Sale {
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
   public SaleDTO endSale() {
-    lastItemFound = true;
     return getSaleDTO();
   }
 

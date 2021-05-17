@@ -5,6 +5,7 @@ import se.kth.iv1350.danielhenning.integration.AccountingHandler;
 import se.kth.iv1350.danielhenning.integration.InventoryHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The SaleLog class represents the logging of all the
@@ -23,7 +24,7 @@ public class SaleLog {
   private ArrayList<SaleDTO> todaysSales;
   private double amountSoldForToday;
   private double amountDiscountGivenToday;
-
+  private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
   /**
    * Creates a new instance of the class SaleLog
    * @param accountingHandler is the handler of the accounting
@@ -56,6 +57,7 @@ public class SaleLog {
       updateTotalDiscountToday(saleDTO);
       accountingHandler.updateAccounting(saleDTO);
       inventoryHandler.updateInventory(saleDTO);
+      notifyObservers();
     }
   }
 
@@ -70,4 +72,15 @@ public class SaleLog {
   public double getAmountDiscountGivenToday() {
     return amountDiscountGivenToday;
   }
+
+  private void notifyObservers() {
+    for (TotalRevenueObserver obs : totalRevenueObservers) {
+      obs.updateTotalSaleAmount(amountSoldForToday);
+    }
+}
+
+  public void addTotalRevenueObeserver(TotalRevenueObserver obs) {
+    totalRevenueObservers.add(obs);
+  }
+
 }

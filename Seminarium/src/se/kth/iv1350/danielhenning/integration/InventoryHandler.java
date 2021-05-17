@@ -29,19 +29,24 @@ public class InventoryHandler {
    * method contains hard coded items to test the program
    * @param itemIdentifier is the identifier (bar code) of the searched item
    * @return a ItemInformationDTO containing all the items information. May return null if item is not found
+   * @throws ItemDoesNotExistException
    */
   public ItemInformationDTO getItemInformation(String itemIdentifier){
 
     ItemInformationDTO item;
+    if(itemIdentifier == "5555"){
+      throw new CouldNotConnectToServerException("Lost connection to inventory databaseserver");
+    }
 
     if(itemIdentifier == "1337") {
       item = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier);
-    } else if (itemIdentifier == "1") {
+      return item;
+    } if (itemIdentifier == "1") {
       item = new ItemInformationDTO(25, 0.10, "Coca-Cola", itemIdentifier);
-    } 
-    else {
-      item = null;
+      return item;
+    } else{
+      throw new ItemDoesNotExistException("No such item: " + itemIdentifier);
+
     }
-    return item;
   }
 }

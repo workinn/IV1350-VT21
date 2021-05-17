@@ -1,7 +1,9 @@
 package se.kth.iv1350.danielhenning.view;
 
 import se.kth.iv1350.danielhenning.controller.Controller;
+import se.kth.iv1350.danielhenning.controller.ItemNotFoundException;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.util.TotalRevenueFileOutput;
 
 /**
  * The View class represents the the view of the program
@@ -16,18 +18,51 @@ public class View {
    * 
    * @param controller is the controller of the program
    */
+  private SaleDTO currentStateOfSale;
+
   public View(Controller controller) {
     this.controller = controller;
     String appleID = "1337";
     String colaID = "1";
-    String noneExcistingItem ="111111";
+    String noneExcistingItem ="1111";
     String existingCustomerID = "1337";
     String noneExistingCustomerID = "10";
-    SaleDTO currentStateOfSale;
+    String connectionLost = "5555";
+    controller.addTotalRevenueObeserver(new TotalRevenueView());
+    controller.addTotalRevenueObeserver(new TotalRevenueFileOutput());
 
     System.out.println("->Starting new Sale\n");
     controller.startSale();
-    System.out.println("->Adding Apple");
+    System.out.println("->Adding Cola");
+    addItem(colaID);
+    System.out.println("->Adding none existing item");
+    addItem(noneExcistingItem);
+    System.out.println("->Loosing Connection");
+    addItem(connectionLost);
+    System.out.println("->End Sale");
+    currentStateOfSale = controller.endSale();
+    System.out.println("->Send Discount Request");
+    currentStateOfSale = controller.requestDiscount(existingCustomerID);
+    System.out.println("->Make Payment 500kr");
+    currentStateOfSale = controller.payment(500);
+    
+    System.out.println("->Starting new Sale\n");
+    controller.startSale();
+    System.out.println("->Adding apple");
+    addItem(appleID);
+    currentStateOfSale = controller.addQuantity(10);
+    System.out.println("->Adding none existing item");
+    addItem(noneExcistingItem);
+    System.out.println("->Loosing Connection");
+    addItem(connectionLost);
+    System.out.println("->End Sale");
+    currentStateOfSale = controller.endSale();
+    System.out.println("->Send Discount Request");
+    currentStateOfSale = controller.requestDiscount(existingCustomerID);
+    System.out.println("->Make Payment 500kr");
+    currentStateOfSale = controller.payment(500);
+
+  /*  System.out.println("->Adding Apple");
     currentStateOfSale = controller.addItem(appleID);
     printSale(currentStateOfSale);
     System.out.println("->Adding Qunatity 10 (+9)");
@@ -53,16 +88,20 @@ public class View {
     printSale(currentStateOfSale);
     System.out.println("->Make Payment 500kr");
     currentStateOfSale = controller.payment(500);
-    printSale(currentStateOfSale);
+    printSale(currentStateOfSale);*/
+  }
+
+  private void addItem(String identifier) throws ItemNotFoundException{
+    try{
+      currentStateOfSale = controller.addItem(identifier);
+    }catch(ItemNotFoundException exc){
+      System.out.println(exc.getMessage());
+    }
+
   }
 
 
-  public void printSale(SaleDTO currentStateOfSale) {
-    if(currentStateOfSale.getLastItemFound() == false) {
-      System.out.println("--------------------------");
-      System.out.println("|INVALID ITEM IDENTIFIER!|");
-      System.out.println("--------------------------");
-    }
+  private void printSale(SaleDTO currentStateOfSale) {
     System.out.println("---------------------------------------------------------------");
     System.out.println("| Row | Description | ID  | Quantity  | Discount  | Row Price |");
     System.out.println("---------------------------------------------------------------");

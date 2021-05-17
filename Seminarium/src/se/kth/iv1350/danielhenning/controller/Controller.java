@@ -1,11 +1,18 @@
 package se.kth.iv1350.danielhenning.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 import se.kth.iv1350.danielhenning.model.CashRegister;
 import se.kth.iv1350.danielhenning.model.Discount;
 import se.kth.iv1350.danielhenning.model.Sale;
 import se.kth.iv1350.danielhenning.model.SaleLog;
+import se.kth.iv1350.danielhenning.model.TotalRevenueObserver;
+import se.kth.iv1350.danielhenning.util.ExceptionLogger;
 
 /**
  * The class Controller represents the interface 
@@ -18,6 +25,8 @@ public class Controller {
   private SaleLog todaysSaleLog;
   private Discount discount;
   private Sale currentSale;
+  private ExceptionLogger exceptionLogger;
+  private List<TotalRevenueObserver> totalRevenueObservers = new ArrayList<>();
 
   /**
    * Creates a new instance of the class Controller
@@ -30,6 +39,7 @@ public class Controller {
     this.cashRegister = cashRegister;
     this.todaysSaleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     this.discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    exceptionLogger = new ExceptionLogger();
   }
 
   /**
@@ -45,8 +55,16 @@ public class Controller {
    * @param itemIdentifier is the identifier (bar code) of the scanned item
    * @return a SaleDTO which represents the current state of the Sale
    */
-  public SaleDTO addItem(String itemIdentifier) {
-    return currentSale.addItem(itemIdentifier);
+  public SaleDTO addItem(String itemIdentifier) throws ItemDoesNotExistException, CouldNotConnectToServerException{
+    try {
+      return currentSale.addItem(itemIdentifier); 
+    } catch (ItemDoesNotExistException exc) {
+      exceptionLogger.logException(exc);
+      throw new ItemNotFoundException("Item: "+itemIdentifier+" Not Found");
+    }catch(CouldNotConnectToServerException exc){
+      exceptionLogger.logException(exc);
+      throw new ItemNotFoundException("Item: "+itemIdentifier+" not found, try again");
+    }
   }
 
   /**
@@ -88,5 +106,11 @@ public class Controller {
     double change = cashRegister.getChange(amountPaid, saleDTO);
     saleDTO = currentSale.printReceipt(amountPaid, change);
     return saleDTO;
+  }
+
+  public void addTotalRevenueObeserver(TotalRevenueObserver obs){
+    totalRevenueObservers.add(obs);
+    todaysSaleLog.addTotalRevenueObeserver(obs);
+
   }
 }
