@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
-import se.kth.iv1350.danielhenning.integration.AccountingHandler;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
-import se.kth.iv1350.danielhenning.integration.InventoryHandler;
-import se.kth.iv1350.danielhenning.model.Sale;
 
 public class SaleTest {
 

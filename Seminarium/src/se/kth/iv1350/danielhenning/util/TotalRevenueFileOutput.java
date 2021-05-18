@@ -29,9 +29,10 @@ public class TotalRevenueFileOutput implements TotalRevenueObserver {
     @Override
     public void updateTotalSaleAmount(double amount) {
         totalRevenue = amount;
-        revenueLog.println(amount);
-
-        
+        revenueLog.println(amount);      
     }
-    
+
+    public double getTotalRevenue(){
+        return this.totalRevenue;
+    }
 }

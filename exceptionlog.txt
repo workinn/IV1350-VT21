@@ -1,4 +1,4 @@
-2021.05.18.23.22.23 Exception Thrown: No such item: 1111
+2021.05.19.00.13.46 Exception Thrown: No such item: 1111
 se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException: No such item: 1111
 	at se.kth.iv1350.danielhenning.integration.InventoryHandler.getItemInformation(InventoryHandler.java:54)
 	at se.kth.iv1350.danielhenning.model.Sale.addItem(Sale.java:75)
@@ -6,7 +6,7 @@ se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException: No such item:
 	at se.kth.iv1350.danielhenning.view.View.addItem(View.java:61)
 	at se.kth.iv1350.danielhenning.view.View.<init>(View.java:44)
 	at se.kth.iv1350.danielhenning.startup.Main.main(Main.java:26)
-2021.05.18.23.22.23 Exception Thrown: Lost connection to inventory databaseserver
+2021.05.19.00.13.47 Exception Thrown: Lost connection to inventory databaseserver
 se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException: Lost connection to inventory databaseserver
 	at se.kth.iv1350.danielhenning.integration.InventoryHandler.getItemInformation(InventoryHandler.java:44)
 	at se.kth.iv1350.danielhenning.model.Sale.addItem(Sale.java:75)
