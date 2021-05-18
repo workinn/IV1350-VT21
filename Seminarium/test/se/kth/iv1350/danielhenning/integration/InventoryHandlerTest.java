@@ -14,7 +14,7 @@ public class InventoryHandlerTest {
 
   @BeforeEach
   public void startUp() {
-    inventoryHandler = new InventoryHandler();
+    inventoryHandler = InventoryHandler.getInventoryHandler();
   }
 
   @AfterEach

@@ -20,7 +20,7 @@ public class SaleLogTest {
   @BeforeEach
   public void startUp() {
     AccountingHandler accountingHandler = new AccountingHandler();
-    InventoryHandler inventoryHandler = new InventoryHandler();
+    InventoryHandler inventoryHandler = InventoryHandler.getInventoryHandler();
     saleLog = new SaleLog(accountingHandler, inventoryHandler);
   }
 

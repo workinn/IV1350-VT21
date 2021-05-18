@@ -2,10 +2,12 @@ package se.kth.iv1350.danielhenning.integration;
 
 import java.util.ArrayList;
 
+import se.kth.iv1350.danielhenning.dto.AllDiscountRulesDTO;
 import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
 import se.kth.iv1350.danielhenning.dto.DiscountRulesDTO;
 import se.kth.iv1350.danielhenning.dto.DiscountRulesTotalDTO;
 import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
+import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 /**
  * The DiscountHandler class represents the system
@@ -16,10 +18,12 @@ public class DiscountHandler {
 
   private ArrayList<DiscountRulesDTO> discountRulesArray;
   private ArrayList<DiscountRulesTotalDTO> discountRulesTotalArray;
-
+  private ArrayList<AllDiscountRulesDTO> allDiscountRules;
   /**
    * Creates a new instance of the class DiscountHandler
    */
+
+
   public DiscountHandler() {
 
     this.discountRulesArray = new ArrayList<DiscountRulesDTO>();
@@ -32,7 +36,18 @@ public class DiscountHandler {
     this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(100,5,null));
     this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(100,10,"0"));
     this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(100,20,"1337"));
-    this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(500,25,"1337"));   
+    this.discountRulesTotalArray.add(new DiscountRulesTotalDTO(500,25,"1337"));  
+    
+    this.allDiscountRules = new ArrayList<AllDiscountRulesDTO>();
+    this.allDiscountRules.add(new AllDiscountRulesDTO("item","1", 5, 0 , 50, null));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("item","1337", 10, 0 , 20, null));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("item","1337", 10, 0 , 30, "0"));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("item","1337", 10, 0 , 40, "1337"));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("total",null,0,100,5,null));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("total",null,0,100,10,"0"));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("total",null,0,100,20,"1337"));
+    this.allDiscountRules.add(new AllDiscountRulesDTO("total",null,0,500,25,"1337"));  
+    
   }
 
   private String getMemberID(ClubMemberDTO member) {
@@ -119,4 +134,27 @@ public class DiscountHandler {
     }
     return discountRulesTotal;
   }
+
+
+
+public ArrayList<AllDiscountRulesDTO> getAllDiscountRules(SaleDTO sale, ClubMemberDTO member){
+  ArrayList<AllDiscountRulesDTO> discountRulesToReturn = new ArrayList<AllDiscountRulesDTO>();
+  
+  for(AllDiscountRulesDTO currentdiscountRules : allDiscountRules){
+    if(member!=null){
+      if(currentdiscountRules.getClubMemberID()==member.getMemberID()){
+        discountRulesToReturn.add(currentdiscountRules);
+      }
+    }
+
+    if(currentdiscountRules.getClubMemberID()==null){
+      discountRulesToReturn.add(currentdiscountRules);
+    }
+    if(currentdiscountRules.getClubMemberID() == "0" && member!=null){
+      discountRulesToReturn.add(currentdiscountRules);
+    }
+  }
+
+  return discountRulesToReturn;
+}
 }

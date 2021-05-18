@@ -3,6 +3,8 @@ package se.kth.iv1350.danielhenning.model;
 import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
+import se.kth.iv1350.danielhenning.dto.AllDiscountRulesDTO;
+import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.ReceiptDTO;
@@ -10,6 +12,7 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.concurrent.RejectedExecutionException;
 
 /**
@@ -105,19 +108,34 @@ public class Sale {
   public SaleDTO endSale() {
     return getSaleDTO();
   }
+/**
+ * Class that adds discount to sale
+ * @param costumerID the costumer id.
+ * @return the new saleDTO
+ */
+  public SaleDTO addDiscount(String costumerID){
+    ClubMemberDTO member = handler.getMemberHandler().getMember(costumerID);
+    ArrayList<AllDiscountRulesDTO> discountRules = handler.getDiscountHandler().getAllDiscountRules(getSaleDTO(), member);
+    DiscountDTO discountDTO = new CalculateItemDiscount().getDiscount(discountRules, getSaleDTO());
+    items.addDiscount(discountDTO);
+
+    discountDTO = new CalculateTotalAmountDiscount().getDiscount(discountRules, getSaleDTO());
+    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
+    return getSaleDTO();
+  }
 
   /**
    * The method addDiscount adds discount to the sale
    * @param customerID is the identification given by the customer
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
-  public SaleDTO addDiscount(String customerID) {
+  /*public SaleDTO addDiscount(String customerID) {
    DiscountDTO discountDTO = discount.getDiscountDTO(customerID, getSaleDTO());
    discountOnWholeSale = discountDTO.getTotalSaleDiscount();
-   items.addDiscount(discountDTO);
+   
 
     return getSaleDTO();
-  }
+  }*/
 
   /**
    * The method logSale logs the sale in the SaleLog which in turn will

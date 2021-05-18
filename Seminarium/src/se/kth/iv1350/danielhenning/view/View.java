@@ -34,22 +34,8 @@ public class View {
     System.out.println("->Starting new Sale\n");
     controller.startSale();
     System.out.println("->Adding Cola");
-    addItem(colaID);
-    System.out.println("->Adding none existing item");
-    addItem(noneExcistingItem);
-    System.out.println("->Loosing Connection");
-    addItem(connectionLost);
-    System.out.println("->End Sale");
-    currentStateOfSale = controller.endSale();
-    System.out.println("->Send Discount Request");
-    currentStateOfSale = controller.requestDiscount(existingCustomerID);
-    System.out.println("->Make Payment 500kr");
-    currentStateOfSale = controller.payment(500);
     
-    System.out.println("->Starting new Sale\n");
-    controller.startSale();
-    System.out.println("->Adding apple");
-    addItem(appleID);
+    addItem(colaID);
     currentStateOfSale = controller.addQuantity(10);
     System.out.println("->Adding none existing item");
     addItem(noneExcistingItem);
@@ -61,6 +47,22 @@ public class View {
     currentStateOfSale = controller.requestDiscount(existingCustomerID);
     System.out.println("->Make Payment 500kr");
     currentStateOfSale = controller.payment(500);
+    
+    /*System.out.println("->Starting new Sale\n");
+    controller.startSale();
+    System.out.println("->Adding apple");
+    addItem(appleID);
+    currentStateOfSale = controller.addQuantity(10);
+    System.out.println("->Adding none existing item");
+    addItem(noneExcistingItem);
+    System.out.println("->Loosing Connection");
+    addItem(connectionLost);
+    System.out.println("->End Sale");
+    currentStateOfSale = controller.endSale();
+    System.out.println("->Send Discount Request");
+    //currentStateOfSale = controller.requestDiscount(existingCustomerID);
+    System.out.println("->Make Payment 500kr");
+    currentStateOfSale = controller.payment(500);*/
 
   /*  System.out.println("->Adding Apple");
     currentStateOfSale = controller.addItem(appleID);

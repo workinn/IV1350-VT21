@@ -9,18 +9,15 @@ import java.util.ArrayList;
 public final class DiscountDTO {
   
     private ArrayList<ItemRowDTO> itemRows;
-    private ClubMemberDTO member;
     private double totalSaleDiscount;
 
     /**
      * Creates a new instance of the class DiscountDTO
      * @param itemRows is a list of all rows of items in a sale. Each row have eligible discounts added to it
-     * @param member is the Club Member used to look for discounts
      * @param totalSaleDiscount is the total amount of discounts given to this sale
      */
-    public DiscountDTO(ArrayList<ItemRowDTO> itemRows, ClubMemberDTO member, double totalSaleDiscount) {
+    public DiscountDTO(ArrayList<ItemRowDTO> itemRows, double totalSaleDiscount) {
       this.itemRows = itemRows;
-      this.member = member;
       this.totalSaleDiscount = totalSaleDiscount;
     }
       
@@ -32,7 +29,4 @@ public final class DiscountDTO {
       return totalSaleDiscount;
     }
 
-    public ClubMemberDTO getMember() {
-      return member;
-    }
 }

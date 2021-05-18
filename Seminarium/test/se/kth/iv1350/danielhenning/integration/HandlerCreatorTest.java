@@ -38,7 +38,7 @@ public class HandlerCreatorTest {
 
   @Test
   public void testGetInventoryHandler() {
-    InventoryHandler inventoryHandler = new InventoryHandler();
+    InventoryHandler inventoryHandler = InventoryHandler.getInventoryHandler();
     boolean expected = true;
     boolean actual = inventoryHandler.getClass().equals(handler.getInventoryHandler().getClass());
     assertEquals(expected, actual, "The InventoryHandler from HandlerCreator is not of type InventoryHandler!");
