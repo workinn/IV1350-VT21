@@ -9,13 +9,20 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
  * External Inventory System
  */
 public class InventoryHandler {
-
+  private static final InventoryHandler INSTANCE = new InventoryHandler();
   /**
    * Creates a new instance of the class InventoryHandler
    */
-  public InventoryHandler() {
+  private InventoryHandler() {
   }
-  
+  /**
+   * Returns this instance of inventory handler
+   * @return this inventory handler.
+   */
+  public static InventoryHandler getInventoryHandler(){
+    return INSTANCE;
+
+  }
   /**
    * The method updateInventory updates an External Inventory System
    * @param saleDTO contains all information about the sale to update an External Accounting System

@@ -16,7 +16,7 @@ public class HandlerCreator {
    */
   public HandlerCreator() {
     this.accountingHandler = new AccountingHandler();
-    this.inventoryHandler = new InventoryHandler();
+    this.inventoryHandler = InventoryHandler.getInventoryHandler();
     this.discountHandler = new DiscountHandler();
     this.memberHandler = new MemberHandler();
     this.printerHandler = new PrinterHandler();
