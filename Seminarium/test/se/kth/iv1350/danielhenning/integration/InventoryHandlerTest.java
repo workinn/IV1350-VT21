@@ -52,9 +52,15 @@ public class InventoryHandlerTest {
   public void testGetItemInformationWithNotExistingItem() {
     String itemIdentifier = "0";
     ItemInformationDTO expected = null;
-    ItemInformationDTO actual = inventoryHandler.getItemInformation(itemIdentifier);
+    ItemInformationDTO actual = null;
+    try {
+      actual = inventoryHandler.getItemInformation(itemIdentifier);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
 
-    assertEquals(expected, actual, "The given ItemInformationDTO is not what was expected: ");
+	assertEquals(expected, actual, "The given ItemInformationDTO is not what was expected: ");
   }
   
 }

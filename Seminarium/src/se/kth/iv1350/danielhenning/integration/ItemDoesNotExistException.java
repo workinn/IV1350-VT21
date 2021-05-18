@@ -1,6 +1,5 @@
 package se.kth.iv1350.danielhenning.integration;
 
-import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 
 public class ItemDoesNotExistException extends RuntimeException {
         /**

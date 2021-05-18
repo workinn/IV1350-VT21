@@ -37,10 +37,15 @@ public class View {
     
     addItem(colaID);
     currentStateOfSale = controller.addQuantity(10);
+    printSale(currentStateOfSale);
+    addItem(appleID);
+    currentStateOfSale = controller.addQuantity(10);
     System.out.println("->Adding none existing item");
     addItem(noneExcistingItem);
+    printSale(currentStateOfSale);
     System.out.println("->Loosing Connection");
     addItem(connectionLost);
+    printSale(currentStateOfSale);
     System.out.println("->End Sale");
     currentStateOfSale = controller.endSale();
     System.out.println("->Send Discount Request");
@@ -48,49 +53,7 @@ public class View {
     System.out.println("->Make Payment 500kr");
     currentStateOfSale = controller.payment(500);
     
-    /*System.out.println("->Starting new Sale\n");
-    controller.startSale();
-    System.out.println("->Adding apple");
-    addItem(appleID);
-    currentStateOfSale = controller.addQuantity(10);
-    System.out.println("->Adding none existing item");
-    addItem(noneExcistingItem);
-    System.out.println("->Loosing Connection");
-    addItem(connectionLost);
-    System.out.println("->End Sale");
-    currentStateOfSale = controller.endSale();
-    System.out.println("->Send Discount Request");
-    //currentStateOfSale = controller.requestDiscount(existingCustomerID);
-    System.out.println("->Make Payment 500kr");
-    currentStateOfSale = controller.payment(500);*/
-
-  /*  System.out.println("->Adding Apple");
-    currentStateOfSale = controller.addItem(appleID);
-    printSale(currentStateOfSale);
-    System.out.println("->Adding Qunatity 10 (+9)");
-    currentStateOfSale = controller.addQuantity(10);
-    printSale(currentStateOfSale);
-    System.out.println("->Adding Cola");
-    currentStateOfSale = controller.addItem(colaID);
-    printSale(currentStateOfSale);
-    System.out.println("->Adding Qunatity 5 (+4)");
-    currentStateOfSale = controller.addQuantity(5);
-    printSale(currentStateOfSale);
-    System.out.println("->Adding none existing item");
-    currentStateOfSale = controller.addItem(noneExcistingItem);
-    printSale(currentStateOfSale);
-    System.out.println("->Adding Apple");
-    currentStateOfSale = controller.addItem(appleID);
-    printSale(currentStateOfSale);
-    System.out.println("->End Sale");
-    currentStateOfSale = controller.endSale();
-    printSale(currentStateOfSale);
-    System.out.println("->Send Discount Request");
-    currentStateOfSale = controller.requestDiscount(existingCustomerID);
-    printSale(currentStateOfSale);
-    System.out.println("->Make Payment 500kr");
-    currentStateOfSale = controller.payment(500);
-    printSale(currentStateOfSale);*/
+    
   }
 
   private void addItem(String identifier) throws ItemNotFoundException{

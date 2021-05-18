@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public final class SaleDTO {
 
   private ArrayList<ItemRowDTO> itemRows;
-  private boolean lastItemFound;
   private double runningTotal;
   private LocalDateTime dateTime;
   private int numberOfItems;
@@ -32,7 +31,6 @@ public final class SaleDTO {
     for(int i = 0; i < sale.getItemList().getItemRows().size(); i++) {
       this.itemRows.add(new ItemRowDTO(sale.getItemList().getItemRows().get(i)));
     }
-    this.lastItemFound = sale.getLastItemFound();
     this.runningTotal = sale.getRunningTotal();
     this.dateTime = sale.getDateTime();
     this.numberOfItems = sale.getItemList().getNumberOfItems();
@@ -56,10 +54,6 @@ public final class SaleDTO {
 
   public int getNumberOfRows() {
     return numberOfRows;
-  }
-
-  public boolean getLastItemFound() {
-    return lastItemFound;
   }
 
   public LocalDateTime getDateTime() {

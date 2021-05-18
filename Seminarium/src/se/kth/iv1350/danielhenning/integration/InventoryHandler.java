@@ -21,7 +21,6 @@ public class InventoryHandler {
    */
   public static InventoryHandler getInventoryHandler(){
     return INSTANCE;
-
   }
   /**
    * The method updateInventory updates an External Inventory System

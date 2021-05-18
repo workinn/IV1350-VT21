@@ -36,8 +36,8 @@ public class CashRegisterTest {
   public void testAddPaymentWithNoItems() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     SaleDTO saleDTO = new SaleDTO(sale);
     cashRegister.addPayment(saleDTO);
 
@@ -50,8 +50,8 @@ public class CashRegisterTest {
   public void testAddPaymentWith1Apple() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String appleID = "1337";
     sale.addItem(appleID);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -68,8 +68,8 @@ public class CashRegisterTest {
   public void testAddPaymentWith1000Apple() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String appleID = "1337";
     sale.addItem(appleID);
     sale.addQuantity(1000);
@@ -87,8 +87,8 @@ public class CashRegisterTest {
   public void testAddPaymentWith1Cola() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String colaID = "1";
     sale.addItem(colaID);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -105,8 +105,8 @@ public class CashRegisterTest {
   public void testAddPaymentWith1000Cola() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String colaID = "1";
     int quantity = 1000;
     sale.addItem(colaID);
@@ -125,8 +125,8 @@ public class CashRegisterTest {
   public void testAddPaymentWith1Apple1Cola() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String appleID = "1337";
     String colaID = "1";
     sale.addItem(appleID);
@@ -146,8 +146,8 @@ public class CashRegisterTest {
   public void testAddPaymentWith1000Apple1000Cola() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String appleID = "1337";
     String colaID = "1";
     int quantity = 1000;
@@ -170,8 +170,8 @@ public class CashRegisterTest {
   public void testGetChangeWithNoItems() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     SaleDTO saleDTO = new SaleDTO(sale);
 
     double amountPaid = 0;
@@ -185,8 +185,8 @@ public class CashRegisterTest {
   public void testGetChangeWith1Apple() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String appleID = "1337";
     sale.addItem(appleID);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -204,8 +204,8 @@ public class CashRegisterTest {
   public void testGetChangeWith1Cola() {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     String colaID = "1";
     sale.addItem(colaID);
     SaleDTO saleDTO = new SaleDTO(sale);

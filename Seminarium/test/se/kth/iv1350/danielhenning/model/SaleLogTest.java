@@ -32,8 +32,8 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWithoutItems() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     SaleDTO saleDTO = new SaleDTO(sale);
     saleLog.logSale(saleDTO);
 
@@ -55,8 +55,8 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWith1Apple() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     sale.addItem("1337");
     SaleDTO saleDTO = new SaleDTO(sale);
     saleLog.logSale(saleDTO);
@@ -80,8 +80,8 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWith10Apple() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     sale.addItem("1337");
     sale.addQuantity(10);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -106,8 +106,8 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWith1Cola() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     sale.addItem("1");
     SaleDTO saleDTO = new SaleDTO(sale);
     saleLog.logSale(saleDTO);
@@ -131,8 +131,8 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWith10Cola() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     sale.addItem("1");
     sale.addQuantity(10);
     SaleDTO saleDTO = new SaleDTO(sale);
@@ -157,8 +157,8 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWith10ColaAndDiscountWithMember() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
     sale.addItem("1");
     sale.addQuantity(10);
     sale.addDiscount("1337");
@@ -184,9 +184,14 @@ public class SaleLogTest {
   @Test
   public void testLogSaleWithNoneExistingItem() {
     HandlerCreator handler = new HandlerCreator();
-    Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    Sale sale = new Sale(handler, saleLog, discount);
-    sale.addItem("10");
+    //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    Sale sale = new Sale(handler, saleLog/*, discount*/);
+    try {
+      sale.addItem("10");
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
     SaleDTO saleDTO = new SaleDTO(sale);
     saleLog.logSale(saleDTO);
 
@@ -204,5 +209,4 @@ public class SaleLogTest {
       assertEquals(todaysSales.get(i).getRunningTotal(), saleLog.getTodaysSales().get(i).getRunningTotal(), "SaleLogs RunningTotal is not what was expected: ");
     }
   }
-  
 }

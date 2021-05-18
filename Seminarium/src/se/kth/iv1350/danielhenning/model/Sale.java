@@ -3,6 +3,8 @@ package se.kth.iv1350.danielhenning.model;
 import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
+import se.kth.iv1350.danielhenning.integration.matching.CalculateItemDiscount;
+import se.kth.iv1350.danielhenning.integration.matching.CalculateTotalAmountDiscount;
 import se.kth.iv1350.danielhenning.dto.AllDiscountRulesDTO;
 import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
@@ -27,24 +29,21 @@ public class Sale {
   private HandlerCreator handler;
   private SaleLog saleLog;
   private ItemList items;
-  private boolean lastItemFound;
   private LocalDateTime dateTime;
   private double runningTotal;
   private double discountOnWholeSale;
   private double amountPaid;
   private double change;
-  private Discount discount;
 
   /**
    * Creates a new instance of the class Sale
    * @param handler contains all the handlers in the integration layer
    * @param saleLog is used to log the completed sale
    */
-  public Sale(HandlerCreator handler, SaleLog saleLog, Discount discount) {
+  public Sale(HandlerCreator handler, SaleLog saleLog/*, Discount discount*/) {
     this.handler = handler;
     this.saleLog = saleLog;
     this.items = new ItemList();
-    this.discount = discount;
     this.dateTime = LocalDateTime.now();
     this.runningTotal = 0;
     this.discountOnWholeSale = 0;
@@ -75,12 +74,9 @@ public class Sale {
     try{
       ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);
       items.addItem(item);
-      lastItemFound = true;
     }catch(ItemDoesNotExistException exc){
-      lastItemFound = false;
       throw exc;
     }catch(CouldNotConnectToServerException exc){
-      lastItemFound = false;
       throw exc;
     }
     return getSaleDTO();
@@ -93,7 +89,7 @@ public class Sale {
    * @return a SaleDTO for the View to retreive information about the current state of the Sale
    */
   public SaleDTO addQuantity(int quantity) {
-    if(lastItemFound && quantity > 0) {
+    if(quantity > 0) {
       items.increaseQuantityOfLastScannedItem(quantity - 1);
     }
 
@@ -115,27 +111,14 @@ public class Sale {
  */
   public SaleDTO addDiscount(String costumerID){
     ClubMemberDTO member = handler.getMemberHandler().getMember(costumerID);
-    ArrayList<AllDiscountRulesDTO> discountRules = handler.getDiscountHandler().getAllDiscountRules(getSaleDTO(), member);
+    ArrayList<AllDiscountRulesDTO> discountRules = handler.getDiscountHandler().getAllDiscountRules(member);
     DiscountDTO discountDTO = new CalculateItemDiscount().getDiscount(discountRules, getSaleDTO());
     items.addDiscount(discountDTO);
-
+  
     discountDTO = new CalculateTotalAmountDiscount().getDiscount(discountRules, getSaleDTO());
     discountOnWholeSale = discountDTO.getTotalSaleDiscount();
     return getSaleDTO();
   }
-
-  /**
-   * The method addDiscount adds discount to the sale
-   * @param customerID is the identification given by the customer
-   * @return a SaleDTO for the View to retreive information about the current state of the Sale
-   */
-  /*public SaleDTO addDiscount(String customerID) {
-   DiscountDTO discountDTO = discount.getDiscountDTO(customerID, getSaleDTO());
-   discountOnWholeSale = discountDTO.getTotalSaleDiscount();
-   
-
-    return getSaleDTO();
-  }*/
 
   /**
    * The method logSale logs the sale in the SaleLog which in turn will
@@ -167,10 +150,6 @@ public class Sale {
 
   public ItemList getItemList() {
     return items;
-  }
-
-  public boolean getLastItemFound() {
-    return lastItemFound;
   }
 
   public double getRunningTotal() {

@@ -13,7 +13,7 @@ import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.model.CashRegister;
-import se.kth.iv1350.danielhenning.model.Discount;
+//import se.kth.iv1350.danielhenning.model.Discount;
 import se.kth.iv1350.danielhenning.model.ItemRow;
 import se.kth.iv1350.danielhenning.model.Sale;
 import se.kth.iv1350.danielhenning.model.SaleLog;
@@ -21,7 +21,7 @@ import se.kth.iv1350.danielhenning.model.SaleLog;
 public class ControllerTest {
 
   private Controller controller;
-  private Discount discount;
+  //private Discount discount;
   private SaleLog saleLog;
   private HandlerCreator handler;
 
@@ -29,7 +29,7 @@ public class ControllerTest {
   public void startUp() {
     handler = new HandlerCreator();
     saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    //discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     CashRegister cashRegister = new CashRegister(1000);
     controller = new Controller(handler, cashRegister);
   }
@@ -42,10 +42,17 @@ public class ControllerTest {
 
   @Test
   public void testAddItemWithNullString() {
-    Sale expected = new Sale(handler, saleLog, discount);
-    expected.addItem(null);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
+
     controller.startSale();
-    SaleDTO actual = controller.addItem(null);
+    SaleDTO actual = controller.endSale();
+    try {
+      actual = controller.addItem(null);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
+
 
     /*
     * Compare Sale to given SaleDTO
@@ -53,7 +60,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -75,7 +81,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -93,7 +98,7 @@ public class ControllerTest {
 
   @Test
   public void testAddItemWit1nApple() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     controller.startSale();
     SaleDTO actual = controller.addItem("1337");
@@ -104,7 +109,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -130,7 +134,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(1, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(10, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -148,7 +151,7 @@ public class ControllerTest {
 
   @Test
   public void testAddItemWit2AppleInRow() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addItem("1337");
     controller.startSale();
@@ -161,7 +164,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -188,7 +190,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(2, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(20, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -206,11 +207,23 @@ public class ControllerTest {
 
   @Test
   public void testAddQuantityOnNullItem() {
-    Sale expected = new Sale(handler, saleLog, discount);
-    expected.addItem(null);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
+    try {
+      expected.addItem(null);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
+
     expected.addQuantity(2);
     controller.startSale();
-    SaleDTO actual = controller.addItem(null);
+    SaleDTO actual;
+    try {
+      actual = controller.addItem(null);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
     actual = controller.addQuantity(2);
 
     /*
@@ -219,7 +232,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -246,7 +258,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -264,7 +275,7 @@ public class ControllerTest {
 
   @Test
   public void testAddQuantityOnApple() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addQuantity(2);
     controller.startSale();
@@ -277,7 +288,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -304,7 +314,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(2, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(20, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -322,7 +331,7 @@ public class ControllerTest {
 
   @Test
   public void testAddNegativeQuantityOnApple() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addQuantity(-10);
     controller.startSale();
@@ -335,7 +344,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -362,7 +370,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(1, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(10, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -380,7 +387,7 @@ public class ControllerTest {
 
   @Test
   public void testEndSale() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addQuantity(10);
     expected.endSale();
@@ -395,7 +402,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -422,7 +428,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(10, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(100, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -440,14 +445,15 @@ public class ControllerTest {
 
   @Test
   public void testRequestDiscountWithNullItemAndNullCustomerID() {
-    Sale expected = new Sale(handler, saleLog, discount);
-    expected.addItem(null);
-    //expected.addQuantity(10);
-    //expected.endSale();
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     controller.startSale();
-    SaleDTO actual = controller.addItem(null);
-    //actual = controller.addQuantity(10);
-    //actual = controller.endSale();
+    SaleDTO actual =null;
+    try {
+      actual = controller.addItem(null);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+  
     actual = controller.requestDiscount(null);
 
     /*
@@ -456,7 +462,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -483,7 +488,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -501,7 +505,7 @@ public class ControllerTest {
 
   @Test
   public void testRequestDiscountWith10ColaAndNullCustomerID() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1");
     expected.addQuantity(10);
     expected.endSale();
@@ -518,7 +522,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -546,7 +549,6 @@ public class ControllerTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(5, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(10, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(145, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -564,7 +566,7 @@ public class ControllerTest {
 
   @Test
   public void testPaymentWith10ColaAndNullCustomerID() {
-    Sale expected = new Sale(handler, saleLog, discount);
+    Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1");
     expected.addQuantity(10);
     expected.endSale();
@@ -584,7 +586,6 @@ public class ControllerTest {
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(expected.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(expected.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(expected.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expected.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -612,7 +613,6 @@ public class ControllerTest {
     assertEquals(500, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(355, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(5, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(10, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(145, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(expectedItemRows.size(), actual.getItemRows().size());

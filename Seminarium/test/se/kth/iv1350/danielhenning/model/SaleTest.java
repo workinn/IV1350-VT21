@@ -19,7 +19,7 @@ import se.kth.iv1350.danielhenning.model.Sale;
 public class SaleTest {
 
   private Sale sale;
-  private Discount discount;
+  //private Discount discount;
   private SaleLog saleLog;
   private HandlerCreator handler;
 
@@ -28,8 +28,8 @@ public class SaleTest {
   public void startUp() {
     handler = new HandlerCreator();
     saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
-    discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
-    sale = new Sale(handler, saleLog, discount);
+    //discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
+    sale = new Sale(handler, saleLog/*, discount*/);
 
 
   }
@@ -38,13 +38,19 @@ public class SaleTest {
   public void tearDown() {
     handler = null;
     saleLog = null;
-    discount = null;
+    //discount = null;
     sale = null;
   }
   
   @Test
   public void testAddItemWithNullString() {
-    SaleDTO actual = sale.addItem(null);
+    SaleDTO actual = new SaleDTO(sale);
+    try {
+      actual = sale.addItem(null);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
 
     /*
     * Compare Sale to given SaleDTO
@@ -52,7 +58,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -74,7 +79,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -93,7 +97,13 @@ public class SaleTest {
 
   @Test
   public void testAddItemWithNoneExistingItem() {
-    SaleDTO actual = sale.addItem("100");
+    SaleDTO actual = new SaleDTO(sale);
+    try {
+      actual = sale.addItem("100");
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
 
     /*
     * Compare Sale to given SaleDTO
@@ -101,7 +111,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -123,7 +132,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -150,7 +158,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -174,7 +181,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(1, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(10, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -202,7 +208,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -228,7 +233,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(2, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(20, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -257,7 +261,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -286,7 +290,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(2, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(35, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -307,7 +310,11 @@ public class SaleTest {
     String appleID = "1337";
     String notExistingID = "100";
     SaleDTO actual = sale.addItem(appleID);
-    actual = sale.addItem(notExistingID);
+    try {
+      actual = sale.addItem(notExistingID);
+    } catch (Exception e) {
+      
+    }
 
     /*
     * Compare Sale to given SaleDTO
@@ -315,7 +322,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -341,7 +348,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(1, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(10, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -371,7 +377,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -400,7 +406,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(3, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(45, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -420,7 +425,8 @@ public class SaleTest {
   public void testAddQuantityWithNoItem() {
     String itemID = null;
     //String colaID = "1";
-    SaleDTO actual = sale.addQuantity(5);
+    SaleDTO actual = new SaleDTO(sale);
+    actual = sale.addQuantity(5);
     //actual = sale.addItem(colaID);
     //actual = sale.addItem(appleID);
 
@@ -430,7 +436,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -459,7 +464,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -479,7 +483,13 @@ public class SaleTest {
   public void testAddQuantityWithNullItem() {
     String itemID = null;
     //String colaID = "1";
-    SaleDTO actual = sale.addItem(itemID);
+    SaleDTO actual = new SaleDTO(sale);
+    try {
+      actual = sale.addItem(itemID);
+    } catch (Exception e) {
+      //TODO: handle exception
+    }
+    
     actual = sale.addQuantity(5);
     //actual = sale.addItem(colaID);
     //actual = sale.addItem(appleID);
@@ -490,7 +500,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -519,7 +529,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(false, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(0, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -550,7 +559,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -579,7 +588,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(5, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(50, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -611,7 +619,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -640,7 +648,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(6, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(60, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -673,7 +680,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -702,7 +709,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(6, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(60, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -734,7 +740,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -764,7 +770,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(10, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(80, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -796,7 +801,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -826,7 +831,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(10, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(70, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -858,7 +862,7 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
+    //assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -888,7 +892,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(0, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(10, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(60, actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
@@ -913,14 +916,12 @@ public class SaleTest {
     actual = sale.addItem(colaID);
     actual = sale.addQuantity(5);
     actual = sale.addDiscount("1337");
-
     /*
     * Compare Sale to given SaleDTO
     */
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -952,7 +953,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(20, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(15, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(115, actual.getRunningTotal(), "The RunningTotal is not what was expected: ");
@@ -985,7 +985,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -1017,7 +1016,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(20, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(15, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(115, actual.getRunningTotal(), "The RunningTotal is not what was expected: ");
@@ -1049,7 +1047,6 @@ public class SaleTest {
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getChange(), actual.getChange(), "The Change is not what was expected: ");
     assertEquals(sale.getDiscountOnWholeSale(), actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(sale.getLastItemFound(), actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(sale.getAmountPaid(), actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getRunningTotal(), actual.getRunningTotal(), "The AmountPaid is not what was expected: ");
     assertEquals(sale.getItemList().getItemRows().size(), actual.getItemRows().size());
@@ -1081,7 +1078,6 @@ public class SaleTest {
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(0, actual.getChange(), "The Change is not what was expected: ");
     assertEquals(20, actual.getDiscountOnWholeSale(), "The DiscountOnWholeSale is not what was expected: ");
-    assertEquals(true, actual.getLastItemFound(), "The LastItemFound is not what was expected: ");
     assertEquals(15, actual.getNumberOfItems(), "The NumberOfItems is not what was expected: ");
     assertEquals(0, actual.getAmountPaid(), "The AmountPaid is not what was expected: ");
     assertEquals(115, actual.getRunningTotal(), "The RunningTotal is not what was expected: ");

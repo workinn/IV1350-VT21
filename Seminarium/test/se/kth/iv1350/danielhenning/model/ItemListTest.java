@@ -498,7 +498,7 @@ public class ItemListTest {
     itemRowDTO = new ItemRowDTO(itemRowDTO, 10);
     itemRows.add(itemRowDTO);
     ClubMemberDTO member = new ClubMemberDTO("Daniel", "1337");
-    DiscountDTO discount = new DiscountDTO(itemRows, member, 10);
+    DiscountDTO discount = new DiscountDTO(itemRows, 10);
     itemList.addDiscount(discount);    
 
     ArrayList<ItemRow> expectedItemRows = new ArrayList<ItemRow>();
@@ -534,7 +534,7 @@ public class ItemListTest {
     itemRowDTO = new ItemRowDTO(itemRowDTO, 10);
     itemRows.add(itemRowDTO);
     ClubMemberDTO member = new ClubMemberDTO("Daniel", "1337");
-    DiscountDTO discount = new DiscountDTO(itemRows, member, 10);
+    DiscountDTO discount = new DiscountDTO(itemRows, 10);
     itemList.addItem(apple);
     itemList.addDiscount(discount);    
 
