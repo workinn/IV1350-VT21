@@ -26,7 +26,12 @@ public class View {
   private SaleDTO currentStateOfSale;
 
   public View(Controller controller) throws ItemNotFoundException, CouldNotConnectToServerException, ItemDoesNotExistException {
-    this.controller = controller;
+    this.controller = controller;    
+    testProgram();
+  }
+
+  private void testProgram() throws CouldNotConnectToServerException, ItemNotFoundException, ItemDoesNotExistException {
+
     String appleID = "1337";
     String colaID = "1";
     String noneExcistingItem ="1111";
@@ -64,8 +69,7 @@ public class View {
     printSale(currentStateOfSale);
     System.out.println("->Make Payment 500kr");
     currentStateOfSale = controller.payment(500);
-    
-    
+
   }
 
   private void addItem(String identifier) throws ItemNotFoundException, CouldNotConnectToServerException, ItemDoesNotExistException{

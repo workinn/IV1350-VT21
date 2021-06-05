@@ -8,7 +8,6 @@ import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 import se.kth.iv1350.danielhenning.model.CashRegister;
-//import se.kth.iv1350.danielhenning.model.Discount;
 import se.kth.iv1350.danielhenning.model.Sale;
 import se.kth.iv1350.danielhenning.model.SaleLog;
 import se.kth.iv1350.danielhenning.model.TotalRevenueObserver;

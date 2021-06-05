@@ -45,18 +45,12 @@ public class InventoryHandler {
     if(itemIdentifier == "5555"){
       throw new CouldNotConnectToServerException("Lost connection to inventory databaseserver");
     }
-
     if(itemIdentifier == "1337") {
       item = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier);
-      return item;
     } if (itemIdentifier == "1") {
       item = new ItemInformationDTO(25, 0.10, "Coca-Cola", itemIdentifier);
-      return item;
-
     } if(item==null){
-
       throw new ItemDoesNotExistException("No such item: " + itemIdentifier);
-
     }
     return item;
   }
