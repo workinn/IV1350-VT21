@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 
 public class SaleTest {
 
@@ -145,7 +147,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddItemWith1Apple() {
+  public void testAddItemWith1Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String itemIdentifier = "1337";
     SaleDTO actual = sale.addItem(itemIdentifier);
 
@@ -194,7 +196,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddItemWithSameItemTwoTimesInARow() {
+  public void testAddItemWithSameItemTwoTimesInARow() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String itemIdentifier = "1337";
     SaleDTO actual = sale.addItem(itemIdentifier);
     actual = sale.addItem(itemIdentifier);
@@ -246,7 +248,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddItemWithTwoDifferentItems() {
+  public void testAddItemWithTwoDifferentItems() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -303,7 +305,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddItemWith1ExistingItemAnd1NoneExistingItem() {
+  public void testAddItemWith1ExistingItemAnd1NoneExistingItem() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     String notExistingID = "100";
     SaleDTO actual = sale.addItem(appleID);
@@ -361,7 +363,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddItemWith1Apple1Cola1Apple() {
+  public void testAddItemWith1Apple1Cola1Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -542,7 +544,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddQuantityWithApple() {
+  public void testAddQuantityWithApple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     //String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -601,7 +603,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddQuantityWithSingleAppleAddedTwice() {
+  public void testAddQuantityWithSingleAppleAddedTwice() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     //String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -661,7 +663,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testEndSale() {
+  public void testEndSale() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     //String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -722,7 +724,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddDiscountWith10ApplesAndNullMember() {
+  public void testAddDiscountWith10ApplesAndNullMember() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     //String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -783,7 +785,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddDiscountWith10ApplesAndMember() {
+  public void testAddDiscountWith10ApplesAndMember() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     //String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -844,7 +846,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddDiscountWith10ApplesAndMemberWithSpecialDiscount() {
+  public void testAddDiscountWith10ApplesAndMemberWithSpecialDiscount() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     //String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -905,7 +907,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testAddDiscountWith10ApplesAnd5Colas() {
+  public void testAddDiscountWith10ApplesAnd5Colas() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -966,7 +968,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testLogSaleWith10AppleAnd5Cola() {
+  public void testLogSaleWith10AppleAnd5Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);
@@ -1029,7 +1031,7 @@ public class SaleTest {
   }
 
   @Test
-  public void testPrintReceiptWith10ApplesAnd5Colas() {
+  public void testPrintReceiptWith10ApplesAnd5Colas() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     String appleID = "1337";
     String colaID = "1";
     SaleDTO actual = sale.addItem(appleID);

@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
 import se.kth.iv1350.danielhenning.integration.AccountingHandler;
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.integration.InventoryHandler;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 
 public class SaleLogTest {
 
@@ -53,7 +55,7 @@ public class SaleLogTest {
   }
 
   @Test
-  public void testLogSaleWith1Apple() {
+  public void testLogSaleWith1Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     Sale sale = new Sale(handler, saleLog/*, discount*/);
@@ -78,7 +80,7 @@ public class SaleLogTest {
   }
 
   @Test
-  public void testLogSaleWith10Apple() {
+  public void testLogSaleWith10Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     Sale sale = new Sale(handler, saleLog/*, discount*/);
@@ -104,7 +106,7 @@ public class SaleLogTest {
   }
 
   @Test
-  public void testLogSaleWith1Cola() {
+  public void testLogSaleWith1Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     Sale sale = new Sale(handler, saleLog/*, discount*/);
@@ -129,7 +131,7 @@ public class SaleLogTest {
   }
 
   @Test
-  public void testLogSaleWith10Cola() {
+  public void testLogSaleWith10Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     Sale sale = new Sale(handler, saleLog/*, discount*/);
@@ -155,7 +157,7 @@ public class SaleLogTest {
   }
 
   @Test
-  public void testLogSaleWith10ColaAndDiscountWithMember() {
+  public void testLogSaleWith10ColaAndDiscountWithMember() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
     Sale sale = new Sale(handler, saleLog/*, discount*/);

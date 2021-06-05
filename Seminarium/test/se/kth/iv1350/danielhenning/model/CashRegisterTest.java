@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 
 public class CashRegisterTest {
 
@@ -47,7 +49,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testAddPaymentWith1Apple() {
+  public void testAddPaymentWith1Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -65,7 +67,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testAddPaymentWith1000Apple() {
+  public void testAddPaymentWith1000Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -84,7 +86,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testAddPaymentWith1Cola() {
+  public void testAddPaymentWith1Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -102,7 +104,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testAddPaymentWith1000Cola() {
+  public void testAddPaymentWith1000Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -122,7 +124,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testAddPaymentWith1Apple1Cola() {
+  public void testAddPaymentWith1Apple1Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -143,7 +145,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testAddPaymentWith1000Apple1000Cola() {
+  public void testAddPaymentWith1000Apple1000Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -182,7 +184,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testGetChangeWith1Apple() {
+  public void testGetChangeWith1Apple() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());
@@ -201,7 +203,7 @@ public class CashRegisterTest {
   }
 
   @Test
-  public void testGetChangeWith1Cola() {
+  public void testGetChangeWith1Cola() throws CouldNotConnectToServerException, ItemDoesNotExistException {
     HandlerCreator handler = new HandlerCreator();
     SaleLog saleLog = new SaleLog(handler.getAccountingHandler(), handler.getInventoryHandler());
     //Discount discount = new Discount(handler.getDiscountHandler(), handler.getMemberHandler());

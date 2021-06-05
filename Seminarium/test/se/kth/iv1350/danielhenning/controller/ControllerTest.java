@@ -11,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.danielhenning.dto.ItemInformationDTO;
 import se.kth.iv1350.danielhenning.dto.ItemRowDTO;
 import se.kth.iv1350.danielhenning.dto.SaleDTO;
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 import se.kth.iv1350.danielhenning.model.CashRegister;
 //import se.kth.iv1350.danielhenning.model.Discount;
 import se.kth.iv1350.danielhenning.model.ItemRow;
@@ -97,7 +99,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testAddItemWit1nApple() {
+  public void testAddItemWit1nApple() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     controller.startSale();
@@ -150,7 +152,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testAddItemWit2AppleInRow() {
+  public void testAddItemWit2AppleInRow() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addItem("1337");
@@ -274,7 +276,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testAddQuantityOnApple() {
+  public void testAddQuantityOnApple() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addQuantity(2);
@@ -330,7 +332,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testAddNegativeQuantityOnApple() {
+  public void testAddNegativeQuantityOnApple() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addQuantity(-10);
@@ -386,7 +388,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testEndSale() {
+  public void testEndSale() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1337");
     expected.addQuantity(10);
@@ -504,7 +506,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testRequestDiscountWith10ColaAndNullCustomerID() {
+  public void testRequestDiscountWith10ColaAndNullCustomerID() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1");
     expected.addQuantity(10);
@@ -565,7 +567,7 @@ public class ControllerTest {
   }
 
   @Test
-  public void testPaymentWith10ColaAndNullCustomerID() {
+  public void testPaymentWith10ColaAndNullCustomerID() throws CouldNotConnectToServerException, ItemDoesNotExistException, ItemNotFoundException {
     Sale expected = new Sale(handler, saleLog/*, discount*/);
     expected.addItem("1");
     expected.addQuantity(10);

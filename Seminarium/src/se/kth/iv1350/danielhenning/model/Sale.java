@@ -15,7 +15,6 @@ import se.kth.iv1350.danielhenning.dto.SaleDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.concurrent.RejectedExecutionException;
 
 /**
  * The Sale class represents the whole sale. It has general information
@@ -64,12 +63,14 @@ public class Sale {
     runningTotal -= discountOnWholeSale;
   }
 
-  /**
-   * The method addItem gets the item from an External 
-   * Inventory System and adds the item to ItemList
-   * @param itemIdentifier is the identifier (bar code) of scanned item
-   * @return a SaleDTO for the View to retreive information about the current state of the Sale
-   */
+/**
+  * The method addItem gets the item from an External 
+  * Inventory System and adds the item to ItemList
+  *@param itemIdentifier is the identifier (bar code) of scanned item
+  *@return a SaleDTO for the View to retreive information about the current state of the Sale
+  *@throws ItemDoesNotExistException catch the exception when the searched item was notfound and throw it to the calling method
+  *@throws CouldNotConnectToServerException catch the exception when connection lost to database and throw it to the calling method
+  */
   public SaleDTO addItem(String itemIdentifier) throws ItemDoesNotExistException, CouldNotConnectToServerException{
     try{
       ItemInformationDTO item = handler.getInventoryHandler().getItemInformation(itemIdentifier);

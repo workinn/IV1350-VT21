@@ -23,7 +23,7 @@ public class InventoryHandlerTest {
   }
 
   @Test
-  public void testGetItemInformationApple() {
+  public void testGetItemInformationApple() throws ItemDoesNotExistException {
     String itemIdentifier = "1337";
     ItemInformationDTO expected = new ItemInformationDTO(10.0, 0.10, "Äpple", itemIdentifier);
     ItemInformationDTO actual = inventoryHandler.getItemInformation(itemIdentifier);
@@ -36,7 +36,7 @@ public class InventoryHandlerTest {
   }
 
   @Test
-  public void testGetItemInformationCola() {
+  public void testGetItemInformationCola() throws ItemDoesNotExistException {
     String itemIdentifier = "1";
     ItemInformationDTO expected = new ItemInformationDTO(25, 0.10, "Coca-Cola", itemIdentifier);
     ItemInformationDTO actual = inventoryHandler.getItemInformation(itemIdentifier);

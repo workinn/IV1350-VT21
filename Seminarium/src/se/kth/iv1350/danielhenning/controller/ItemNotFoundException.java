@@ -1,6 +1,6 @@
 package se.kth.iv1350.danielhenning.controller;
 
-public class ItemNotFoundException extends RuntimeException{
+public class ItemNotFoundException extends Exception{
       /**
      * Create a new instance of throw with secified message.
      * @param msg the exception message.

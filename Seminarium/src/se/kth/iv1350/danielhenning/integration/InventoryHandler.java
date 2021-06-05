@@ -35,11 +35,13 @@ public class InventoryHandler {
    * method contains hard coded items to test the program
    * @param itemIdentifier is the identifier (bar code) of the searched item
    * @return a ItemInformationDTO containing all the items information. May return null if item is not found
-   * @throws ItemDoesNotExistException
-   */
-  public ItemInformationDTO getItemInformation(String itemIdentifier){
+   * @throws ItemDoesNotExistException throws this exception when no item is found.
+   * @throws CouldNotConnectToServerException throws this exception when connection to server is lost.
+   * Sense we dont have a database this is simulated by checking for the item identifier 5555
+   *    */
+  public ItemInformationDTO getItemInformation(String itemIdentifier) throws ItemDoesNotExistException{
 
-    ItemInformationDTO item;
+    ItemInformationDTO item = null;
     if(itemIdentifier == "5555"){
       throw new CouldNotConnectToServerException("Lost connection to inventory databaseserver");
     }
@@ -50,9 +52,12 @@ public class InventoryHandler {
     } if (itemIdentifier == "1") {
       item = new ItemInformationDTO(25, 0.10, "Coca-Cola", itemIdentifier);
       return item;
-    } else{
+
+    } if(item==null){
+
       throw new ItemDoesNotExistException("No such item: " + itemIdentifier);
 
     }
+    return item;
   }
 }

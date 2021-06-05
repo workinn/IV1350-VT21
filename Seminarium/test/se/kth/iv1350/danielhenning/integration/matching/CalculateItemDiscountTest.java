@@ -11,8 +11,10 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.danielhenning.dto.AllDiscountRulesDTO;
 import se.kth.iv1350.danielhenning.dto.ClubMemberDTO;
 import se.kth.iv1350.danielhenning.dto.DiscountDTO;
+import se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException;
 import se.kth.iv1350.danielhenning.integration.HandlerCreator;
 import se.kth.iv1350.danielhenning.integration.InventoryHandler;
+import se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException;
 import se.kth.iv1350.danielhenning.model.Sale;
 import se.kth.iv1350.danielhenning.model.SaleLog;
 
@@ -40,7 +42,7 @@ public class CalculateItemDiscountTest {
 
 
     @Test
-    public void testDiscountItemCalculato111rWith10ColaWithNullMember(){
+    public void testDiscountItemCalculato111rWith10ColaWithNullMember() throws CouldNotConnectToServerException, ItemDoesNotExistException{
         sale.addItem("1");
         sale.addQuantity(10);
         member = handler.getMemberHandler().getMember(null);    
@@ -53,7 +55,7 @@ public class CalculateItemDiscountTest {
 
 
     @Test
-    public void testDiscountItemCalculatorWith10ColaWith1337Member(){
+    public void testDiscountItemCalculatorWith10ColaWith1337Member() throws CouldNotConnectToServerException, ItemDoesNotExistException{
         sale.addItem("1");
         sale.addQuantity(10);
         member = handler.getMemberHandler().getMember("1337");    
@@ -65,7 +67,7 @@ public class CalculateItemDiscountTest {
     }
 
     @Test
-    public void testDiscountItemCalculatorWith1ColaWith1337Member(){
+    public void testDiscountItemCalculatorWith1ColaWith1337Member() throws CouldNotConnectToServerException, ItemDoesNotExistException{
         sale.addItem("1");
         member = handler.getMemberHandler().getMember("1337");    
         ArrayList<AllDiscountRulesDTO> rules = handler.getDiscountHandler().getAllDiscountRules(member);
@@ -92,7 +94,7 @@ public class CalculateItemDiscountTest {
     }
 
     @Test
-    public void testDiscountItemCalculatorWith10ColaAnd10AppleMember1337(){
+    public void testDiscountItemCalculatorWith10ColaAnd10AppleMember1337() throws CouldNotConnectToServerException, ItemDoesNotExistException{
         sale.addItem("1");
         sale.addQuantity(10);
         sale.addItem("1337");
