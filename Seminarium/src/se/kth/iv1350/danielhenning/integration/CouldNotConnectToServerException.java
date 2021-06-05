@@ -5,14 +5,14 @@ package se.kth.iv1350.danielhenning.integration;
 public class CouldNotConnectToServerException extends RuntimeException{
 
     /**
-     * Create a new instance of throw with secified message.
+     * This exception is thrown when a database could not be called.
      * @param msg the exception message.
      */
     CouldNotConnectToServerException(String msg){
         super(msg);
     }
     /**
-     * Create a new instance of throw with secified message and cause.
+     * This exception is thrown when a database could not be called.
      * @param msg the exception message. 
      * @param cause the exception cause.
      */
