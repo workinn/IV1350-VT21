@@ -25,60 +25,66 @@ public class View {
    */
   private SaleDTO currentStateOfSale;
 
-  public View(Controller controller) throws ItemNotFoundException, CouldNotConnectToServerException, ItemDoesNotExistException {
+  public View(Controller controller) {
     this.controller = controller;    
     testProgram();
   }
 
-  private void testProgram() throws CouldNotConnectToServerException, ItemNotFoundException, ItemDoesNotExistException {
+  private void testProgram() {
 
     String appleID = "1337";
     String colaID = "1";
-    String noneExcistingItem ="1111";
+    String noneExistingItem ="1111";
     String existingCustomerID = "1337";
-    String noneExistingCustomerID = "10";
     String connectionLost = "5555";
     controller.addTotalRevenueObeserver(new TotalRevenueView());
     controller.addTotalRevenueObeserver(new TotalRevenueFileOutput());
-
+    
     System.out.println("->Starting new Sale\n");
     controller.startSale();
+
     System.out.println("->Adding Cola");
     addItem(colaID);
     printSale(currentStateOfSale);
+
     System.out.println("->Add quantity 10");
     currentStateOfSale = controller.addQuantity(10);
     printSale(currentStateOfSale);
+
     System.out.println("->Adding Apple");
     addItem(appleID);
     printSale(currentStateOfSale);
+
     System.out.println("->Add quantity 5");
     currentStateOfSale = controller.addQuantity(5);
     printSale(currentStateOfSale);
+
     System.out.println("->Adding none existing item");
-    addItem(noneExcistingItem);
+    addItem(noneExistingItem);
     printSale(currentStateOfSale);
+
     System.out.println("->Loosing Connection");
     addItem(connectionLost);
     printSale(currentStateOfSale);
+
     System.out.println("->End Sale");
     currentStateOfSale = controller.endSale();
     printSale(currentStateOfSale);
+
     System.out.println("->Send Discount Request");
     currentStateOfSale = controller.requestDiscount(existingCustomerID);
     printSale(currentStateOfSale);
+
     System.out.println("->Make Payment 500kr");
     currentStateOfSale = controller.payment(500);
-
   }
 
-  private void addItem(String identifier) throws ItemNotFoundException, CouldNotConnectToServerException, ItemDoesNotExistException{
+  private void addItem(String identifier) throws CouldNotConnectToServerException{
     try{
       currentStateOfSale = controller.addItem(identifier);
     }catch(ItemNotFoundException exc){
       System.out.println("Item "+identifier+" not found, try again");
     }
-
   }
 
 

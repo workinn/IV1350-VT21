@@ -1,16 +1,18 @@
-2021.06.05.18.25.17 Exception Thrown: No such item: 1111
+2021.06.05.19.54.24 Exception Thrown: No such item: 1111
 se.kth.iv1350.danielhenning.integration.ItemDoesNotExistException: No such item: 1111
-	at se.kth.iv1350.danielhenning.integration.InventoryHandler.getItemInformation(InventoryHandler.java:58)
+	at se.kth.iv1350.danielhenning.integration.InventoryHandler.getItemInformation(InventoryHandler.java:53)
 	at se.kth.iv1350.danielhenning.model.Sale.addItem(Sale.java:76)
-	at se.kth.iv1350.danielhenning.controller.Controller.addItem(Controller.java:62)
-	at se.kth.iv1350.danielhenning.view.View.addItem(View.java:70)
-	at se.kth.iv1350.danielhenning.view.View.<init>(View.java:51)
+	at se.kth.iv1350.danielhenning.controller.Controller.addItem(Controller.java:59)
+	at se.kth.iv1350.danielhenning.view.View.addItem(View.java:76)
+	at se.kth.iv1350.danielhenning.view.View.testProgram(View.java:58)
+	at se.kth.iv1350.danielhenning.view.View.<init>(View.java:30)
 	at se.kth.iv1350.danielhenning.startup.Main.main(Main.java:26)
-2021.06.05.18.25.17 Exception Thrown: Lost connection to inventory databaseserver
+2021.06.05.19.54.24 Exception Thrown: Lost connection to inventory databaseserver
 se.kth.iv1350.danielhenning.integration.CouldNotConnectToServerException: Lost connection to inventory databaseserver
 	at se.kth.iv1350.danielhenning.integration.InventoryHandler.getItemInformation(InventoryHandler.java:46)
 	at se.kth.iv1350.danielhenning.model.Sale.addItem(Sale.java:76)
-	at se.kth.iv1350.danielhenning.controller.Controller.addItem(Controller.java:62)
-	at se.kth.iv1350.danielhenning.view.View.addItem(View.java:70)
-	at se.kth.iv1350.danielhenning.view.View.<init>(View.java:54)
+	at se.kth.iv1350.danielhenning.controller.Controller.addItem(Controller.java:59)
+	at se.kth.iv1350.danielhenning.view.View.addItem(View.java:76)
+	at se.kth.iv1350.danielhenning.view.View.testProgram(View.java:61)
+	at se.kth.iv1350.danielhenning.view.View.<init>(View.java:30)
 	at se.kth.iv1350.danielhenning.startup.Main.main(Main.java:26)

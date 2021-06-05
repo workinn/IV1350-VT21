@@ -1,8 +1,6 @@
 package se.kth.iv1350.danielhenning.integration;
-
-
 public class ItemDoesNotExistException extends Exception {
-        /**
+    /**
      * Create a new instance of throw with secified message.
      * @param msg the exception message.
      */

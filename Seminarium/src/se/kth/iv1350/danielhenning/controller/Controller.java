@@ -52,11 +52,9 @@ public class Controller {
    * The method addItem adds a new item to the Sale 
    * @param itemIdentifier is the identifier (bar code) of the scanned item
    * @return a SaleDTO which represents the current state of the Sale
-   * @throws ItemDoesNotExistException catch the exception when the searched item was notfound and throw a new ItemNotFoundException to calling method.
-   * @throws CouldNotConnectToServerException catch the exception when connection lost to database and throw a new ItemNotFoundException to calling method.
    * @throws ItemNotFoundException thows this exception to the calling method when any of the above excetions are caught.
    */
-  public SaleDTO addItem(String itemIdentifier) throws ItemDoesNotExistException, CouldNotConnectToServerException, ItemNotFoundException{
+  public SaleDTO addItem(String itemIdentifier) throws ItemNotFoundException{
     try {
       return currentSale.addItem(itemIdentifier); 
     } catch (ItemDoesNotExistException exc) {
